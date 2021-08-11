@@ -9,10 +9,6 @@ const Routes = () => {
                 <HomePage />
             </Route>
 
-            <Route path="/registerPage">
-                {/* <Register /> */}
-            </Route>
-
             <Route path="/loginPage">
                 <LoginPage />
             </Route>

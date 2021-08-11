@@ -38,7 +38,7 @@ const LoginPage = () => {
 
     const formSchema = yup.object().shape({
         username: yup.string(),
-        password: yup.string().min(8, 'Senha obrigatória de 8 dígitos')
+        password: yup.string().min(4, 'Senha obrigatória de 8 dígitos')
     })
 
     const { register, handleSubmit } = useForm({
@@ -54,6 +54,7 @@ const LoginPage = () => {
             history.push("/dashboard")
         })
         .catch(_ => alert('Usuário ou senha inválidos'))
+       
     }
 
     return (
