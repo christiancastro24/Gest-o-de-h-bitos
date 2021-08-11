@@ -1,8 +1,8 @@
-
+import AsideMenu from "../../Components/AsideMenu";
 const HomePage = () => {
     return ( 
         <>
-        Home
+        <AsideMenu />
         </>
      );
 }
