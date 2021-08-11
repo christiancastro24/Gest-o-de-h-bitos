@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const ContainerHome = styled.div`
+export const ContainerHome = styled.section`
         
         color: var(--white);
 
@@ -60,7 +60,7 @@ export const ContainerHome = styled.div`
     }
 `
 
-export const ContainerAbout = styled.div`
+export const ContainerAbout = styled.section`
 
     @media (min-width: 280px) and (max-width: 560px) {
         
@@ -93,7 +93,7 @@ export const ContainerAbout = styled.div`
 
 `
 
-export const ContainerButton = styled.div`
+export const ContainerButton = styled.section`
 
     button:hover {
         filter: brightness(90%);
@@ -101,7 +101,7 @@ export const ContainerButton = styled.div`
 
     button:nth-child(1) {
         background-color: var(--pink);
-     }   
+    }   
 
     button:nth-child(2) {
         background-color: var(--purple);
@@ -127,6 +127,7 @@ export const ContainerButton = styled.div`
             margin: 1.5rem 0.5rem;
             color: var(--white);
         }
+        
         display: flex;
         flex-direction: row;
         border-radius: 10px;      
