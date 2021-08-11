@@ -36,6 +36,12 @@ export const ContainerLogin = styled.form `
 
         p {
             font-size: 1rem;
+            color: var(--white);
+            text-align: center;
+        }
+
+        a {
+            color: #0095f6;
         }
 `
 

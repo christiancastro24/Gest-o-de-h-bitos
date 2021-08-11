@@ -14,7 +14,7 @@ import { ContainerInput, ContainerLogin, Image } from "./styles";
 
 import imageLogin from "../../Assets/Images/login.svg"
 
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -87,6 +87,7 @@ const LoginPage = () => {
 
                 <div>
                     <Button variant="contained" type="submit">Entrar</Button>
+                    <p>Não possui uma conta? <Link to={"/registerPage"}>Cadastre-se</Link></p>
                 </div>
             </ContainerInput>    
                 
