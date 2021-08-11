@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const ContainerRegisterForm = styled.div`
+    font-family: sans-serif;
     color: #fff;
     height: 724px;
     width: 100%;
@@ -10,7 +11,7 @@ const ContainerRegisterForm = styled.div`
     justify-content: center;
 
     form {
-        width: 80%;
+        width: 100%;
         height: 380px;
         display: flex;
         flex-direction: column;
@@ -48,6 +49,14 @@ const ContainerRegisterForm = styled.div`
     p > span > a {
         color: #1FDED4;
         text-decoration: none;
+    }
+
+    .title_D {
+        color: var(--pink);
+    }
+
+    .title_Y {
+        color: var(--lightGreen)
     }
 `
 
