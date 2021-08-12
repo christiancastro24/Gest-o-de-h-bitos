@@ -3,7 +3,7 @@ import styled from "styled-components";
 const ContainerRegisterForm = styled.div`
     font-family: sans-serif;
     color: #fff;
-    height: 724px;
+    height: 724px; 
     width: 100%;
     display: flex;
     flex-direction: column;
