@@ -1,6 +1,8 @@
 import { Switch, Route } from "react-router-dom";
-import HomePage from "../Pages/Home";
-import AsideMenu from "../Components/AsideMenu";
+import HomePage from "../Pages/Home"
+import LoginPage from "../Pages/Login"
+import AsideMenu from "../Components/AsideMenu"
+import PageNotFound from "../Pages/PageNotFound"
 
 const Routes = () => {
     return ( 
@@ -8,8 +10,15 @@ const Routes = () => {
             <Route exact path="/">
                 <HomePage />
             </Route>
+
+            <Route path="/loginPage">
+                <LoginPage />
+            </Route>
             <Route path="/teste">
-                <AsideMenu/>
+                <AsideMenu />
+            </Route>
+            <Route path="*">
+                <PageNotFound />
             </Route>
         </Switch>
      );

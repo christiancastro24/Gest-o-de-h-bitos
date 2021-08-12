@@ -19,8 +19,8 @@ const HomePage = () => {
             </p>
 
         <ContainerButton>
-            <Button variant="contained" onClick={() => history.push("/register")}>Registre-se</Button>
-            <Button variant="contained" onClick={() => history.push("/login")}>Login</Button>
+            <Button variant="contained" onClick={() => history.push("/registerPage")}>Registre-se</Button>
+            <Button variant="contained" onClick={() => history.push("/loginPage")}>Login</Button>
         </ContainerButton>
 
         </ContainerAbout>
