@@ -30,12 +30,12 @@ const RegisterForm = () => {
     const history = useHistory();
 
     const formSchema = yup.object().shape({
-        username: yup.string(),
-        email: yup.string().email("email inválido"),
-        password: yup.string().min(8, "senha deve conter no mínimo 8 caracteres")
+        username: yup.string().required("Usuário inválido"),
+        email: yup.string().email("Email inválido"),
+        password: yup.string().min(6, "Senha deve conter no mínimo 6 caracteres")
     })
 
-    const { register, handleSubmit } = useForm({
+    const { register, handleSubmit, formState: {errors} } = useForm({
         resolver: yupResolver(formSchema)
     })
 
@@ -52,12 +52,12 @@ const RegisterForm = () => {
             history.push("/habits")
         })
         .catch(res => {
-            toast.error("Falha ao registrar!",
+            toast.error("Usuário ou email já existente!",
             {
                 style: {
                     backgroundColor: "red",
                     color: "#fff",
-                }
+            }
             })
         })
     }
@@ -75,6 +75,7 @@ const RegisterForm = () => {
                         InputProps = {{startAdornment : (<AccountCircle/>),}} 
                         {...register("username")}
                     />
+                    {errors.username && <span className = "error_message">{errors.username.message}</span>}
                     <TextField required 
                         className={classes.inputs} 
                         variant = "outlined" 
@@ -82,6 +83,7 @@ const RegisterForm = () => {
                         InputProps = {{startAdornment : (<MailOutlineIcon/>),}}
                         {...register("email")}
                     />
+                    {errors.email && <span className = "error_message">{errors.email.message}</span>}
                     <TextField required 
                         className={classes.inputs} 
                         variant = "outlined" 
@@ -90,6 +92,7 @@ const RegisterForm = () => {
                         InputProps = {{startAdornment : (<LockOpenIcon/>),}}
                         {...register("password")}
                     />
+                    {errors.password && <span className = "error_message">{errors.password.message}</span>}
                     <button type = "submit">Registrar-se</button>
                 </form>
                 <p>

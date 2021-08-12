@@ -62,6 +62,14 @@ const ContainerRegisterForm = styled.div`
     .title_Y {
         color: var(--lightGreen)
     }
+
+    .error_message {
+        color: red;
+        background-color: white;
+        padding: 4px;
+        border-radius: 4px;
+        position: relative;
+    }
 `
 
 export default ContainerRegisterForm;
