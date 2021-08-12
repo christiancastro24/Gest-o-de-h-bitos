@@ -52,6 +52,7 @@ export const ContainerHome = styled.section`
             font-size: 3.8rem;
             letter-spacing: 8px;
             font-family: 'Lobster', cursive;
+            color: var(--white);
         }
         
         img {
@@ -130,7 +131,7 @@ export const ContainerButton = styled.section`
         
         display: flex;
         flex-direction: row;
-        border-radius: 10px;      
+        border-radius: 11px;      
 }
 
 `

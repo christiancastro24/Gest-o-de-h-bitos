@@ -10,6 +10,10 @@ const ContainerRegisterForm = styled.div`
     align-items: center;
     justify-content: center;
 
+    h1 {
+        color: var(--white);
+    }
+
     @media(max-width: 450px) {
         width: 130%;
     }
@@ -51,7 +55,7 @@ const ContainerRegisterForm = styled.div`
     }
 
     p > span > a {
-        color: #1FDED4;
+        color: var(--lightGreen);
         text-decoration: none;
     }
 

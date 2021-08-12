@@ -2,10 +2,17 @@ import { ContainerHome, ContainerAbout, ContainerButton } from "./styles";
 import home from "../../Assets/Images/home.svg";
 import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+import { useAuthenticated } from "../../Providers/authentication";
 
 const HomePage = () => {
 	const history = useHistory();
 
+	const { authenticated } = useAuthenticated()
+
+	if(authenticated) {
+		history.push("/habits")
+	}
+	
 	return (
 		<ContainerHome>
 			<img src={home} alt={home} />
