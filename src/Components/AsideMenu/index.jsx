@@ -3,7 +3,7 @@ import { Container, SubContainer, Header, Logo, Avatar, UserName, Menu, MenuItem
 import "antd/dist/antd.css";
 import AvatarSelector from "./AvatarSelector";
 import { MeetingRoom } from "@material-ui/icons";
-
+import { useHistory } from "react-router";
 
 const getRandom = (max, min = 0) => {
 	return Math.round(Math.random() * (max - min) + min);
@@ -11,18 +11,20 @@ const getRandom = (max, min = 0) => {
 
 
 const AsideMenu = () => {
-    const [wichMenuIsSelected, setWitchMenuIsSelected] = useState(1);
+    // const [wichMenuIsSelected, setWitchMenuIsSelected] = useState(1);
     const [open, setOpen] = useState(false);
     const [avatarId, setAvatarId] = useState(localStorage.getItem('userAvatarId') || getRandom(20));
     const [avatarType, setAvatarType] = useState(localStorage.getItem('userAvatarType') || getRandom(5,2));
-    
+    const currentPath = window.location.pathname;
+    console.log(currentPath)
+    const history = useHistory();
 
     const getUserAvatar = () => {
         return `https://robohash.org/${avatarId}.png?set=set${avatarType}`;
     }
-    const handleSelect = (menuId) => {
-        setWitchMenuIsSelected(menuId)
-    }
+    // const handleSelect = (menuId) => {
+    //     setWitchMenuIsSelected(menuId)
+    // }
     const handleChangeAvatarId = (id, type) => {
         setAvatarId(id);
         localStorage.setItem('userAvatarId', id)
@@ -42,7 +44,7 @@ const AsideMenu = () => {
     
     return (
 		<Container>
-            <Logo>
+			<Logo>
 				<span style={{ color: "var(--pink)" }}>D</span>evHealth
 				<span style={{ color: "var(--lightGreen)" }}>y</span>
 			</Logo>
@@ -53,37 +55,44 @@ const AsideMenu = () => {
 						alt="UserAvatar"
 						onClick={handleOpen}
 					/>
-                    <AvatarSelector open={open} handleClose={handleClose} handleChangeAvatarId={handleChangeAvatarId}/>
-					
+					<AvatarSelector
+						open={open}
+						handleClose={handleClose}
+						handleChangeAvatarId={handleChangeAvatarId}
+					/>
+
 					<UserName>Jorgesp88</UserName>
 				</Header>
 				<Menu>
 					<MenuItem
-						foq={wichMenuIsSelected === 1}
-						onClick={() => handleSelect(1)}
+						foq={currentPath === "/habits"}
+						onClick={() => history.push("/habits")}
 					>
 						<b />
 						<b />
 						Hábitos
 					</MenuItem>
 					<MenuItem
-						foq={wichMenuIsSelected === 2}
-						onClick={() => handleSelect(2)}
+						foq={currentPath === "/groups"}
+						onClick={() => history.push("/groups")}
 					>
 						<b />
 						<b />
 						Grupos
 					</MenuItem>
 					<MenuItem
-						foq={wichMenuIsSelected === 3}
-						onClick={() => handleSelect(3)}
+						foq={currentPath === "/profile"}
+						onClick={() => history.push("/profile")}
 					>
 						<b />
 						<b />
 						Profile
 					</MenuItem>
 				</Menu>
-				<Footer>Deslogar <MeetingRoom style={{transform: 'translateY(25%)'}}/> </Footer>
+				<Footer>
+					Deslogar{" "}
+					<MeetingRoom style={{ transform: "translateY(25%)" }} />{" "}
+				</Footer>
 			</SubContainer>
 		</Container>
 	);

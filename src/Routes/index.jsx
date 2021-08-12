@@ -4,6 +4,9 @@ import LoginPage from "../Pages/Login"
 import AsideMenu from "../Components/AsideMenu"
 import PageNotFound from "../Pages/PageNotFound"
 import RegisterPage from "../Pages/Register";
+import GroupsPage from "../Pages/Grupos";
+import HabitsPage from "../Pages/Habitos";
+import ProfilePage from "../Pages/Profile";
 
 const Routes = () => {
     return (
@@ -16,6 +19,15 @@ const Routes = () => {
 			</Route>
 			<Route path="/loginPage">
 				<LoginPage />
+			</Route>
+			<Route path="/habits">
+				<HabitsPage />
+			</Route>
+			<Route path="/groups">
+				<GroupsPage />
+			</Route>
+			<Route path="/profile">
+				<ProfilePage />
 			</Route>
 			<Route path="/teste">
 				<AsideMenu />
