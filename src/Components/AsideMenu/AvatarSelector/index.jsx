@@ -4,8 +4,13 @@ import { Avatar } from "../style";
 
 const AvatarSelector = ({open, handleClose, handleChangeAvatarId}) => {
     const { TabPane } = Tabs;
+    const robotsId = 3;
+    const mutantsId = 2;
+    const catsId = 4;
+    const humansId = 5;
+
     const getAvatars = (type = 3) => {
-		const avatarsQuantity = 20;
+		const avatarsQuantity = 30;
 		let output = [];
 		for (let i = 0; i < avatarsQuantity; i++) {
 			output.push(`https://robohash.org/${i}.png?set=set${type}`);
@@ -17,9 +22,9 @@ const AvatarSelector = ({open, handleClose, handleChangeAvatarId}) => {
 		<Dialog
 			open={open}
 			onClose={handleClose}
-			aria-labelledby="responsive-dialog-title"
+			aria-labelledby="responsive-dialog"
 		>
-			<DialogTitle id="responsive-dialog-title">
+			<DialogTitle id="responsive-dialog">
 				{"Escolha um novo avatar:"}
 			</DialogTitle>
 			<DialogContent>
@@ -28,46 +33,50 @@ const AvatarSelector = ({open, handleClose, handleChangeAvatarId}) => {
 						{getAvatars().map((item, ind) => (
 							<Avatar
 								src={item}
-								alt=""
+								alt="Carregando..."
+								key={`r${ind}`}
 								onClick={() => {
 									handleClose();
-									handleChangeAvatarId(ind, 3);
+									handleChangeAvatarId(ind, robotsId);
 								}}
 							/>
 						))}
 					</TabPane>
 					<TabPane tab="Mutants" key="2">
-						{getAvatars(2).map((item, ind) => (
+						{getAvatars(mutantsId).map((item, ind) => (
 							<Avatar
 								src={item}
-								alt=""
+								alt="Carregando..."
+								key={`m${ind}`}
 								onClick={() => {
 									handleClose();
-									handleChangeAvatarId(ind, 2);
+									handleChangeAvatarId(ind, mutantsId);
 								}}
 							/>
 						))}
 					</TabPane>
 					<TabPane tab="Cats" key="3">
-						{getAvatars(4).map((item, ind) => (
+						{getAvatars(catsId).map((item, ind) => (
 							<Avatar
 								src={item}
-								alt=""
+								alt="Carregando..."
+								key={`c${ind}`}
 								onClick={() => {
 									handleClose();
-									handleChangeAvatarId(ind, 4);
+									handleChangeAvatarId(ind, catsId);
 								}}
 							/>
 						))}
 					</TabPane>
 					<TabPane tab="Humans" key="4">
-						{getAvatars(5).map((item, ind) => (
+						{getAvatars(humansId).map((item, ind) => (
 							<Avatar
 								src={item}
-								alt=""
+								alt="Carregando..."
+								key={`h${ind}`}
 								onClick={() => {
 									handleClose();
-									handleChangeAvatarId(ind, 5);
+									handleChangeAvatarId(ind, humansId);
 								}}
 							/>
 						))}

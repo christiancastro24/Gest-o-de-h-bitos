@@ -1,8 +1,8 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const ContainerHome = styled.section`
         
-        color: var(--white);
+    color: var(--white);
 
     @media (min-width: 280px) and (max-width: 1109px) {
         display: flex;

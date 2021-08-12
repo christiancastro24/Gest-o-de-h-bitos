@@ -1,7 +1,8 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const ContainerLogin = styled.form `
     width: 100%;
+
     h1 {
         color: var(--white);
     }
@@ -59,9 +60,7 @@ export const ContainerInput = styled.section `
     }
 
     }
-    /* margin-left: 10rem;
-    margin-top: -6rem; */
-
+    
     input {
         width: 14rem;
     }
