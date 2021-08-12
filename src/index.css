@@ -11,6 +11,7 @@
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
+  height: 100%;
 }
 
 /* Sections
@@ -22,8 +23,54 @@ html {
 
 body {
   margin: 0;
+  height: 100%;
+}
+#root{
+    display: flex;
+    justify-content: center;
+    height: 100%;
 }
 
+b:nth-child(1) {
+		position: absolute;
+		top: -20px;
+		left: 0;
+		height: 20px;
+		width: 100%;
+		background-color: var(--background);
+		z-index: 10;
+		display: none;
+	}
+	b:nth-child(1)::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #6095b9;
+		border-bottom-right-radius: 20px;
+	}
+	b:nth-child(2) {
+		position: absolute;
+		bottom: -20px;
+		right: 0;
+		height: 20px;
+		width: 100%;
+		background-color: var(--background);
+		z-index: 10;
+		display: none;
+	}
+	b:nth-child(2)::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #6095b9;
+		border-radius: 0px 20px 0px 0px;
+	}
 /**
  * Render the `main` element consistently in IE.
  */

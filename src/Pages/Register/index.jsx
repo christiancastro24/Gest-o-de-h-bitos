@@ -1,11 +1,12 @@
 import { Container, Background, Content, ContainerForm } from "./styles";
+import RegisterForm from "../../Components/RegisterForm"
 
 const RegisterPage = () => {
   return (
     <Container>
       <Background />
       <Content>
-        <ContainerForm></ContainerForm>
+          <RegisterForm />
       </Content>
     </Container>
   );
