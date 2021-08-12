@@ -1,14 +1,13 @@
 import styled from "styled-components";
 
 const CreateGroupContainer = styled.div`
-    background-color: #7D69CB;
+    background-color: var(--purple);
     border-radius: .4rem;
-    width: 280px;
-    height: 424px;
+    width: 260px;
+    height: 380px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
 
     form {
         display: flex;
@@ -23,17 +22,17 @@ const CreateGroupContainer = styled.div`
             border: none;
             padding: 4px;
             font-weight: bold;
-            width:88%;
+            width:14rem;
             outline: none;
     }
 
     button {
-        width: 132px;
+        width: 11rem;
         border: none;
         background-color: #0095F6;
-        color: #fff;
+        color: var(--white);
         font-weight: bold;
-        border-radius: 2spx;
+        border-radius: 2px;
         margin-top: 60px;
         height: 32px;
         cursor: pointer;
@@ -41,7 +40,6 @@ const CreateGroupContainer = styled.div`
 
     input::placeholder {
         color: black;
-        opacity: 1;
         text-align: center;
     }
 `
