@@ -24,6 +24,7 @@ const CreateGroupContainer = styled.div`
             padding: 4px;
             font-weight: bold;
             width:88%;
+            outline: none;
     }
 
     button {
@@ -35,6 +36,7 @@ const CreateGroupContainer = styled.div`
         border-radius: 2spx;
         margin-top: 60px;
         height: 32px;
+        cursor: pointer;
     }
 
     input::placeholder {
