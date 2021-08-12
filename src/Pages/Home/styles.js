@@ -131,7 +131,7 @@ export const ContainerButton = styled.section`
         
         display: flex;
         flex-direction: row;
-        border-radius: 10px;      
+        border-radius: 11px;      
 }
 
 `
