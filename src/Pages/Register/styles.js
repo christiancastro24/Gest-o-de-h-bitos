@@ -2,9 +2,11 @@ import styled, { keyframes } from 'styled-components';
 import Register from "../../Assets/Images/register.svg";
 
 export const Container = styled.div`
-    height: 100vh;
+    height: 100%;
     display: flex;
     align-items: stretch;
+    width: 100%;
+    justify-content: center;
 `;
 
 export const Background = styled.div`
