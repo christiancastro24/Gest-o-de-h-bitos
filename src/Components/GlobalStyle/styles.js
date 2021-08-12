@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
 
 export const GlobalStyle = createGlobalStyle `
 
@@ -22,3 +23,6 @@ export const GlobalStyle = createGlobalStyle `
         background-color: var(--background);
     }
 `
+export const Window = styled.div`
+	width: 100%;
+`;

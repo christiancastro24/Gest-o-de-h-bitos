@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const ContainerNotFound = styled.section `
     display: flex;
@@ -26,4 +26,4 @@ export const ContainerNotFound = styled.section `
         color: var(--white);
         background-color: var(--purple);
     }
-`
+`;

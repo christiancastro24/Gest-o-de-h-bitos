@@ -1,11 +1,11 @@
-import { useHistory } from "react-router-dom"
-import { Button } from "@material-ui/core"
-import pageNotFound from "../../Assets/Images/pageNotFound.svg"
-import { ContainerNotFound } from "./styles"
+import { useHistory } from "react-router-dom";
+import { Button } from "@material-ui/core";
+import pageNotFound from "../../Assets/Images/pageNotFound.svg";
+import { ContainerNotFound } from "./styles";
 
 const PageNotFound = () => {
 
-    const history = useHistory()
+    const history = useHistory();
 
     return (
         <ContainerNotFound>
@@ -16,4 +16,4 @@ const PageNotFound = () => {
     )
 }
 
-export default PageNotFound
+export default PageNotFound;

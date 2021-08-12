@@ -11,20 +11,15 @@ const getRandom = (max, min = 0) => {
 
 
 const AsideMenu = () => {
-    // const [wichMenuIsSelected, setWitchMenuIsSelected] = useState(1);
     const [open, setOpen] = useState(false);
     const [avatarId, setAvatarId] = useState(localStorage.getItem('userAvatarId') || getRandom(20));
     const [avatarType, setAvatarType] = useState(localStorage.getItem('userAvatarType') || getRandom(5,2));
     const currentPath = window.location.pathname;
-    console.log(currentPath)
     const history = useHistory();
 
     const getUserAvatar = () => {
         return `https://robohash.org/${avatarId}.png?set=set${avatarType}`;
     }
-    // const handleSelect = (menuId) => {
-    //     setWitchMenuIsSelected(menuId)
-    // }
     const handleChangeAvatarId = (id, type) => {
         setAvatarId(id);
         localStorage.setItem('userAvatarId', id)
@@ -38,8 +33,6 @@ const AsideMenu = () => {
 	const handleClose = () => {
 		setOpen(false);
 	};
-
-    
 
     
     return (

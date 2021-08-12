@@ -1,22 +1,15 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-
-import api from "../../Services";
-
 import { TextField, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
-import LockOpenIcon from "@material-ui/icons/LockOpen";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-
+import { LockOpen, AccountCircle } from "@material-ui/icons";
 import { ContainerInput, ContainerLogin, Image } from "./styles";
-
-import imageLogin from "../../Assets/Images/login.svg";
-
 import { useHistory, Link } from "react-router-dom";
+import imageLogin from "../../Assets/Images/login.svg";
+import api from "../../Services";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
 	inputs: {
 		backgroundColor: "white",
 		margin: "12px",
@@ -50,7 +43,7 @@ const LoginPage = () => {
 				localStorage.setItem("@Gestao/user", JSON.stringify(access));
 				history.push("/dashboard");
 			})
-			.catch((_) => alert("Usuário ou senha inválidos"));
+			.catch(() => alert("Usuário ou senha inválidos"));
 	};
 
 	return (
@@ -82,7 +75,7 @@ const LoginPage = () => {
 							className={classes.inputs}
 							variant="outlined"
 							placeholder="Usuário"
-							InputProps={{ startAdornment: <LockOpenIcon /> }}
+							InputProps={{ startAdornment: <LockOpen /> }}
 							type="password"
 							{...register("password")}
 						/>
