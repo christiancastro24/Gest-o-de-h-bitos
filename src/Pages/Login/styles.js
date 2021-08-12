@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const ContainerLogin = styled.form `
-
+    width: 100%;
     h1 {
         color: var(--white);
     }
@@ -47,7 +47,9 @@ export const ContainerLogin = styled.form `
 
 
 export const ContainerInput = styled.section `
-
+    display: grid;
+    place-items: center;
+    width: 30%;
     @media (min-width: 300px) and (max-width: 1299px) {
         margin-left: -1rem;
         margin-top: 3rem;
@@ -57,8 +59,8 @@ export const ContainerInput = styled.section `
     }
 
     }
-    margin-left: 10rem;
-    margin-top: -6rem;
+    /* margin-left: 10rem;
+    margin-top: -6rem; */
 
     input {
         width: 14rem;
@@ -84,8 +86,9 @@ export const ContainerInput = styled.section `
 export const Image = styled.div`
     background-color: #282c34;
     height: 100vh;
-    width: 70rem;
-    margin-left: 10rem;
+    width: 70%;
+    display: grid;
+    place-items: stretch;
     overflow: hidden;
 
     @media (min-width: 300px) and (max-width: 1300px) {
