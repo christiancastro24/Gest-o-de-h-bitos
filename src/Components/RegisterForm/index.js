@@ -10,6 +10,7 @@ import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
 import api from "../../Services";
 import { useHistory } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const useStyles = makeStyles((theme) => ({
     inputs: {
@@ -41,7 +42,23 @@ const RegisterForm = () => {
     const onSub = (data) => {
         api.post("/users/", data)
         .then(res => {
-            history.push("/loginPage")
+            toast.success("Cadastro efetuado com sucesso!",
+            {
+                style: {
+                    backgroundColor: "var(--pink)",
+                    color: "#fff"
+                }
+            })
+            history.push("/habits")
+        })
+        .catch(res => {
+            toast.error("Falha ao registrar!",
+            {
+                style: {
+                    backgroundColor: "red",
+                    color: "#fff",
+                }
+            })
         })
     }
 
@@ -69,6 +86,7 @@ const RegisterForm = () => {
                         className={classes.inputs} 
                         variant = "outlined" 
                         placeholder = "Senha" 
+                        type = "password"
                         InputProps = {{startAdornment : (<LockOpenIcon/>),}}
                         {...register("password")}
                     />
