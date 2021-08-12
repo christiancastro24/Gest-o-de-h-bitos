@@ -1,18 +1,15 @@
 import {TextField} from "@material-ui/core";
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
-import ContainerRegisterForm from "./style";
+import { AccountCircle, MailOutline, LockOpen } from "@material-ui/icons";
 import { makeStyles } from '@material-ui/core/styles';
-import {Link} from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
+import ContainerRegisterForm from "./style";
 import api from "../../Services";
-import { useHistory } from "react-router-dom";
-import toast from "react-hot-toast";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     inputs: {
         backgroundColor: 'white',
         margin: "12px",
@@ -31,17 +28,17 @@ const RegisterForm = () => {
 
     const formSchema = yup.object().shape({
         username: yup.string().required("Usuário inválido"),
-        email: yup.string().email("Email inválido"),
+        email: yup.string().email("E-mail inválido"),
         password: yup.string().min(6, "Senha deve conter no mínimo 6 caracteres")
-    })
+    });
 
     const { register, handleSubmit, formState: {errors} } = useForm({
         resolver: yupResolver(formSchema)
-    })
+    });
 
     const onSub = (data) => {
         api.post("/users/", data)
-        .then(res => {
+        .then(() => {
             toast.success("Cadastro efetuado com sucesso!",
             {
                 style: {
@@ -51,8 +48,8 @@ const RegisterForm = () => {
             })
             history.push("/habits")
         })
-        .catch(res => {
-            toast.error("Usuário ou email já existente!",
+        .catch(() => {
+            toast.error("Usuário ou e-mail já existente!",
             {
                 style: {
                     backgroundColor: "red",
@@ -80,7 +77,7 @@ const RegisterForm = () => {
                         className={classes.inputs} 
                         variant = "outlined" 
                         placeholder = "E-mail" 
-                        InputProps = {{startAdornment : (<MailOutlineIcon/>),}}
+                        InputProps = {{startAdornment : (<MailOutline/>),}}
                         {...register("email")}
                     />
                     {errors.email && <span className = "error_message">{errors.email.message}</span>}
@@ -89,7 +86,7 @@ const RegisterForm = () => {
                         variant = "outlined" 
                         placeholder = "Senha" 
                         type = "password"
-                        InputProps = {{startAdornment : (<LockOpenIcon/>),}}
+                        InputProps = {{startAdornment : (<LockOpen/>),}}
                         {...register("password")}
                     />
                     {errors.password && <span className = "error_message">{errors.password.message}</span>}

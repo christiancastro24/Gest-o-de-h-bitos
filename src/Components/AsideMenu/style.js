@@ -10,11 +10,7 @@ export const Container = styled.div`
 	padding: 1rem 0 1rem 0.2rem;
 	overflow: hidden;
 	box-sizing: border-box;
-    /* position: relative; */
-
-	/* Temp */
-	/* border: 1px solid; */
-	background: linear-gradient(
+    background: linear-gradient(
 		to bottom,
 		#30336b 0%,
 		#6095b9 30%,
@@ -30,13 +26,16 @@ export const SubContainer = styled.div`
 	flex-direction: column;
 	justify-content: space-between;
 `;
+
 export const Header = styled.div`
     width: 100%;
     height: auto;
 `
+
 export const Logo = styled.h1`
     
 `;
+
 export const Avatar = styled.img`
     width: 30%;
     box-sizing: border-box;

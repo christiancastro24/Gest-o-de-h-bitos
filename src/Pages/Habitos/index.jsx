@@ -1,10 +1,13 @@
 import AsideMenu from "../../Components/AsideMenu";
+import { Window } from "../../Components/GlobalStyle/styles";
 
 const HabitsPage = () => {
 	return (
 		<>
 			<AsideMenu />
-			<div style={{ width: "75%" }}></div>
+			<Window >
+                
+            </Window>
 		</>
 	);
 };
