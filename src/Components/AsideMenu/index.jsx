@@ -1,35 +1,90 @@
-import { TextField, InputAdornment } from "@material-ui/core";
-import { AccountCircle } from "@material-ui/icons";
-import { Container, Header, Logo, Avatar, UserName, Menu, MenuItem, Logout } from "./style";
-import axios from "axios";
+import { useState } from "react";
+import { Container, SubContainer, Header, Logo, Avatar, UserName, Menu, MenuItem, Footer} from "./style";
+import "antd/dist/antd.css";
+import AvatarSelector from "./AvatarSelector";
+import { MeetingRoom } from "@material-ui/icons";
+
+
+const getRandom = (max, min = 0) => {
+	return Math.round(Math.random() * (max - min) + min);
+};
+
 
 const AsideMenu = () => {
+    const [wichMenuIsSelected, setWitchMenuIsSelected] = useState(1);
+    const [open, setOpen] = useState(false);
+    const [avatarId, setAvatarId] = useState(localStorage.getItem('userAvatarId') || getRandom(20));
+    const [avatarType, setAvatarType] = useState(localStorage.getItem('userAvatarType') || getRandom(5,2));
     
-    const getAvatars = () => {
-        const avatarsQuantity = 10;
-        let output = [];
-        for (let i = 0; i < avatarsQuantity; i++){
-            output.push(`https://robohash.org/${i}.png?set=set3`);
-        }
-        return output;
-    }
 
+    const getUserAvatar = () => {
+        return `https://robohash.org/${avatarId}.png?set=set${avatarType}`;
+    }
+    const handleSelect = (menuId) => {
+        setWitchMenuIsSelected(menuId)
+    }
+    const handleChangeAvatarId = (id, type) => {
+        setAvatarId(id);
+        localStorage.setItem('userAvatarId', id)
+        setAvatarType(type)
+        localStorage.setItem('userAvatarType', type)
+    }
+    const handleOpen = () => {
+		setOpen(true);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
+	};
+
+    
+
+    
     return (
 		<Container>
-			<h1 style={{ textAlign: "left", alignSelf: "flex-start" }}>
-				DevHealthy
-			</h1>
-			<Header>
-				<Avatar src={getAvatars()[1]} alt="UserAvatar" />
-                <UserName>joaquim</UserName>
-			</Header>
-			<Menu>
-				<MenuItem>Hábitos</MenuItem>
-				<MenuItem>Grupos</MenuItem>
-				<MenuItem>Profile</MenuItem>
-			</Menu>
-			<Logout>Deslogar</Logout>
-			
+            <Logo>
+				<span style={{ color: "var(--pink)" }}>D</span>evHealth
+				<span style={{ color: "var(--lightGreen)" }}>y</span>
+			</Logo>
+			<SubContainer>
+				<Header>
+					<Avatar
+						src={getUserAvatar()}
+						alt="UserAvatar"
+						onClick={handleOpen}
+					/>
+                    <AvatarSelector open={open} handleClose={handleClose} handleChangeAvatarId={handleChangeAvatarId}/>
+					
+					<UserName>Jorgesp88</UserName>
+				</Header>
+				<Menu>
+					<MenuItem
+						foq={wichMenuIsSelected === 1}
+						onClick={() => handleSelect(1)}
+					>
+						<b />
+						<b />
+						Hábitos
+					</MenuItem>
+					<MenuItem
+						foq={wichMenuIsSelected === 2}
+						onClick={() => handleSelect(2)}
+					>
+						<b />
+						<b />
+						Grupos
+					</MenuItem>
+					<MenuItem
+						foq={wichMenuIsSelected === 3}
+						onClick={() => handleSelect(3)}
+					>
+						<b />
+						<b />
+						Profile
+					</MenuItem>
+				</Menu>
+				<Footer>Deslogar <MeetingRoom style={{transform: 'translateY(25%)'}}/> </Footer>
+			</SubContainer>
 		</Container>
 	);
 }
