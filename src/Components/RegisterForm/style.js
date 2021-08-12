@@ -10,6 +10,10 @@ const ContainerRegisterForm = styled.div`
     align-items: center;
     justify-content: center;
 
+    @media(max-width: 450px) {
+        width: 130%;
+    }
+
     form {
         width: 100%;
         height: 380px;
