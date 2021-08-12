@@ -52,6 +52,7 @@ export const ContainerHome = styled.section`
             font-size: 3.8rem;
             letter-spacing: 8px;
             font-family: 'Lobster', cursive;
+            color: var(--white);
         }
         
         img {

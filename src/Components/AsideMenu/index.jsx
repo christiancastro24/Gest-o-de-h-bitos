@@ -4,13 +4,16 @@ import "antd/dist/antd.css";
 import AvatarSelector from "./AvatarSelector";
 import { MeetingRoom } from "@material-ui/icons";
 import { useHistory } from "react-router";
+import { useAuthenticated } from "../../Providers/authentication";
 
 const getRandom = (max, min = 0) => {
 	return Math.round(Math.random() * (max - min) + min);
 };
 
-
 const AsideMenu = () => {
+
+	const { setAuthenticated } = useAuthenticated()
+	
     const [open, setOpen] = useState(false);
     const [avatarId, setAvatarId] = useState(localStorage.getItem('userAvatarId') || getRandom(20));
     const [avatarType, setAvatarType] = useState(localStorage.getItem('userAvatarType') || getRandom(5,2));
@@ -33,6 +36,12 @@ const AsideMenu = () => {
 	const handleClose = () => {
 		setOpen(false);
 	};
+
+	const handleLogout = () => {
+		setAuthenticated(false)
+		localStorage.removeItem("@DevHealthy/user");
+		history.push("/")
+	}
 
     
     return (
@@ -82,7 +91,7 @@ const AsideMenu = () => {
 						Profile
 					</MenuItem>
 				</Menu>
-				<Footer>
+				<Footer onClick={handleLogout}>
 					Deslogar{" "}
 					<MeetingRoom style={{ transform: "translateY(25%)" }} />{" "}
 				</Footer>

@@ -8,6 +8,7 @@ import { ContainerInput, ContainerLogin, Image } from "./styles";
 import { useHistory, Link } from "react-router-dom";
 import imageLogin from "../../Assets/Images/login.svg";
 import api from "../../Services";
+import { useAuthenticated } from "../../Providers/authentication";
 
 const useStyles = makeStyles(() => ({
 	inputs: {
@@ -27,6 +28,8 @@ const LoginPage = () => {
 
 	const history = useHistory();
 
+	const { authenticated, setAuthenticated } = useAuthenticated()
+
 	const formSchema = yup.object().shape({
 		username: yup.string(),
 		password: yup.string().min(4, "Senha obrigatória de 8 dígitos"),
@@ -40,11 +43,20 @@ const LoginPage = () => {
 		api.post("/sessions/", data)
 			.then((res) => {
 				const { access } = res.data;
-				localStorage.setItem("@Gestao/user", JSON.stringify(access));
-				history.push("/dashboard");
+
+				localStorage.setItem("@DevHealthy/user", JSON.stringify(access));
+				
+				setAuthenticated(true)
+				
+				history.push("/habits");
+				history.push("/habits")
 			})
 			.catch(() => alert("Usuário ou senha inválidos"));
 	};
+
+	if(authenticated) {
+		history.push("/habits")
+	}
 
 	return (
 		<>
