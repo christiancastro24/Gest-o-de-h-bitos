@@ -32,7 +32,7 @@ const LoginPage = () => {
 	const { authenticated, setAuthenticated } = useAuthenticated()
 
 	const formSchema = yup.object().shape({
-		username: yup.string(),
+		username: yup.string().required("Usuário obrigatório!"),
 		password: yup.string().min(4, "Senha obrigatória de 8 dígitos"),
 	});
 
