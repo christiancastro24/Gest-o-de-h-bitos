@@ -24,5 +24,5 @@ export const GlobalStyle = createGlobalStyle `
     }
 `
 export const Window = styled.div`
-	width: 100%;
+	width: 75%;
 `;
