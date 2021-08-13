@@ -153,7 +153,7 @@ export const MenuItem = styled.div`
 	cursor: pointer;
 	margin: 0.5rem 0;
 	font-weight: bold;
-	font-size: 1.5rem;
+	font-size: 1.6rem;
 	transition: all 280ms ease-in-out;
 	@media (min-width: 1000px) {
 		background-color: ${(props) =>
