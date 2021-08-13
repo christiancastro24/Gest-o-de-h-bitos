@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const ContainerLogin = styled.form `
     width: 100%;
+    text-align: center;
 
     h1 {
         color: var(--white);
@@ -47,7 +48,6 @@ export const ContainerLogin = styled.form `
         }
 `
 
-
 export const ContainerInput = styled.section `
     display: grid;
     place-items: center;
@@ -70,17 +70,6 @@ export const ContainerInput = styled.section `
         text-align: center;
         font-size: 3.8rem;
     }
-
-    button {
-        display: block;
-        margin: 0.5rem auto;
-        background-color: var(--pink);
-        color: var(--white);
-        font-weight: bold;
-        width: 9rem;
-        height: 2.5rem;
-    }
-
 `
 
 export const Image = styled.div`
@@ -93,6 +82,5 @@ export const Image = styled.div`
 
     @media (min-width: 300px) and (max-width: 1300px) {
         display: none;
-        
     }
 `

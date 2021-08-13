@@ -11,6 +11,7 @@ export const GlobalStyle = createGlobalStyle `
         --lightBlue: #1C90B4;
         --purple: #7D69CB;
         --white: #FFF;
+        --btnHover: brightness(90%)
     }
 
     h1 {

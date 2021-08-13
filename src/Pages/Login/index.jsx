@@ -9,6 +9,7 @@ import { useHistory, Link } from "react-router-dom";
 import imageLogin from "../../Assets/Images/login.svg";
 import api from "../../Services";
 import { useAuthenticated } from "../../Providers/authentication";
+import PinkButton from "../../Components/PinkButton";
 
 const useStyles = makeStyles(() => ({
 	inputs: {
@@ -94,11 +95,9 @@ const LoginPage = () => {
 					</div>
 
 					<div>
-						<Button variant="contained" type="submit">
-							Entrar
-						</Button>
+						<PinkButton text = "ENTRAR" type = "submit" />
 						<p>
-							Não possui uma conta?{" "}
+							Não possui uma conta?
 							<Link to={"/registerPage"}>Cadastre-se</Link>
 						</p>
 					</div>
