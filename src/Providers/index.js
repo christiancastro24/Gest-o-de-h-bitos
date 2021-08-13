@@ -1,9 +1,12 @@
 import { AutheticationProvider } from './authentication'
+import { GroupsProvider } from './groups'
 
 const Providers = ({ children }) => {
     return ( 
         <AutheticationProvider>
-            {children}
+            <GroupsProvider>
+                {children}
+            </GroupsProvider>
         </AutheticationProvider>
      );
 }

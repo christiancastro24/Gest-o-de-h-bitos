@@ -25,5 +25,12 @@ export const GlobalStyle = createGlobalStyle `
     }
 `
 export const Window = styled.div`
-	width: 100%;
+	width: 75%;
+
+	@media (max-width: 1000px) {
+		margin-top: clamp(3rem, 15vw, 7rem);
+	}
+	@media (max-width: 580px){
+        margin-top: 160px;
+    };
 `;

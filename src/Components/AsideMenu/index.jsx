@@ -1,8 +1,26 @@
 import { useState } from "react";
-import { Container, SubContainer, Header, Logo, Avatar, UserName, Menu, MenuItem, Footer} from "./style";
+import {
+	Container,
+	SubContainer,
+	Header,
+	Logo,
+	Avatar,
+	UserName,
+	Menu,
+	MenuItem,
+	Footer,
+	EditHover,
+	MultiFrameContainer,
+	BurguerMenu,
+} from "./style";
 import "antd/dist/antd.css";
 import AvatarSelector from "./AvatarSelector";
-import { MeetingRoom } from "@material-ui/icons";
+import {
+	MeetingRoom,
+	Edit,
+	Menu as Burguer,
+	ExpandLess,
+} from "@material-ui/icons";
 import { useHistory } from "react-router";
 import { useAuthenticated } from "../../Providers/authentication";
 
@@ -15,6 +33,7 @@ const AsideMenu = () => {
 	const { setAuthenticated } = useAuthenticated()
 	
     const [open, setOpen] = useState(false);
+    const [showMenu, setShowMenu] = useState(false);
     const [avatarId, setAvatarId] = useState(localStorage.getItem('userAvatarId') || getRandom(20));
     const [avatarType, setAvatarType] = useState(localStorage.getItem('userAvatarType') || getRandom(5,2));
     const currentPath = window.location.pathname;
@@ -22,13 +41,15 @@ const AsideMenu = () => {
 
     const getUserAvatar = () => {
         return `https://robohash.org/${avatarId}.png?set=set${avatarType}`;
-    }
+    };
+
     const handleChangeAvatarId = (id, type) => {
         setAvatarId(id);
         localStorage.setItem('userAvatarId', id)
         setAvatarType(type)
         localStorage.setItem('userAvatarType', type)
-    }
+    };
+
     const handleOpen = () => {
 		setOpen(true);
 	};
@@ -37,11 +58,15 @@ const AsideMenu = () => {
 		setOpen(false);
 	};
 
+    const handleShowMenu = () => {
+        setShowMenu(!showMenu)
+    };
+
 	const handleLogout = () => {
 		setAuthenticated(false)
 		localStorage.removeItem("@DevHealthy/user");
 		history.push("/")
-	}
+	};
 
     
     return (
@@ -50,13 +75,21 @@ const AsideMenu = () => {
 				<span style={{ color: "var(--pink)" }}>D</span>evHealth
 				<span style={{ color: "var(--lightGreen)" }}>y</span>
 			</Logo>
+			<BurguerMenu onClick={handleShowMenu}>
+				{showMenu ? <ExpandLess /> : <Burguer />}
+			</BurguerMenu>
 			<SubContainer>
 				<Header>
-					<Avatar
-						src={getUserAvatar()}
-						alt="UserAvatar"
-						onClick={handleOpen}
-					/>
+					<MultiFrameContainer>
+						<Avatar
+							src={getUserAvatar()}
+							alt="UserAvatar"
+							onClick={handleOpen}
+						></Avatar>
+						<EditHover onClick={handleOpen}>
+							<Edit />
+						</EditHover>
+					</MultiFrameContainer>
 					<AvatarSelector
 						open={open}
 						handleClose={handleClose}
@@ -65,7 +98,7 @@ const AsideMenu = () => {
 
 					<UserName>Jorgesp88</UserName>
 				</Header>
-				<Menu>
+				<Menu show={showMenu}>
 					<MenuItem
 						foq={currentPath === "/habits"}
 						onClick={() => history.push("/habits")}
