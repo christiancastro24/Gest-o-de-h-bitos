@@ -42,7 +42,8 @@ export const ContainerLogin = styled.form `
         }
 
         a {
-            color: #0095f6;
+            padding-top: 1rem;
+            color: var(--lightGreen);
         }
 `
 

@@ -22,13 +22,16 @@ import {
 	ExpandLess,
 } from "@material-ui/icons";
 import { useHistory } from "react-router";
+import { useAuthenticated } from "../../Providers/authentication";
 
 const getRandom = (max, min = 0) => {
 	return Math.round(Math.random() * (max - min) + min);
 };
 
-
 const AsideMenu = () => {
+
+	const { setAuthenticated } = useAuthenticated()
+	
     const [open, setOpen] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
     const [avatarId, setAvatarId] = useState(localStorage.getItem('userAvatarId') || getRandom(20));
@@ -38,13 +41,15 @@ const AsideMenu = () => {
 
     const getUserAvatar = () => {
         return `https://robohash.org/${avatarId}.png?set=set${avatarType}`;
-    }
+    };
+
     const handleChangeAvatarId = (id, type) => {
         setAvatarId(id);
         localStorage.setItem('userAvatarId', id)
         setAvatarType(type)
         localStorage.setItem('userAvatarType', type)
-    }
+    };
+
     const handleOpen = () => {
 		setOpen(true);
 	};
@@ -52,9 +57,17 @@ const AsideMenu = () => {
 	const handleClose = () => {
 		setOpen(false);
 	};
+
     const handleShowMenu = () => {
         setShowMenu(!showMenu)
-    }
+    };
+
+	const handleLogout = () => {
+		setAuthenticated(false)
+		localStorage.removeItem("@DevHealthy/user");
+		history.push("/")
+	};
+
     
     return (
 		<Container>
@@ -111,7 +124,7 @@ const AsideMenu = () => {
 						Profile
 					</MenuItem>
 				</Menu>
-				<Footer>
+				<Footer onClick={handleLogout}>
 					Deslogar{" "}
 					<MeetingRoom style={{ transform: "translateY(25%)" }} />{" "}
 				</Footer>

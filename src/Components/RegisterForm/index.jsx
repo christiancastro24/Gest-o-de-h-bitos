@@ -8,6 +8,8 @@ import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
 import ContainerRegisterForm from "./style";
 import api from "../../Services";
+import { useAuthenticated } from "../../Providers/authentication";
+
 
 const useStyles = makeStyles(() => ({
     inputs: {
@@ -24,6 +26,8 @@ const useStyles = makeStyles(() => ({
 
 const RegisterForm = () => {
 
+    const { authenticated } = useAuthenticated();
+
     const history = useHistory();
 
     const formSchema = yup.object().shape({
@@ -38,7 +42,8 @@ const RegisterForm = () => {
 
     const onSub = (data) => {
         api.post("/users/", data)
-        .then(() => {
+        .then((res) => {
+
             toast.success("Cadastro efetuado com sucesso!",
             {
                 style: {
@@ -46,7 +51,7 @@ const RegisterForm = () => {
                     color: "#fff"
                 }
             })
-            history.push("/habits")
+            history.push("/loginPage")
         })
         .catch(() => {
             toast.error("Usuário ou e-mail já existente!",
@@ -57,6 +62,10 @@ const RegisterForm = () => {
             }
             })
         })
+    }
+
+    if(authenticated) {
+        history.push("/habits")
     }
 
     const classes = useStyles();
@@ -95,7 +104,7 @@ const RegisterForm = () => {
                 <p>
                     Já possui uma conta? 
                     <span className = "enter_link">
-                        <Link to = {"loginPage"}> Entrar</Link>
+                        <Link to = {"/loginPage"}> Entrar</Link>
                     </span>
                 </p>
             </ContainerRegisterForm>
