@@ -9,7 +9,9 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import ContainerRegisterForm from "./style";
 import api from "../../Services";
 import { useAuthenticated } from "../../Providers/authentication";
-
+import MessageBalloon from "../MessageBalloon";
+import "../../index.css"
+import PinkButton from "../PinkButton";
 
 const useStyles = makeStyles(() => ({
     inputs: {
@@ -32,8 +34,8 @@ const RegisterForm = () => {
 
     const formSchema = yup.object().shape({
         username: yup.string().required("Usuário inválido"),
-        email: yup.string().email("E-mail inválido"),
-        password: yup.string().min(6, "Senha deve conter no mínimo 6 caracteres")
+        email: yup.string().required("Email obrigatório!").email("E-mail inválido"),
+        password: yup.string().min(6, "Mínimo 6 caracteres").required("Senha inválida")
     });
 
     const { register, handleSubmit, formState: {errors} } = useForm({
@@ -78,10 +80,11 @@ const RegisterForm = () => {
                         className = {classes.inputs} 
                         variant = "outlined" 
                         placeholder = "Usuário" 
+                        type = "text"
                         InputProps = {{startAdornment : (<AccountCircle/>),}} 
                         {...register("username")}
                     />
-                    {errors.username && <span className = "error_message">{errors.username.message}</span>}
+                        {errors.username && <MessageBalloon className = "invalid_user_message" message = {errors.username.message} />}
                     <TextField required 
                         className={classes.inputs} 
                         variant = "outlined" 
@@ -89,7 +92,7 @@ const RegisterForm = () => {
                         InputProps = {{startAdornment : (<MailOutline/>),}}
                         {...register("email")}
                     />
-                    {errors.email && <span className = "error_message">{errors.email.message}</span>}
+                    {errors.email && <MessageBalloon className = "invalid_email_message" message = {errors.email.message} />}
                     <TextField required 
                         className={classes.inputs} 
                         variant = "outlined" 
@@ -97,9 +100,9 @@ const RegisterForm = () => {
                         type = "password"
                         InputProps = {{startAdornment : (<LockOpen/>),}}
                         {...register("password")}
-                    />
-                    {errors.password && <span className = "error_message">{errors.password.message}</span>}
-                    <button type = "submit">Registrar-se</button>
+                    /> 
+                    {errors.password && <MessageBalloon className = "invalid_password_message" message = {errors.password.message} />}
+                    <PinkButton type = "submit" text = "Registrar-se" />
                 </form>
                 <p>
                     Já possui uma conta? 
