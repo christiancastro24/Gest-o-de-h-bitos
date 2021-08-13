@@ -7,6 +7,7 @@ import { LockOpen, AccountCircle } from "@material-ui/icons";
 import { ContainerInput, ContainerLogin, Image } from "./styles";
 import { useHistory, Link } from "react-router-dom";
 import imageLogin from "../../Assets/Images/login.svg";
+import toast from "react-hot-toast";
 import api from "../../Services";
 import { useAuthenticated } from "../../Providers/authentication";
 
@@ -32,7 +33,7 @@ const LoginPage = () => {
 
 	const formSchema = yup.object().shape({
 		username: yup.string(),
-		password: yup.string().min(4, "Senha obrigatória de 8 dígitos"),
+		password: yup.string().min(8, "Senha obrigatória de 8 dígitos"),
 	});
 
 	const { register, handleSubmit } = useForm({
@@ -48,10 +49,18 @@ const LoginPage = () => {
 				
 				setAuthenticated(true)
 				
-				history.push("/habits");
 				history.push("/habits")
 			})
-			.catch(() => alert("Usuário ou senha inválidos"));
+			.catch(() => {
+				toast.error("Usuário ou senha incorretos!",
+            {
+                style: {
+                    backgroundColor: "red",
+                    color: "var(--white)",
+					fontWeight: "bold"
+            }
+            })
+			})
 	};
 
 	if(authenticated) {
@@ -62,7 +71,7 @@ const LoginPage = () => {
 		<>
 			<ContainerLogin onSubmit={handleSubmit(onSub)}>
 				<ContainerInput>
-					<div>
+					<section className="container-teste"> 						
 						<h1>
 							<span style={{ color: "var(--pink)" }}>D</span>
 							evHealth
@@ -81,19 +90,16 @@ const LoginPage = () => {
 						/>
 
 						<br />
-						<br />
 						<TextField
 							required
 							className={classes.inputs}
 							variant="outlined"
-							placeholder="Usuário"
+							placeholder="Senha"
 							InputProps={{ startAdornment: <LockOpen /> }}
 							type="password"
 							{...register("password")}
 						/>
-					</div>
 
-					<div>
 						<Button variant="contained" type="submit">
 							Entrar
 						</Button>
@@ -101,7 +107,7 @@ const LoginPage = () => {
 							Não possui uma conta?{" "}
 							<Link to={"/registerPage"}>Cadastre-se</Link>
 						</p>
-					</div>
+					</section>
 				</ContainerInput>
 
 				<Image>
