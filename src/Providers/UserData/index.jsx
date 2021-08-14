@@ -10,7 +10,9 @@ export const UserDataProvider = ({ children }) => {
 	;
     const [habits, setHabits] = useState('');
     const [groupsIn, setGroupsIn] = useState([]);
-    const [userId, setUserId] = useState('');
+    const [userId, setUserId] = useState(
+		JSON.parse(localStorage.getItem("userId")) || ''
+	);
     const [timer, setTimer] = useState(JSON.parse(localStorage.getItem('habitsLastUpdate')) || {});
 	
     const recarregarDados = () => {
