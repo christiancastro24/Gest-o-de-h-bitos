@@ -10,7 +10,7 @@ export const ContainerNotFound = styled.section `
 
     h2 {
         color: var(--white);  
-        font-family: monospace;
+        font-family: Arial;
         text-align: center;
     }
 

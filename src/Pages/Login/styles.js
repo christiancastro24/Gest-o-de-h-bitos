@@ -2,15 +2,29 @@ import styled from "styled-components";
 
 export const ContainerLogin = styled.form `
     width: 100%;
+    text-align: center;
+    position: relative;
+    
+    .invalid_username_message {
+        top: 33%;
+        transform: translateX(152%);
+        position: absolute;
+    }
+
+    .invalid_password_message {
+        top: 51%;
+        transform: translateX(152%);
+        position: absolute;
+    }
 
     h1 {
         color: var(--white);
     }
 
         display: flex;
-        justify-content: space-evenly;
         align-items: center;
-        margin: auto;
+        justify-content: center;
+        margin: 0 auto;
 
         a {
             color: #0095;
@@ -22,6 +36,11 @@ export const ContainerLogin = styled.form `
             left: -0.2rem;
         }
 
+        section {
+            width: 100%;
+            position: relative;
+        }
+
         h1 {
             font-family: 'Oleo Script Swash Caps', cursive;
             font-size: 3rem;
@@ -29,9 +48,9 @@ export const ContainerLogin = styled.form `
         }
 
         img {
-            height: 65vh;
+            height: 75vh;
             position: relative;
-            top: 8rem;
+            top: 6rem;
             left: 1rem;
         }
 
@@ -45,54 +64,61 @@ export const ContainerLogin = styled.form `
             padding-top: 1rem;
             color: var(--lightGreen);
         }
-`
 
+        input {
+            width: 150%;
+        }
+`
 
 export const ContainerInput = styled.section `
     display: grid;
     place-items: center;
-    width: 30%;
+    justify-content: center;
+    margin: 0 auto;
+
     @media (min-width: 300px) and (max-width: 1299px) {
-        margin-left: -1rem;
-        margin-top: 3rem;
-        
-    input {
-        width: 10rem;
+        margin: 0 auto;
+
+        .container-teste {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            position: relative;
     }
 
+    .invalid_username_message {
+        top: 32%;
+        transform: translateX(152%);
     }
+
+    .invalid_password_message {
+        top: 53.5%;
+        transform: translateX(152%);
+    }
+
+    input {
+        width: 100%;
+    }
+
     
-    input {
-        width: 14rem;
-    }
-
     h1 {
         text-align: center;
-        font-size: 3.8rem;
+        font-size: 3rem;
     }
-
-    button {
-        display: block;
-        margin: 0.5rem auto;
-        background-color: var(--pink);
-        color: var(--white);
-        font-weight: bold;
-        width: 9rem;
-        height: 2.5rem;
-    }
-
+}
 `
 
 export const Image = styled.div`
-    background-color: #282c34;
+    background-color: #000;
     height: 100vh;
-    width: 70%;
+    width: 60%;
     display: grid;
     place-items: stretch;
     overflow: hidden;
 
     @media (min-width: 300px) and (max-width: 1300px) {
         display: none;
-        
     }
 `
