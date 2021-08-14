@@ -3,6 +3,19 @@ import styled from "styled-components";
 export const ContainerLogin = styled.form `
     width: 100%;
     text-align: center;
+    position: relative;
+    
+    .invalid_username_message {
+        top: 33%;
+        transform: translateX(152%);
+        position: absolute;
+    }
+
+    .invalid_password_message {
+        top: 51%;
+        transform: translateX(152%);
+        position: absolute;
+    }
 
     h1 {
         color: var(--white);
@@ -21,6 +34,11 @@ export const ContainerLogin = styled.form `
             position: relative;
             top: -0.10rem;
             left: -0.2rem;
+        }
+
+        section {
+            width: 100%;
+            position: relative;
         }
 
         h1 {
@@ -46,6 +64,10 @@ export const ContainerLogin = styled.form `
             padding-top: 1rem;
             color: var(--lightGreen);
         }
+
+        input {
+            width: 150%;
+        }
 `
 
 export const ContainerInput = styled.section `
@@ -53,7 +75,6 @@ export const ContainerInput = styled.section `
     place-items: center;
     justify-content: center;
     margin: 0 auto;
-
 
     @media (min-width: 300px) and (max-width: 1299px) {
         margin: 0 auto;
@@ -64,10 +85,21 @@ export const ContainerInput = styled.section `
             justify-content: center;
             align-items: center;
             margin: 0 auto;
+            position: relative;
+    }
+
+    .invalid_username_message {
+        top: 32%;
+        transform: translateX(152%);
+    }
+
+    .invalid_password_message {
+        top: 53.5%;
+        transform: translateX(152%);
     }
 
     input {
-        width: 7rem;
+        width: 100%;
     }
 
     
