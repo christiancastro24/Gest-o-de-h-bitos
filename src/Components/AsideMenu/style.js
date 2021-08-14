@@ -202,16 +202,15 @@ export const Menu = styled.div`
 		display: ${(props) => (props.show ? "unset" : "none")};
 		position: absolute;
 		width: max-content;
-		bottom: -210%;
+		bottom: -20rem;
 		left: 50%;
-		/* padding: 0 2rem; */
 		background-color: #6095b9;
 		box-sizing: border-box;
 		border-radius: 20px;
 		transform: translateX(-50%);
 	}
 	@media (max-width: 580px){
-        bottom: -150%;
+        bottom: -200%;
         left: 30%;
     };
 `;

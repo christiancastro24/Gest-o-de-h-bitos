@@ -123,6 +123,9 @@ const AsideMenu = () => {
 						<b />
 						Profile
 					</MenuItem>
+					{showMenu && (
+						<MenuItem onClick={handleLogout}>Deslogar</MenuItem>
+					)}
 				</Menu>
 				<Footer onClick={handleLogout}>
 					Deslogar{" "}

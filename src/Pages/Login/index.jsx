@@ -9,6 +9,8 @@ import { useHistory, Link } from "react-router-dom";
 import imageLogin from "../../Assets/Images/login.svg";
 import api from "../../Services";
 import { useAuthenticated } from "../../Providers/authentication";
+import jwt_decode from "jwt-decode";
+import { useUserData } from "../../Providers/UserData";
 
 const useStyles = makeStyles(() => ({
 	inputs: {
@@ -24,6 +26,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const LoginPage = () => {
+    const { setToken, setUserId } = useUserData();
 	const classes = useStyles();
 
 	const history = useHistory();
@@ -43,9 +46,11 @@ const LoginPage = () => {
 		api.post("/sessions/", data)
 			.then((res) => {
 				const { access } = res.data;
-
+                const userId = jwt_decode(access).user_id;
 				localStorage.setItem("@DevHealthy/user", JSON.stringify(access));
-				
+				localStorage.setItem('userId', userId)
+                setUserId(userId)
+                setToken(access)
 				setAuthenticated(true)
 				
 				history.push("/habits");

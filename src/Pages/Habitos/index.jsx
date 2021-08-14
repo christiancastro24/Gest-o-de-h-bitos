@@ -1,6 +1,7 @@
 import { useHistory } from "react-router-dom";
 import AsideMenu from "../../Components/AsideMenu";
 import { Window } from "../../Components/GlobalStyle/styles";
+import HabitsList from "../../Components/HabitsList";
 import { useAuthenticated } from "../../Providers/authentication";
 
 const HabitsPage = () => {
@@ -17,6 +18,7 @@ const HabitsPage = () => {
 		<>
 			<AsideMenu />
 			<Window >
+                <HabitsList />
             </Window>
 		</>
 	);
