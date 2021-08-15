@@ -6,7 +6,7 @@ export const GlobalStyle = createGlobalStyle `
     :root {
         --background: #30336B;
         --black: #000;
-        --pink: #B5179E;
+        --pink: rgb(247, 37, 133);
         --lightGreen: #1FDED4;
         --lightBlue: #1C90B4;
         --purple: #7D69CB;
@@ -21,6 +21,8 @@ export const GlobalStyle = createGlobalStyle `
 
     body {
         background-color: var(--background);
+        scrollbar-arrow-color:#000000;
+
     }
 `
 export const Window = styled.div`

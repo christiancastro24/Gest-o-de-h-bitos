@@ -7,6 +7,7 @@ import RegisterPage from "../Pages/Register";
 import GroupsPage from "../Pages/Grupos";
 import HabitsPage from "../Pages/Habitos";
 import ProfilePage from "../Pages/Profile";
+import MyGroups from "../Pages/MeusGrupos";
 
 const Routes = () => {
     return (
@@ -31,6 +32,9 @@ const Routes = () => {
 			</Route>
 			<Route path="/teste">
 				<AsideMenu />
+			</Route>
+			<Route path="/myGroups">
+				<MyGroups />
 			</Route>
 			<Route path="*">
 				<PageNotFound />

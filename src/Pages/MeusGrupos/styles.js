@@ -1,15 +1,15 @@
 import styled from "styled-components"
 
 
+export const ContainerAll = styled.section `
+    h1 {
+        color: white;
+        text-align: center;
+        font-family: Helvetica;
+    }
+`
+
 export const ContainerSearch = styled.section `
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #eee;
-    height: 4rem;
-    border-radius: 10px;
-    width: 95%;
-    margin: 1rem auto;
     
     input {
         height: 2.2rem;
@@ -20,27 +20,23 @@ export const ContainerSearch = styled.section `
         
     }
     
-
     span:nth-child(4) {
         padding-left: 1rem;
     }
+    
     button {
-        background-color: var(--pink);
+        background-color: rgba(255,25,244,0.4);
         color: var(--white);
         font-weight: bold;
-        margin-left: 0.2rem;
-        height: 2rem;
-        border-radius: 100%;
+        margin-left: auto;
+        margin-right: 2rem;
+        margin-bottom: 0.2rem;
+        height: 3rem;
         width: 3rem;
+        font-size: 1.1rem;
+        display: block;
+        border-radius: 35rem;
         cursor: pointer;
-    }
-
-    button:nth-child(3) {
-        background-color: var(--pink);
-        color: var(--white);
-        font-weight: bold;
-        margin: 0.2rem;
-        
     }
 `
 
@@ -58,11 +54,11 @@ export const ContainerPopUp = styled.div`
             background-color: var(--pink);
         }
         
-        button:nth-child(5) {
+        button:nth-child(6) {
             display: block; 
             margin: 1.5rem auto;
             border-radius: 4%;
-            width: 70%;
+            width: 85%;
             height: 2.5rem;
             background-color: transparent;
             border: 1px solid var(--pink);
@@ -86,6 +82,7 @@ export const ContainerPopUp = styled.div`
         position: absolute; 
         top: 25%;
         left: 10%; 
+        z-index: 1000;
     }
 
 
@@ -99,32 +96,12 @@ export const ContainerPopUp = styled.div`
         background-color: rgb(19, 15, 64);
         position: absolute; 
         top: 25%;
-        left: 42%; 
+        left: 38%; 
         padding: 0.3rem;
         justify-content: center; 
         align-items: center;
         border-radius: 1rem;
         padding: 1rem;    
-    }
-        `
-
-export const ContainerItemsSearch = styled.section `
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--lightGreen);
-    padding: 0.8rem;
-    max-width: 32rem;
-    margin: 0 auto;
-    text-align: center;
-
-    button {
-        background-color: #0095F6;
-        color: var(--white);
-        font-weight: bold;
-        margin: 0.5rem;
-        height: 2rem;
     }
 `
 
@@ -137,7 +114,6 @@ export const Container = styled.section`
     background-color: #000;
     color: var(--white);
     overflow-y: scroll;
-    overflow-x: hidden;
     margin-top: 0;
 
     @media (min-width: 300px) and (max-width:508px) {
@@ -161,25 +137,27 @@ export const ContainerGroup = styled.div `
     align-items: center;
     box-shadow: 5px 1px 5px 3px rgba(155, 155, 220);
     box-sizing: border-box;
-   
+
+    .btn-add-actvi {
+        background-color: #0095f7;
+        margin-left: 0.2rem;
+    }
+    
+    .Items {
+        display: flex;
+        flex-direction: column;
+    }
 
     h2, h3 {
         color: var(--white);
         padding-left: 1rem;
     }
 
-
-    .Items {
-        display: flex;
-        flex-direction: column;
-    }
-
-    button:nth-child(2) {
+    button {
         width: 25%;
         height: 3rem;
         display: block;
         margin-left: auto;
-        margin-right: 1rem;
         border: none;
         border-radius: 8px;
         background-color: var(--pink);
@@ -188,15 +166,9 @@ export const ContainerGroup = styled.div `
         cursor: pointer;
     }
 
-    button:nth-child(3) {
-        width: 10%;
-        height: 1.7rem;
-        border: none;
-        border-radius: 8px;
-        background-color: var(--lightBlue);
-        font-weight: bold;
-        color: var(--white);
-        cursor: pointer;
+    .btn-info {
+        width: 9%;
+        margin-right: 1rem;
     }
 
     button:hover {
