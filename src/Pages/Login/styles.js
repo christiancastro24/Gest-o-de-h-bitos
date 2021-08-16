@@ -1,124 +1,102 @@
-import styled from "styled-components";
+// import styled from "styled-components";
+import styled from 'styled-components';
+import Login from "../../Assets/Images/login.svg";
 
-export const ContainerLogin = styled.form `
+export const Container = styled.div`
+    height: 100%;
+    display: flex;
+    align-items: stretch;
     width: 100%;
-    text-align: center;
-    position: relative;
-    
-    .invalid_username_message {
-        top: 33%;
-        transform: translateX(152%);
-        position: absolute;
-    }
+    justify-content: center;
+    overflow: hidden;
+`;
 
-    .invalid_password_message {
-        top: 51%;
-        transform: translateX(152%);
-        position: absolute;
+export const Background = styled.div`
+    @media(min-width: 1100px) {
+        flex:1;
+        background: url(${Login}) no-repeat center, var(--black);
+        background-size: contain;
     }
+`;
+
+export const Content = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 40%;
+`;
+
+export const ContainerRegisterForm = styled.div`
+    font-family: sans-serif;
+    color: #fff;
+    height: 724px; 
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
     h1 {
         color: var(--white);
     }
 
+    @media(max-width: 450px) {
+        width: 130%;
+    }
+
+    form {
+        width: 100%;
         display: flex;
-        align-items: center;
+        flex-direction: column;
         justify-content: center;
-        margin: 0 auto;
-
-        a {
-            color: #0095;
-        }
-
-        svg {
-            position: relative;
-            top: -0.10rem;
-            left: -0.2rem;
-        }
-
-        section {
-            width: 100%;
-            position: relative;
-        }
-
-        h1 {
-            font-family: 'Oleo Script Swash Caps', cursive;
-            font-size: 3rem;
-            margin-top: 4.5rem;
-        }
-
-        img {
-            height: 75vh;
-            position: relative;
-            top: 6rem;
-            left: 1rem;
-        }
-
-        p {
-            font-size: 1rem;
-            color: var(--white);
-            text-align: center;
-        }
-
-        a {
-            padding-top: 1rem;
-            color: var(--lightGreen);
-        }
-
-        input {
-            width: 150%;
-        }
-`
-
-export const ContainerInput = styled.section `
-    display: grid;
-    place-items: center;
-    justify-content: center;
-    margin: 0 auto;
-
-    @media (min-width: 300px) and (max-width: 1299px) {
-        margin: 0 auto;
-
-        .container-teste {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto;
-            position: relative;
-    }
-
-    .invalid_username_message {
-        top: 32%;
-        transform: translateX(152%);
-    }
-
-    .invalid_password_message {
-        top: 53.5%;
-        transform: translateX(152%);
+        align-items: center;
+        position: relative;
     }
 
     input {
         width: 100%;
+        height: 24px;
+        padding-left: 6px;
     }
 
-    
-    h1 {
-        text-align: center;
-        font-size: 3rem;
+    input::placeholder {
+        color: black;
+        opacity: 1;
     }
-}
-`
 
-export const Image = styled.div`
-    background-color: #000;
-    height: 100vh;
-    width: 60%;
-    display: grid;
-    place-items: stretch;
-    overflow: hidden;
+    button {
+        background-color: #B5179E;
+        margin-top: 16px;
+        width: 12rem;
+        height: 3rem;
+        color: #fff;
+        border: none;
+        border-radius: .4rem;
+        font-size: 1.3rem;
+        box-shadow: 5px 6px 10px -2px black;
+        cursor: pointer;
+    }
 
-    @media (min-width: 300px) and (max-width: 1300px) {
-        display: none;
+    button:hover {
+        filter: var(--btnHover)
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    p > span > a {
+        color: var(--lightGreen);
+        text-decoration: none;
+    }
+
+    .title_D {
+        color: var(--pink);
+    }
+
+    .title_Y {
+        color: var(--lightGreen)
     }
 `
