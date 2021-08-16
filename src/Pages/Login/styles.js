@@ -2,6 +2,20 @@ import styled from "styled-components";
 
 export const ContainerLogin = styled.form `
     width: 100%;
+    text-align: center;
+    position: relative;
+    
+    .invalid_username_message {
+        top: 33%;
+        transform: translateX(152%);
+        position: absolute;
+    }
+
+    .invalid_password_message {
+        top: 51%;
+        transform: translateX(152%);
+        position: absolute;
+    }
 
     h1 {
         color: var(--white);
@@ -20,6 +34,11 @@ export const ContainerLogin = styled.form `
             position: relative;
             top: -0.10rem;
             left: -0.2rem;
+        }
+
+        section {
+            width: 100%;
+            position: relative;
         }
 
         h1 {
@@ -45,15 +64,17 @@ export const ContainerLogin = styled.form `
             padding-top: 1rem;
             color: var(--lightGreen);
         }
-`
 
+        input {
+            width: 150%;
+        }
+`
 
 export const ContainerInput = styled.section `
     display: grid;
     place-items: center;
     justify-content: center;
     margin: 0 auto;
-
 
     @media (min-width: 300px) and (max-width: 1299px) {
         margin: 0 auto;
@@ -64,10 +85,21 @@ export const ContainerInput = styled.section `
             justify-content: center;
             align-items: center;
             margin: 0 auto;
+            position: relative;
+    }
+
+    .invalid_username_message {
+        top: 32%;
+        transform: translateX(152%);
+    }
+
+    .invalid_password_message {
+        top: 53.5%;
+        transform: translateX(152%);
     }
 
     input {
-        width: 7rem;
+        width: 100%;
     }
 
     
@@ -75,51 +107,7 @@ export const ContainerInput = styled.section `
         text-align: center;
         font-size: 3rem;
     }
-
-    button {
-        display: block;
-        margin: 0.5rem auto;
-        background-color: var(--pink);
-        color: var(--white);
-        font-weight: bold;
-        width: 9rem;
-        height: 2.5rem;
-    }
-    
 }
-
-    @media (min-width: 1300px)  {
-        margin: 0 auto;
-
-    button {
-        display: block;
-        margin: 0.5rem auto;
-        background-color: var(--pink);
-        color: var(--white);
-        font-weight: bold;
-        width: 11rem;
-        height: 2.7rem;
-    }
-
-    .container-teste {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-    }
-
-    input {
-        width: 22rem;
-    }
-        
-
-    h1 {
-        text-align: center;
-        font-size: 3.8rem;
-    }
-
-}
-
 `
 
 export const Image = styled.div`
@@ -131,6 +119,6 @@ export const Image = styled.div`
     overflow: hidden;
 
     @media (min-width: 300px) and (max-width: 1300px) {
-        display: none;     
+        display: none;
     }
 `
