@@ -16,8 +16,37 @@ body {
     display: flex;
     justify-content: center;
     height: 100%;
+    padding: 0;
+    margin: 0;
 }
-
+@media only screen and (max-width: 574px){
+    #root{
+        display:grid;
+        justify-content: stretch;
+        align-content: stretch;
+        justify-items: stretch;
+    }
+}
+button.ant-switch {
+    background-color: rgba(255, 60, 0, 0.541);
+}
+button.ant-switch svg {
+    transform: translate(30%, -7%);
+}
+button.ant-switch-checked {
+    background-color: green;
+}
+button.ant-switch-checked svg {
+    transform: translate(-30%, -5%);
+}
+button.MuiFab-root{
+    width: 25px;
+    height: 25px;
+    min-height: 0;
+}
+.MuiTooltip-tooltip {
+    background-color: white;
+}
 b:nth-child(1) {
 		position: absolute;
 		top: -20px;
@@ -60,7 +89,9 @@ b:nth-child(1) {
 		border-radius: 0px 20px 0px 0px;
 
 	}
-
+cite {
+    text-align: center;
+}
 main {
   display: block;
 }

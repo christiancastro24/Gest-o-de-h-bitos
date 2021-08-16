@@ -78,7 +78,7 @@ export const Header = styled.div`
 
 	@media (max-width: 1000px) {
 		display: flex;
-        flex-direction: row;
+        flex-direction: row-reverse;
         width: max-content;
         justify-content: flex-end;
         align-items: center;
@@ -143,7 +143,7 @@ export const UserName = styled.h2`
 `;
 
 export const MenuItem = styled.div`
-	background-color: ${(props) => (props.foq ? "#1C90B4" : "#6095b9")};
+	background-color: ${(props) => (props.foq ? "#1C90B4" : "transparent")};
 	color: ${(props) => (props.foq ? "white" : "MidnightBlue")};
 	height: auto;
 	width: 100%;
@@ -157,7 +157,7 @@ export const MenuItem = styled.div`
 	transition: all 280ms ease-in-out;
 	@media (min-width: 1000px) {
 		background-color: ${(props) =>
-			props.foq ? "var(--background)" : "#6095b9"};
+			props.foq ? "var(--background)" : "transparent"};
 		border-radius: 20px 0 0 20px;
 		padding: 1rem 0;
 		&:hover {
@@ -196,7 +196,7 @@ export const MenuItem = styled.div`
 export const Menu = styled.div`
 	width: 100%;
 	height: auto;
-	transform: translateY(-25%);
+	transform: translateY(-10%);
 
 	@media (max-width: 1000px) {
 		display: ${(props) => (props.show ? "unset" : "none")};

@@ -12,6 +12,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useUserData } from "../../../Providers/UserData";
 import api from "../../../Services";
 import toast from "react-hot-toast";
+import { Form } from './styles'
 
 const AddHabit = ({ open, handleClose }) => {
     const { userId, token, recarregarDados } = useUserData();
@@ -51,16 +52,17 @@ const AddHabit = ({ open, handleClose }) => {
 				{"Criar um hábito:"}
 			</DialogTitle>
 			<DialogContent>
-				<form noValidate onSubmit={handleSubmit(handleCreateHabit)}>
+				<Form noValidate >
 					<TextField label="Um nome" {...register("title")} />
 					<TextField label="Categoria" {...register("category")} />
 					<TextField label="Dificuldade" {...register("difficulty")} />
 					<TextField label="Frequência" {...register("frequency")} />
-					<Button type="submit">Criar</Button>
-				</form>
+					
+				</Form>
 			</DialogContent>
 			<DialogActions>
-				<Button onClick={handleClose} color="secondary" autoFocus>
+				<Button variant="contained" onClick={handleSubmit(handleCreateHabit)} color="primary">Criar</Button>
+                <Button onClick={handleClose} color="secondary" autoFocus>
 					Close
 				</Button>
 			</DialogActions>

@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "../../Services";
+import jwt_decode from "jwt-decode";
 
 const UserDataContext = createContext();
 
@@ -14,7 +15,8 @@ export const UserDataProvider = ({ children }) => {
 		JSON.parse(localStorage.getItem("userId")) || ''
 	);
     const [timer, setTimer] = useState(JSON.parse(localStorage.getItem('habitsLastUpdate')) || {});
-	
+	const [userName, setUserName] = useState('');
+
     const recarregarDados = () => {
         setReloadData(!reloadData)
     }
@@ -35,6 +37,12 @@ export const UserDataProvider = ({ children }) => {
 		}).then(res=>{
             setGroupsIn(res.data)
         }).catch(err=>console.log(err));
+
+        api.get(`/users/${userId}/`)
+			.then((res) => {
+				setUserName(res.data.username);
+			})
+			.catch((err) => console.log(err));
         }
         
 		
@@ -49,7 +57,7 @@ export const UserDataProvider = ({ children }) => {
 
 	return (
 		<UserDataContext.Provider
-			value={{ token, setToken, habits, setHabits, userId, setUserId, groupsIn, setGroupsIn, recarregarDados, handleUpdateTimer }}
+			value={{ token, setToken, habits, setHabits, userId, setUserId, groupsIn, setGroupsIn, recarregarDados, handleUpdateTimer, userName }}
 		>
 			{children}
 		</UserDataContext.Provider>
