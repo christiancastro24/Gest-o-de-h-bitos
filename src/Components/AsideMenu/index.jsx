@@ -98,7 +98,6 @@ const AsideMenu = () => {
 						handleClose={handleClose}
 						handleChangeAvatarId={handleChangeAvatarId}
 					/>
-                    {console.log(hora)}
 					<UserName>{hora > 18 ? 'Boa noite, ' : hora > 12 ? 'Boa tarde, ' : hora > 6 ? 'Bom dia, ' : 'Boa noite, '}<br/>{userName}{'!'}</UserName>
 				</Header>
 				<Menu show={showMenu}>

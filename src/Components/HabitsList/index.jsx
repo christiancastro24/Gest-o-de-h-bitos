@@ -25,16 +25,14 @@ const frases = [
 	<cite>"É impressionante os resultados que temos quando nós propomos mudar nossos hábitos. Somos feitos de hábitos, construídos por pensamentos." <Bold>Henriki Borges</Bold></cite>,
 ];
 const getRandomFrase = () => {
-	return frases[Math.round(Math.random() * 9)];
+	return frases[Math.round(Math.random() * (frases.length - 1))];
 };
 
 const HabitsList = () => {
     
 	const { habits, token, recarregarDados, handleUpdateTimer } = useUserData();
     const [appIsThinking, setAppIsThinking] = useState(false);
-    const actualDate = new Date();
-    const dateInfo = [actualDate.getDate(), actualDate.getMonth()];
-	
+    const dateInfo = [new Date().getDate(), new Date().getMonth()];
     const [open, setOpen] = useState(false);
     const [openDoneInfo, setOpenDoneInfo] = useState(false);
     const [openDelConfirmation, setOpenDelConfirmation] = useState(false);
@@ -47,10 +45,10 @@ const HabitsList = () => {
 	};
     const handleOpenDoneInfo = () => {
         setOpenDoneInfo(true);
-        setTimeout(()=>{setOpenDoneInfo(false)}, 2500);
+        setTimeout(()=>{setOpenDoneInfo(false)}, 2500); //delay para leitura
     }
     const handleOpenDelConfirmation = () => {
-        setOpenDelConfirmation(!openDelConfirmation)
+        setOpenDelConfirmation(!openDelConfirmation);
     }
     const handleDoneTask = (habitId, repeticoes) => {
         setAppIsThinking(true);
