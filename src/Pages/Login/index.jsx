@@ -4,8 +4,12 @@ import * as yup from "yup";
 import { TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { LockOpen, AccountCircle } from "@material-ui/icons";
-import { ContainerRegisterForm } from "./styles";
-import { Container, Background, Content } from "./styles";
+import {
+  Container,
+  Background,
+  Content,
+  ContainerRegisterForm,
+} from "./styles";
 import { useHistory, Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import api from "../../Services";
