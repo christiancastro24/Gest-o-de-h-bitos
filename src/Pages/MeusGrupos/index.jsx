@@ -20,7 +20,7 @@ const MyGroups = () => {
 
             <CreateGroup />
             <CreateGoals />         
-            <CreateActivities />
+            
             
         <Container>      
                 {myGroups.map(myGroup => {
@@ -38,7 +38,7 @@ const MyGroups = () => {
 
                             <button className="btn-add-actvi" variant="contained" onClick={() => setPopUpActivities(!popUpActivities)}>Add atv</button>
 
-                         
+                         <CreateActivities itemId={myGroup.id}/>
                         </ContainerGroup>
                     )
                 })}

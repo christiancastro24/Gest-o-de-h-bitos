@@ -2,7 +2,7 @@ import { useGroups } from "../../Providers/groups"
 import { ContainerPopUp } from "./styles"
 import { Button } from "@material-ui/core"
 
-const CreateActivities = () => {
+const CreateActivities = ({itemId}) => {
 
     const { popUpActivities, setPopUpActivities, title, setTitle, group, setGroup, handleCreateActivity  } = useGroups()
     return (
@@ -15,9 +15,9 @@ const CreateActivities = () => {
                 <input value={title} onChange={evt => setTitle(evt.target.value)} placeholder="Título" />
 
                 
-                <input value={group} onChange={evt => setGroup(evt.target.value)} placeholder="Grupo"/>
+                {/* <input value={group} onChange={evt => setGroup(evt.target.value)} placeholder="Grupo"/> */}
 
-                <Button className="btn-create-actv"variant="contained" color="secondary" onClick={handleCreateActivity}>Criar Atividade</Button>
+                <Button className="btn-create-actv"variant="contained" color="secondary" onClick={()=>handleCreateActivity(itemId)}>Criar Atividade</Button>
             </ContainerPopUp>
             }
         </>
