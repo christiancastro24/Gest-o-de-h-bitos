@@ -3,7 +3,7 @@ import styled from "styled-components";
 const ContainerRegisterForm = styled.div`
     font-family: sans-serif;
     color: #fff;
-    height: 724px;
+    height: 724px; 
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -25,6 +25,7 @@ const ContainerRegisterForm = styled.div`
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        position: relative;
     }
 
     input {
@@ -48,10 +49,15 @@ const ContainerRegisterForm = styled.div`
         border-radius: .4rem;
         font-size: 1.3rem;
         box-shadow: 5px 6px 10px -2px black;
+        cursor: pointer;
+    }
+
+    button:hover {
+        filter: var(--btnHover)
     }
 
     p {
-        font-size: 1.4rem;
+        font-size: 1rem;
     }
 
     p > span > a {
@@ -65,14 +71,6 @@ const ContainerRegisterForm = styled.div`
 
     .title_Y {
         color: var(--lightGreen)
-    }
-
-    .error_message {
-        color: red;
-        background-color: white;
-        padding: 4px;
-        border-radius: 4px;
-        position: relative;
     }
 `
 

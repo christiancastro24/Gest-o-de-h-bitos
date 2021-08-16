@@ -10,6 +10,8 @@ import imageLogin from "../../Assets/Images/login.svg";
 import toast from "react-hot-toast";
 import api from "../../Services";
 import { useAuthenticated } from "../../Providers/authentication";
+import PinkButton from "../../Components/PinkButton";
+import MessageBalloon from "../../Components/MessageBalloon";
 
 const useStyles = makeStyles(() => ({
 	inputs: {
@@ -32,11 +34,11 @@ const LoginPage = () => {
 	const { authenticated, setAuthenticated } = useAuthenticated()
 
 	const formSchema = yup.object().shape({
-		username: yup.string(),
-		password: yup.string().min(6, "Senha obrigatória de 6 dígitos"),
+		username: yup.string().required("Usuário obrigatório!"),
+		password: yup.string().min(4, "Mínimo 4 dígitos!").required("Senha obrigatória!"),
 	});
 
-	const { register, handleSubmit } = useForm({
+	const { register, handleSubmit, formState:{errors} } = useForm({
 		resolver: yupResolver(formSchema),
 	});
 
@@ -50,6 +52,7 @@ const LoginPage = () => {
 				setAuthenticated(true)
 				
 				history.push("/habits")
+				toast.success("Sucesso!")
 			})
 			.catch(() => {
 				toast.error("Usuário ou senha incorretos!",
@@ -81,17 +84,15 @@ const LoginPage = () => {
 						</h1>
 
 						<TextField
-							required
 							className={classes.inputs}
 							variant="outlined"
 							placeholder="Usuário"
 							InputProps={{ startAdornment: <AccountCircle /> }}
 							{...register("username")}
 						/>
-
 						<br />
+						{errors.username && <MessageBalloon message = {errors.username.message} className = "invalid_username_message"/>}
 						<TextField
-							required
 							className={classes.inputs}
 							variant="outlined"
 							placeholder="Senha"
@@ -99,14 +100,14 @@ const LoginPage = () => {
 							type="password"
 							{...register("password")}
 						/>
-
-						<Button variant="contained" type="submit">
-							Entrar
-						</Button>
+					{errors.password && <MessageBalloon message = "Senha obrigatória!" className = "invalid_password_message"/>}
+					<div>
+						<PinkButton text = "ENTRAR" type = "submit" />
 						<p>
-							Não possui uma conta?{" "}
-							<Link to={"/registerPage"}>Cadastre-se</Link>
+							Não possui uma conta?
+							<Link to={"/registerPage"}> Cadastre-se</Link>
 						</p>
+					</div>
 					</section>
 				</ContainerInput>
 

@@ -97,7 +97,7 @@ export const ContainerAbout = styled.section`
 export const ContainerButton = styled.section`
 
     button:hover {
-        filter: brightness(90%);
+        filter: var(--btnHover)
     }
 
     button:nth-child(1) {
