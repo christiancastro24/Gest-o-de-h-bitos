@@ -32,7 +32,7 @@ export const GroupsProvider = ({ children }) => {
             headers: { Authorization: `Bearer ${token}`}
         
         })
-        .then(res => setMyGroups(res.data))
+        .then(res => {setMyGroups(res.data); console.log(myGroups)})
 
         .catch(err => console.log(err))
     }, [])
@@ -81,9 +81,9 @@ export const GroupsProvider = ({ children }) => {
     }
 
     // Criando Atividade
-    const handleCreateActivity = () => {
+    const handleCreateActivity = (itemId) => {
         const realization_time = new Date();
-        const dataActivities = { title: title, group: group }
+        const dataActivities = { title: title, group: itemId }
 
         api.post("/activities/", {...dataActivities, realization_time}, {
             headers: {

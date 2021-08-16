@@ -27,6 +27,7 @@ export const ContainerPopUp = styled.div`
         input {
             height: 3rem;
             border: 2px solid var(--pink);
+            color: black;
         }
 
         button {
