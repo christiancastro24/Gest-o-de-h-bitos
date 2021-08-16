@@ -16,6 +16,9 @@ export const GroupsProvider = ({ children }) => {
     const [description, setDescription] = useState("")
     const [category, setCategory] = useState("")
 
+    const [groupGoals, setGroupGoals] = useState([])
+    const [groupActivities, setGroupActivities] = useState([])
+
     const [title, setTitle] = useState("")
     const [difficulty, setDifficulty] = useState("")
     const [group, setGroup] = useState("")
@@ -32,7 +35,7 @@ export const GroupsProvider = ({ children }) => {
             headers: { Authorization: `Bearer ${token}`}
         
         })
-        .then(res => {setMyGroups(res.data); console.log(myGroups)})
+        .then(res => setMyGroups(res.data))
 
         .catch(err => console.log(err))
     }, [])
@@ -47,9 +50,9 @@ export const GroupsProvider = ({ children }) => {
 
 
     // Criando meta 
-    const handleCreateGoal = () => {
+    const handleCreateGoal = (itemId) => {
         const how_much_achieved = 50;
-        const dataMeta = { title: title, difficulty: difficulty, group: group }
+        const dataMeta = { title: title, difficulty: difficulty, group: itemId }
 
         api.post("/goals/", {...dataMeta, how_much_achieved}, {
             headers: {
@@ -77,7 +80,7 @@ export const GroupsProvider = ({ children }) => {
                 backgroundColor: "red",
                 color: "#fff"
             }
-        })("Erro ao criar a meta")) 
+        })) 
     }
 
     // Criando Atividade
@@ -177,9 +180,17 @@ export const GroupsProvider = ({ children }) => {
         }))
     }
 
+    const handleInfo = (itemId) => {
+        const filtGoals = myGroups.filter(item => item.id === itemId)
+        setGroupGoals(filtGoals)
+
+        const filtActivities =  myGroups.filter(item => item.id === itemId)
+        setGroupActivities(filtActivities)
+    }
+
 
     return (
-        <GroupsContext.Provider value={{groups, setGroups, name, setName, description, setDescription, category, setCategory, myGroups, setMyGroups, goals, setGoals, title, setTitle, difficulty, setDifficulty, group, setGroup, handleCreateGoal, handleCreateActivity, activities, setActivities, popUp, setPopUp, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, handleCreate, handleSignIn}}>
+        <GroupsContext.Provider value={{groups, setGroups, name, setName, description, setDescription, category, setCategory, myGroups, setMyGroups, goals, setGoals, title, setTitle, difficulty, setDifficulty, group, setGroup, handleCreateGoal, handleCreateActivity, activities, setActivities, popUp, setPopUp, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, handleCreate, handleSignIn, handleInfo, groupGoals, groupActivities, setGroupActivities}}>
             {children}
         </GroupsContext.Provider>
     )

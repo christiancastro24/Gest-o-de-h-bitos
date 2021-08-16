@@ -2,9 +2,9 @@ import { useGroups } from "../../Providers/groups";
 import { ContainerPopUp } from "./styles";
 import { Button } from "@material-ui/core"
 
-const CreateGoals = () => {
+const CreateGoals = ({ itemId }) => {
 
-    const {popUpMeta, setPopUpMeta, title, setTitle, group, setGroup, difficulty, setDifficulty, handleCreateGoal} = useGroups()
+    const {popUpMeta, setPopUpMeta, title, setTitle, difficulty, setDifficulty, handleCreateGoal} = useGroups()
     return (
         <>
         
@@ -16,12 +16,10 @@ const CreateGoals = () => {
                 <h3>Metas</h3>
 
                 <input value={title} onChange={evt => setTitle(evt.target.value)} placeholder="Título" />
-                
-                <input value={group} onChange={evt => setGroup(evt.target.value)} placeholder="Grupo"/>
 
                 <input value={difficulty} onChange={evt => setDifficulty(evt.target.value)} placeholder="Dificuldade" />
 
-                <Button variant="contained" color="secondary"  onClick={handleCreateGoal}>Criar meta</Button>
+                <Button variant="contained" color="secondary"  onClick={() => handleCreateGoal(itemId)}>Criar meta</Button>
             </ContainerPopUp>
             }
         </>
