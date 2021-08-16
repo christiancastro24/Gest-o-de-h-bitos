@@ -1,43 +1,185 @@
 import { createContext, useContext, useState, useEffect } from "react"
 import api from "../../Services/"
+import toast from "react-hot-toast";
 
 const GroupsContext = createContext()
 
 export const GroupsProvider = ({ children }) => {
 
     const [groups, setGroups] = useState([])
-    const [groupsFiltered, setGroupsFiltered] = useState([])
-    const [error, setError] = useState(false)
-    const [search, setSearch] = useState("")
+    const [myGroups, setMyGroups] = useState([])
 
+    const [goals, setGoals] = useState([])
+    const [activities, setActivities] = useState([])
+
+    const [name, setName] = useState("")
+    const [description, setDescription] = useState("")
+    const [category, setCategory] = useState("")
+
+    const [title, setTitle] = useState("")
+    const [difficulty, setDifficulty] = useState("")
+    const [group, setGroup] = useState("")
+
+    const [popUp, setPopUp] = useState(false)
+    const [popUpMeta, setPopUpMeta] = useState(false)
+    const [popUpActivities, setPopUpActivities] = useState(false)
+
+   const [token] = useState(JSON.parse(localStorage.getItem("@DevHealthy/user")) || "")
+
+   // Grupos inscritos 
     useEffect(() => {
-        api.get("/activities/")
-        .then(res => {
-            setError(false)
-            setGroups(res.data.results.slice(0,4))
-        }) 
-        .catch(error => console.log(error))
+        api.get(`/groups/subscriptions/`, {         
+            headers: { Authorization: `Bearer ${token}`}
+        
+        })
+        .then(res => setMyGroups(res.data))
+
+        .catch(err => console.log(err))
     }, [])
 
-    const handleSearch = (groupList) => {
-        const filterGroups = groups.filter(group => group.title.toLowerCase().includes(groupList.toLowerCase()))
-        setGroupsFiltered(filterGroups)
 
-        if(filterGroups.length > 0) {
-            setError(false)
-        } else {
-            setError(true)
-        }
+    // Todos grupos que não precisam de ("Autorização")
+    useEffect(() => {
+        api.get(`/groups/subscriptions/`)
+        .then(res => setGroups(res.data))
+        .catch(err => console.log(err))
+    }, [])
+
+
+    // Criando meta 
+    const handleCreateGoal = () => {
+        const how_much_achieved = 50;
+        const dataMeta = { title: title, difficulty: difficulty, group: group }
+
+        api.post("/goals/", {...dataMeta, how_much_achieved}, {
+            headers: {
+                "Content-Type": "application/json", 
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        .then(_ => {
+            setGoals([...goals, {...dataMeta, how_much_achieved}])
+            setTitle("")
+            setDifficulty("")
+            setGroup("")
+            setPopUpMeta(!popUpMeta)
+            toast.success("Meta cadastrada!",
+            {
+                style: {
+                    backgroundColor: "#228B22",
+                    color: "#fff"
+                }
+            })
+        })
+        .catch(_ => toast.error("Erro ao cadastrar uma meta",
+        {
+            style: {
+                backgroundColor: "red",
+                color: "#fff"
+            }
+        })("Erro ao criar a meta")) 
     }
 
-    const handleClear = () => {
-        setGroupsFiltered([])
-        setError(false)
-        setSearch("")
+    // Criando Atividade
+    const handleCreateActivity = () => {
+        const realization_time = new Date();
+        const dataActivities = { title: title, group: group }
+
+        api.post("/activities/", {...dataActivities, realization_time}, {
+            headers: {
+                "Content-Type": "application/json", 
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        .then(_ => {
+            setActivities([...activities, {...setActivities, realization_time}])
+            setTitle("")
+            setGroup("")
+            setPopUpActivities(!popUpActivities)
+            toast.success("Atividade cadastrada!",
+            {
+                style: {
+                    backgroundColor: "#228B22",
+                    color: "#fff"
+                }
+            })
+        })
+        .catch(_ => toast.error("Erro ao criar a atividade!",
+        {
+            style: {
+                backgroundColor: "red",
+                color: "#fff"
+            }
+        })) 
     }
+
+
+    // Criando grupo
+    const handleCreate = () => {
+
+        const data = { name: name, description: description, category: category }
+        api.post("/groups/", data, {
+
+            headers: { Authorization: `Bearer ${token}`},
+        })
+        .then(_ => {
+            setMyGroups([...myGroups, {...data}])
+            toast.success("Grupo criado!",
+            {
+                style: {
+                    backgroundColor: "#228B22",
+                    color: "#fff"
+                }
+            })
+            setName("")
+            setCategory("")
+            setDescription("")
+            setPopUp(!popUp)
+            
+
+        })
+        .catch(_ => toast.error("Erro ao criar o grupo!",
+        {
+            style: {
+                backgroundColor: "red",
+                color: "#fff",
+            }
+        }))
+    }
+
+
+    // Inscrevendo-se nos grupos 
+    const handleSignIn = (id) => {
+
+        api.post(`/groups/${id}/subscribe/`, null, {
+
+            headers: { Authorization: `Bearer ${token}`},
+        })
+        .then(_ => {
+            toast.success("Você entrou no grupo",
+            {
+                style: {
+                    backgroundColor: "#228B22",
+                    color: "#fff"
+                }
+            })
+            // setTimeout(() => history.push("/myGroups"), 1000)
+            window.location.reload();
+            
+
+        })
+        .catch(_ => toast.error("Você já esta nesse grupo",
+        {
+            style: {
+                backgroundColor: "red",
+                color: "#fff"
+            }
+        }))
+    }
+
 
     return (
-        <GroupsContext.Provider value={{groups, groupsFiltered, search, setSearch, error, handleSearch, handleClear}}>
+        <GroupsContext.Provider value={{groups, setGroups, name, setName, description, setDescription, category, setCategory, myGroups, setMyGroups, goals, setGoals, title, setTitle, difficulty, setDifficulty, group, setGroup, handleCreateGoal, handleCreateActivity, activities, setActivities, popUp, setPopUp, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, handleCreate, handleSignIn}}>
             {children}
         </GroupsContext.Provider>
     )

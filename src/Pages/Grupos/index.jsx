@@ -1,63 +1,39 @@
-import { Button} from "@material-ui/core";
 import AsideMenu from "../../Components/AsideMenu";
 import { Window } from "../../Components/GlobalStyle/styles";
 import { useGroups } from "../../Providers/groups";
-import { Container, ContainerGroup, ContainerItemsSearch, ContainerSearch } from "./styles";
+import { Container, ContainerGroup } from "./styles";
+import { ContainerAll } from "../MeusGrupos/styles";
 
 const GroupsPage = () => {
 
-    const { groups, groupsFiltered, search, setSearch, error, handleSearch, handleClear } = useGroups();
+    const { groups, handleSignIn } = useGroups();
 
     return ( 
         <>
         <AsideMenu />
         <Window>
 
-        <section>
-            <h1 style={{color: "white", textAlign: "center", fontFamily: "Helvetica"}}>Grupos</h1>
-            <ContainerSearch>
-                <h2>Pesquise:</h2>
+        <ContainerAll>
+            <h1>Grupos</h1>
 
-                &nbsp;&nbsp;<input value={search} onChange={evt => setSearch(evt.target.value)} placeholder="Procure seu grupo" />
-
-             <Button variant="contained" onClick={() => handleSearch(search)}>Pesquisar</Button>
-
-             <Button variant="contained" onClick={handleClear}>Limpar</Button>
-
-        </ContainerSearch>
-
-
-        <ContainerItemsSearch>
-                
-            {groupsFiltered.map(groupsEqual => {
-                return (
-                    <div>
-                        <h2>{groupsEqual.title}</h2>
-                        {/* <h3>{groupsEqual.realization_time}</h3>
-                        <h4>{groupsEqual.group}</h4> */}
-                        <Button variant="contained">Inscrever-se</Button>
-                    </div>
-                )
-            })}
-             {error && <span>Grupo nao encontrado.</span>}
-
-        </ContainerItemsSearch>
-
-        <Container>
-           
-
+        <Container>      
                 {groups.map(group => {
                     return (
                         <ContainerGroup key={group.id}>
-                            <h2>{group.title}</h2>
-                            <h3>{group.realization_time}</h3>
-                            <h4>Grupo: {group.group}</h4>
-                            <Button variant="contained">Inscrever-se</Button>
+                            <div className="Items">
+                                <h2>{group.name}</h2>
+                                <h3>{group.description}</h3>
+                                <h3>Categoria: {group.category}</h3>
+                            </div>
+
+                            <button variant="contained" onClick={() => handleSignIn(group.id)}>Entrar</button>
+                            
+                            <button>...</button>
                         </ContainerGroup>
                     )
                 })}
             </Container>
-            </section>
+            </ContainerAll>
         </Window>
         </>
      );

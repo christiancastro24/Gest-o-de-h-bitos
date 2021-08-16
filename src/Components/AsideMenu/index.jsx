@@ -99,6 +99,7 @@ const AsideMenu = () => {
 					<UserName>Jorgesp88</UserName>
 				</Header>
 				<Menu show={showMenu}>
+					<br />
 					<MenuItem
 						foq={currentPath === "/habits"}
 						onClick={() => history.push("/habits")}
@@ -106,6 +107,14 @@ const AsideMenu = () => {
 						<b />
 						<b />
 						Hábitos
+					</MenuItem>
+					<MenuItem
+						foq={currentPath === "/profile"}
+						onClick={() => history.push("/profile")}
+					>
+						<b />
+						<b />
+						Profile
 					</MenuItem>
 					<MenuItem
 						foq={currentPath === "/groups"}
@@ -116,12 +125,12 @@ const AsideMenu = () => {
 						Grupos
 					</MenuItem>
 					<MenuItem
-						foq={currentPath === "/profile"}
-						onClick={() => history.push("/profile")}
+						foq={currentPath === "/myGroups"}
+						onClick={() => history.push("/myGroups")}
 					>
 						<b />
 						<b />
-						Profile
+						Meus Grupos
 					</MenuItem>
 				</Menu>
 				<Footer onClick={handleLogout}>
