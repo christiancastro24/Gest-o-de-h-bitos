@@ -7,8 +7,7 @@ import RegisterPage from "../Pages/Register";
 import GroupsPage from "../Pages/Grupos";
 import HabitsPage from "../Pages/Habitos";
 import ProfilePage from "../Pages/Profile";
-import CreateGroup from "../Components/CreateGroup";
-import MessageBalloon from "../Components/MessageBalloon"
+import MyGroups from "../Pages/MeusGrupos";
 
 const Routes = () => {
     return (
@@ -31,9 +30,12 @@ const Routes = () => {
 			<Route path="/profile">
 				<ProfilePage />
 			</Route>
-			<Route path="/teste">
+			{/* <Route path="/teste">
 				<CreateGroup />
 				<MessageBalloon />
+			</Route> */}
+			<Route path="/myGroups">
+				<MyGroups />
 			</Route>
 			<Route path="*">
 				<PageNotFound />

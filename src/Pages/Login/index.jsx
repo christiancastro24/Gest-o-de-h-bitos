@@ -37,8 +37,8 @@ const LoginPage = () => {
 	const { authenticated, setAuthenticated } = useAuthenticated()
 
 	const formSchema = yup.object().shape({
-		username: yup.string().required("Usuário obrigatório!"),
-		password: yup.string().min(4, "Mínimo 4 dígitos!").required("Senha obrigatória!"),
+		username: yup.string(),
+		password: yup.string().min(6, "Senha obrigatória de 6 dígitos"),
 	});
 
 	const { register, handleSubmit, formState:{errors} } = useForm({
