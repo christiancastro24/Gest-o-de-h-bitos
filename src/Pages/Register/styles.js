@@ -7,6 +7,7 @@ export const Container = styled.div`
     align-items: stretch;
     width: 100%;
     justify-content: center;
+    overflow: hidden;
 `;
 
 export const Background = styled.div`
