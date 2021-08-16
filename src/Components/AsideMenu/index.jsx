@@ -23,6 +23,7 @@ import {
 } from "@material-ui/icons";
 import { useHistory } from "react-router";
 import { useAuthenticated } from "../../Providers/authentication";
+import { useUserData } from "../../Providers/UserData";
 
 const getRandom = (max, min = 0) => {
 	return Math.round(Math.random() * (max - min) + min);
@@ -38,6 +39,8 @@ const AsideMenu = () => {
     const [avatarType, setAvatarType] = useState(localStorage.getItem('userAvatarType') || getRandom(5,2));
     const currentPath = window.location.pathname;
     const history = useHistory();
+    const { userName } = useUserData();
+    const hora = new Date().getHours();
 
     const getUserAvatar = () => {
         return `https://robohash.org/${avatarId}.png?set=set${avatarType}`;
@@ -95,8 +98,7 @@ const AsideMenu = () => {
 						handleClose={handleClose}
 						handleChangeAvatarId={handleChangeAvatarId}
 					/>
-
-					<UserName>Jorgesp88</UserName>
+					<UserName>{hora > 18 ? 'Boa noite, ' : hora > 12 ? 'Boa tarde, ' : hora > 6 ? 'Bom dia, ' : 'Boa noite, '}<br/>{userName}{'!'}</UserName>
 				</Header>
 				<Menu show={showMenu}>
 					<br />
@@ -132,6 +134,9 @@ const AsideMenu = () => {
 						<b />
 						Meus Grupos
 					</MenuItem>
+					{showMenu && (
+						<MenuItem onClick={handleLogout}>Deslogar</MenuItem>
+					)}
 				</Menu>
 				<Footer onClick={handleLogout}>
 					Deslogar{" "}
