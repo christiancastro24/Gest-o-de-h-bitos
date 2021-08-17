@@ -9,14 +9,21 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import MessageBalloon from "../MessageBalloon";
 import api from "../../Services";
 import ConfirmationPopup from "../ConfirmationPopup";
+import { useHistory } from "react-router-dom";
+import { useAuthenticated } from "../../Providers/authentication";
+
 
 const ProfileCard = () => {
     
-    const { userName, userEmail, userId, password, token } = useUserData();
-
+    const { userName, userEmail, userId, password, token, userAvatar } = useUserData();
+    
     const [changingProfile, setChangingProfile] = useState(false);
-
+    
     const [deletingProfile, setDeletingProfile] = useState(false);
+
+    const {setAuthenticated} = useAuthenticated();
+
+    const history = useHistory();
 
     const formSchema = yup.object().shape({
         username: yup.string().required("Usuário inválido"),
@@ -30,56 +37,81 @@ const ProfileCard = () => {
                 Authorization: `Bearer ${token}`
             }
         })
-        console.log("apagouuu")
+        .then ( res => {
+            toast.success("Conta excluída!")
+            setAuthenticated(false);
+            localStorage.clear();
+            history.push("/")
+        }
+        )
     }
 
     const { register, handleSubmit, formState: {errors} } = useForm({
         resolver: yupResolver(formSchema)
     });
 
+    const handleCancel = () => {
+        document.getElementById("username_input").value = userName;
+        document.getElementById("email_input").value = userEmail;
+        setChangingProfile(false)
+    }
+
     const onSub = (data) => {
-        console.log("teste")
-        console.log(data)
-        console.log(userId);
         api.patch(`/users/${userId}/`, data, {
             headers: {
                 Authorization: `Bearer ${token}`
             },
         })
-        .then(res => {
-            console.log(res)
+        .then(() => {
             setChangingProfile(false);
+            toast.success("Sucesso!")
             window.location.reload();
             })
-        .catch(error => console.log(error))
+        .catch(() => toast.error("Erro ao atualizar perfil!"))
     }
 
     return (
         <>
         <ProfileContainer >
-            { deletingProfile && <ConfirmationPopup />}
+            <h1>{userName}</h1>
+            <img alt = {userName} src = {userAvatar} />
+            { deletingProfile && 
+            <ConfirmationPopup >
+                <p>Tem certeza?</p>
+                A Exclusão da conta é irreversível e você deverá fazer outro cadastro se desejar
+                continuar usando nossos serviços. 
+                <div>
+                    <button className = "yes_button" onClick = {deleteProfile}>Sim</button>
+                    <button className = "no_button" onClick = {() => setDeletingProfile(false)}>Não</button>
+                </div>
+            </ConfirmationPopup>
+            }
+            <div></div>
             <form className = "profile_card" onSubmit = {handleSubmit(onSub)} noValidate>
-                <input id = "teste" defaultValue = {userName}  type = "text" disabled = {changingProfile? "" : "true"} {...register("username")} 
+                <input id = "username_input" defaultValue = {userName}  type = "text" disabled = {changingProfile? "" : "true"} {...register("username")} 
                 />
                 {changingProfile && errors.username && <MessageBalloon className = "invalid_username_message" message = {errors.username.message} />}
-                <input defaultValue = {userEmail} disabled = {changingProfile? "" : "true"} {...register("email")} 
+                <input id = "email_input" defaultValue = {userEmail} disabled = {changingProfile? "" : "true"} {...register("email")} 
                 />
                 
                 {changingProfile && errors.email && <MessageBalloon className = "invalid_email_message" message = {errors.email.message} />}
                 
                 
-                
-                {changingProfile? 
-                <PinkButton text = "Salvar" type = "submit" onClick = {() => setChangingProfile(true)}/>
-                // <button type = "submit" onClick = {() => setChangingProfile(true)} >Salvar</button>
-                :
-                <PinkButton text = "Alterar" type = "button" onClick = {() => setChangingProfile(true)} />
-                // <button type = "button" onClick = {() => setChangingProfile(true)}>Alterar</button>
+            
+                <div>
+                    {changingProfile? 
+                    <div className = "change_profile_buttons">
+                    <PinkButton text = "Salvar" type = "submit" />
+                    <span className = "fake_button" onClick = {handleCancel}>cancelar</span>
+                    </div>
+                    :
+                    <span className = "fake_button" onClick = {() => setChangingProfile(true)}>Alterar</span>
                 }
+                </div>
             </form>
         
             <div className = "profile_footer">
-                <button onClick = {() => setDeletingProfile(true)}>Excluir Conta</button>
+                <button className = "delete_button" onClick = {() => setDeletingProfile(true)}>Excluir Conta</button>
             </div>
         </ProfileContainer>
         </>

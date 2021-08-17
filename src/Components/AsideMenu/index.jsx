@@ -39,12 +39,14 @@ const AsideMenu = () => {
     const [avatarType, setAvatarType] = useState(localStorage.getItem('userAvatarType') || getRandom(5,2));
     const currentPath = window.location.pathname;
     const history = useHistory();
-    const { userName } = useUserData();
+    const { userName, userAvatar, setUserAvatar } = useUserData();
     const hora = new Date().getHours();
 
     const getUserAvatar = () => {
-        return `https://robohash.org/${avatarId}.png?set=set${avatarType}`;
+        return setUserAvatar(`https://robohash.org/${avatarId}.png?set=set${avatarType}`);
     };
+
+	getUserAvatar();
 
     const handleChangeAvatarId = (id, type) => {
         setAvatarId(id);
@@ -85,7 +87,7 @@ const AsideMenu = () => {
 					<Header>
 						<MultiFrameContainer>
 							<Avatar
-								src={getUserAvatar()}
+								src={userAvatar}
 								alt="UserAvatar"
 								onClick={handleOpen}
 							></Avatar>

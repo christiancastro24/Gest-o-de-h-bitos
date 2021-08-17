@@ -25,10 +25,17 @@ const ProfileContainer = styled.div`
         justify-content: center;
         align-items: center;
         margin: 0 auto;
+
+        
     }
 
+    h1 {
+            color: white;
+            text-transform: capitalize;
+        }
+
+
     .profile_footer {
-            background-color: #6b64642f;
             width: 100%;
             max-width: 1200px;
             text-align: right;
@@ -42,8 +49,9 @@ const ProfileContainer = styled.div`
         margin: 4px auto;
         outline: none;
         border: none;
-        height: 24px;
+        height: 28px;
         width: 80%;
+        border-radius: 2px;
     }
 
     input::placeholder {
@@ -64,6 +72,46 @@ const ProfileContainer = styled.div`
         right: 15%;
     }
 
+    .fake_button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #B5179E;
+        margin: 16px 0      ;
+        width: 128px;
+        height: 3rem;
+        color: #fff;
+        border: none;
+        border-radius: .4rem;
+        font-size: 1.3rem;
+        box-shadow: 5px 6px 10px -2px black;
+        cursor: pointer;
+        text-transform: uppercase;
+        margin-left: 16px;
+
+        &:hover{
+            filter: var(--btnHover)
+        }
+    }
+
+    .change_profile_buttons {
+        display: flex;
+        width: 100%;
+    }
+    
+    .delete_button {
+        width: 104px;
+        height: 2rem;
+        background-color: #ac1919;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        color: var(--white);
+
+        &:hover {
+            filter: var(--btnHover)
+        }
+    }
     @media (max-width: 1080px) {
         .profile_footer {
             text-align: center;

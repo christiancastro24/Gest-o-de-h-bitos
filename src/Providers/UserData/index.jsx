@@ -17,6 +17,7 @@ export const UserDataProvider = ({ children }) => {
 	const [userName, setUserName] = useState('');
     const [userEmail, setUserEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [userAvatar, setUserAvatar] = useState('')
 
     const recarregarDados = () => {
         setReloadData(!reloadData)
@@ -61,7 +62,7 @@ export const UserDataProvider = ({ children }) => {
 
 	return (
 		<UserDataContext.Provider
-			value={{ token, setToken, habits, setHabits, userId, setUserId, groupsIn, setGroupsIn, recarregarDados, handleUpdateTimer, userName, userEmail, setPassword, password}}
+			value={{ token, setToken, habits, setHabits, userId, setUserId, groupsIn, setGroupsIn, recarregarDados, handleUpdateTimer, userName, userEmail, setPassword, password, userAvatar, setUserAvatar}}
 		>
 			{children}
 		</UserDataContext.Provider>
