@@ -38,7 +38,7 @@ export const GroupsProvider = ({ children }) => {
         .then(res => setMyGroups(res.data))
 
         .catch(err => console.log(err))
-    }, [])
+    }, [groupGoals, groupActivities])
 
 
     // Todos grupos que não precisam de ("Autorização")
@@ -46,7 +46,7 @@ export const GroupsProvider = ({ children }) => {
         api.get(`/groups/subscriptions/`)
         .then(res => setGroups(res.data))
         .catch(err => console.log(err))
-    }, [])
+    }, [groups])
 
 
     // Criando meta 
@@ -151,7 +151,7 @@ export const GroupsProvider = ({ children }) => {
     }
 
 
-    // Inscrevendo-se nos grupos 
+    // Entrar em um grupo 
     const handleSignIn = (id) => {
 
         api.post(`/groups/${id}/subscribe/`, null, {
@@ -166,7 +166,6 @@ export const GroupsProvider = ({ children }) => {
                     color: "#fff"
                 }
             })
-            // setTimeout(() => history.push("/myGroups"), 1000)
             window.location.reload();
             
 
@@ -180,6 +179,48 @@ export const GroupsProvider = ({ children }) => {
         }))
     }
 
+
+    // Sair de um grupo
+    const handleLogout = (id) => {
+        api.delete(`/groups/${id}/unsubscribe/`, {
+            headers: { Authorization: `Bearer ${token}`}
+
+        })
+        .then(() => window.location.reload())
+        .catch(err => console.log(err))
+    }
+
+
+    // Deletando meta 
+    const handleDeleteGoal = (id) => {
+        api.delete(`/goals/${id}/`, {
+
+            headers: { Authorization: `Bearer ${token}`}
+        })
+        .then(_ => {
+            const removeItem = groupGoals.filter(item => item !== id)
+            setGroupGoals(removeItem)
+            window.location.reload();
+        })
+        .catch(err => console.log(err))
+    }
+
+    // Deletando Atividade
+    const handleDeleteActv = (id) => {
+        api.delete(`/activities/${id}/`, {
+
+            headers: { Authorization: `Bearer ${token}`}
+        })
+        .then(_ => {
+            const removeItem = groupGoals.filter(item => item !== id)
+            setGroupActivities(removeItem)
+            window.location.reload();
+        })
+        .catch(err => console.log(err))
+    }
+
+
+    // Imprimindo metas e atividades de um grupo
     const handleInfo = (itemId) => {
         const filtGoals = myGroups.filter(item => item.id === itemId)
         setGroupGoals(filtGoals)
@@ -190,7 +231,7 @@ export const GroupsProvider = ({ children }) => {
 
 
     return (
-        <GroupsContext.Provider value={{groups, setGroups, name, setName, description, setDescription, category, setCategory, myGroups, setMyGroups, goals, setGoals, title, setTitle, difficulty, setDifficulty, group, setGroup, handleCreateGoal, handleCreateActivity, activities, setActivities, popUp, setPopUp, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, handleCreate, handleSignIn, handleInfo, groupGoals, groupActivities, setGroupActivities}}>
+        <GroupsContext.Provider value={{groups, setGroups, name, setName, description, setDescription, category, setCategory, myGroups, setMyGroups, goals, setGoals, title, setTitle, difficulty, setDifficulty, group, setGroup, handleCreateGoal, handleCreateActivity, activities, setActivities, popUp, setPopUp, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, handleCreate, handleSignIn, handleInfo, groupGoals, groupActivities, setGroupActivities, handleDeleteGoal, handleDeleteActv, handleLogout}}>
             {children}
         </GroupsContext.Provider>
     )
