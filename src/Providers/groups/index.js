@@ -23,6 +23,8 @@ export const GroupsProvider = ({ children }) => {
     const [difficulty, setDifficulty] = useState("")
     const [group, setGroup] = useState("")
 
+    const [popUpT, setPopUpt] = useState(false)
+
     const [popUp, setPopUp] = useState(false)
     const [popUpMeta, setPopUpMeta] = useState(false)
     const [popUpActivities, setPopUpActivities] = useState(false)
@@ -123,7 +125,10 @@ export const GroupsProvider = ({ children }) => {
         const data = { name: name, description: description, category: category }
         api.post("/groups/", data, {
 
-            headers: { Authorization: `Bearer ${token}`},
+            headers: { 
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
         })
         .then(_ => {
             setMyGroups([...myGroups, {...data}])
@@ -229,9 +234,41 @@ export const GroupsProvider = ({ children }) => {
         setGroupActivities(filtActivities)
     }
 
+    const handleUpdateGoals = (id) => {
+        const teste = { achieved: true }
+
+        api.patch(`/goals/${id}/`, teste, {
+            headers: { 
+                "Content-Type": "application/json", 
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(() => {
+            const filterAct = groupGoals.filter(gro => gro !== teste)
+            setGroupGoals(filterAct)
+        })
+        .catch(err => console.log(err))
+    }
+
+    const handleUpdateActivities = (id) => {
+        const teste = { title: title }
+        
+        api.patch(`/activities/${id}/`, teste, {
+            headers: { 
+                "Content-Type": "application/json", 
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(() => {
+            const filterAct = groupActivities.filter(gro => gro !== teste)
+            setGroupGoals(filterAct)
+        })
+        .catch(err => console.log(err))
+    }
+
 
     return (
-        <GroupsContext.Provider value={{groups, setGroups, name, setName, description, setDescription, category, setCategory, myGroups, setMyGroups, goals, setGoals, title, setTitle, difficulty, setDifficulty, group, setGroup, handleCreateGoal, handleCreateActivity, activities, setActivities, popUp, setPopUp, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, handleCreate, handleSignIn, handleInfo, groupGoals, groupActivities, setGroupActivities, handleDeleteGoal, handleDeleteActv, handleLogout}}>
+        <GroupsContext.Provider value={{groups, setGroups, name, setName, description, setDescription, category, setCategory, myGroups, setMyGroups, goals, setGoals, title, setTitle, difficulty, setDifficulty, group, setGroup, handleCreateGoal, handleCreateActivity, activities, setActivities, popUp, setPopUp, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, handleCreate, handleSignIn, handleInfo, groupGoals, groupActivities, setGroupActivities, handleDeleteGoal, handleDeleteActv, handleLogout, handleUpdateGoals, handleUpdateActivities, popUpT, setPopUpt}}>
             {children}
         </GroupsContext.Provider>
     )

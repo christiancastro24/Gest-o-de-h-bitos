@@ -11,13 +11,12 @@ import { useState } from "react";
 
 const MyGroups = () => {
 
-    const { myGroups, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, groupGoals, handleInfo, groupActivities, handleDeleteGoal, handleDeleteActv, handleLogout } = useGroups();
+    const { myGroups, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, groupGoals, handleInfo, groupActivities, handleDeleteGoal, handleDeleteActv, handleLogout, handleUpdateGoals,
+    popUpT, setPopUpt, title, setTitle, handleUpdateActivities } = useGroups();
 
     const [popUpActGoal, setPopUpActGoal] = useState(false)
 
     const [groupId, setGroupId] = useState("")
-
- 
 
     return ( 
         <>
@@ -35,16 +34,20 @@ const MyGroups = () => {
             {groupGoals.length > 0 && groupGoals[0].goals.map((grou, index) => {
                 
                 return (
-                    <div className="group-actv" key={index}>
-                        
+                    <div className="group-actv" key={index}>   
                         <h4 style={{color: "white"}}>Metas: </h4>
                         Título: {grou.title} <br /> 
                         Dificuldade: {grou.difficulty}
                         <br />
-                        <button className="btn-delete" onClick={() => handleDeleteGoal(grou.id)}>Excluir</button>
+                        <button className="btn-delete" onClick={() => handleDeleteGoal(grou.id)}
+                        >Excluir</button>
+
+                        <button className="btn-delete" onClick={() => handleUpdateGoals(grou.id)}>Concluir</button>           
                     </div>
                 )
             })}
+
+            {popUpT && <div style={{position: "absolute", top: "10rem", left: "15%"}}><input value={title} onChange={evt => setTitle(evt.target.value)}/></div>}
 
             {groupActivities.length > 0 && groupActivities[0].activities.map((grouAtv, index) => {
                 
@@ -55,6 +58,12 @@ const MyGroups = () => {
                         Tempo de realização: {grouAtv.realization_time}
                         <br />
                         <button className="btn-delete" onClick={() => handleDeleteActv(grouAtv.id)}>Excluir</button>
+                        <button className="btn-delete" onClick={() => setPopUpt(!popUpT)}>Editar</button>
+                        <button className="btn-delete" onClick={() => {
+                            setPopUpt(!popUpT);
+                            handleUpdateActivities(grouAtv.id)
+                        }
+                        }>Salvar</button>
                     </div>
                 )
             })}
@@ -64,16 +73,16 @@ const MyGroups = () => {
             <CreateGroup />
             
             
-        <Container>      
+        <Container>  
                 {myGroups.map(myGroup => {
                    
                     return (
                         <ContainerGroup key={myGroup.id}>
                             <div className="Items">
-                               
                                 <h2>{myGroup.name}</h2>
                                 <h3>{myGroup.description}</h3>
                                 <h3>Categoria: {myGroup.category}</h3>
+                                <br />
                             </div>
 
                             <button 
