@@ -45,10 +45,10 @@ export const GroupsProvider = ({ children }) => {
 
     // Todos grupos que não precisam de ("Autorização")
     useEffect(() => {
-        api.get(`/groups/subscriptions/`)
-        .then(res => setGroups(res.data))
+        api.get(`/groups/`)
+        .then(res => setGroups(res.data.results))
         .catch(err => console.log(err))
-    }, [groups])
+    }, [])
 
 
     // Criando meta 
@@ -75,6 +75,7 @@ export const GroupsProvider = ({ children }) => {
                     color: "#fff"
                 }
             })
+            window.location.reload();
         })
         .catch(_ => toast.error("Erro ao cadastrar uma meta",
         {
@@ -108,7 +109,9 @@ export const GroupsProvider = ({ children }) => {
                     color: "#fff"
                 }
             })
+            window.location.reload();
         })
+
         .catch(_ => toast.error("Erro ao criar a atividade!",
         {
             style: {
@@ -144,7 +147,6 @@ export const GroupsProvider = ({ children }) => {
             setDescription("")
             setPopUp(!popUp)
             
-
         })
         .catch(_ => toast.error("Erro ao criar o grupo!",
         {
@@ -205,10 +207,14 @@ export const GroupsProvider = ({ children }) => {
         .then(_ => {
             const removeItem = groupGoals.filter(item => item !== id)
             setGroupGoals(removeItem)
-            window.location.reload();
+            // window.location.reload();
         })
         .catch(err => console.log(err))
     }
+
+    // useEffect(() => {
+    //     handleDeleteGoal();
+    // }, [])
 
     // Deletando Atividade
     const handleDeleteActv = (id) => {
@@ -235,16 +241,16 @@ export const GroupsProvider = ({ children }) => {
     }
 
     const handleUpdateGoals = (id) => {
-        const teste = { achieved: true }
+        const updateGoal = { achieved: true }
 
-        api.patch(`/goals/${id}/`, teste, {
+        api.patch(`/goals/${id}/`, updateGoal, {
             headers: { 
                 "Content-Type": "application/json", 
                 Authorization: `Bearer ${token}`
             }
         })
         .then(() => {
-            const filterAct = groupGoals.filter(gro => gro !== teste)
+            const filterAct = groupGoals.filter(gro => gro !== updateGoal)
             setGroupGoals(filterAct)
         })
         .catch(err => console.log(err))
