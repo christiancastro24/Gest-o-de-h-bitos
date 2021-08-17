@@ -3,6 +3,8 @@ import AsideMenu from "../../Components/AsideMenu";
 import { Window } from "../../Components/GlobalStyle/styles";
 import HabitsList from "../../Components/HabitsList";
 import { useAuthenticated } from "../../Providers/authentication";
+import ActivitiesToDo from "../../Components/ActivitiesToDo";
+import { Flex } from "./styles";
 
 const HabitsPage = () => {
 
@@ -17,9 +19,12 @@ const HabitsPage = () => {
 	return (
 		<>
 			<AsideMenu />
-			<Window >
-                <HabitsList />
-            </Window>
+			<Window>
+				<Flex>
+						<HabitsList />
+					<ActivitiesToDo />
+				</Flex>
+			</Window>
 		</>
 	);
 };

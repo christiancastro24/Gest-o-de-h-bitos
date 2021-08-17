@@ -1,7 +1,6 @@
 import { Switch, Route } from "react-router-dom";
 import HomePage from "../Pages/Home"
 import LoginPage from "../Pages/Login"
-import AsideMenu from "../Components/AsideMenu"
 import PageNotFound from "../Pages/PageNotFound"
 import RegisterPage from "../Pages/Register";
 import GroupsPage from "../Pages/Grupos";
