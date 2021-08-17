@@ -18,6 +18,7 @@ import jwt_decode from "jwt-decode";
 import { useUserData } from "../../Providers/UserData";
 import PinkButton from "../../Components/PinkButton";
 import MessageBalloon from "../../Components/MessageBalloon";
+import { useState } from "react";
 
 const useStyles = makeStyles(() => ({
   inputs: {
@@ -35,6 +36,8 @@ const useStyles = makeStyles(() => ({
 const LoginPage = () => {
   const { setToken, setUserId } = useUserData();
   const classes = useStyles();
+
+  const {setPassword} = useUserData();
 
   const history = useHistory();
 
@@ -55,28 +58,28 @@ const LoginPage = () => {
 
   const onSub = (data) => {
     api
-      .post("/sessions/", data)
-      .then((res) => {
+    .post("/sessions/", data)
+    .then((res) => {
         const { access } = res.data;
         const userId = jwt_decode(access).user_id;
         localStorage.setItem("@DevHealthy/user", JSON.stringify(access));
         localStorage.setItem("userId", userId);
         setUserId(userId);
         setToken(access);
+		setPassword(data.password);
         setAuthenticated(true);
-
         history.push("/habits");
         toast.success("Sucesso!");
-      })
-      .catch(() => {
+    })
+    .catch(() => {
         toast.error("Usuário ou senha incorretos!", {
-          style: {
+        style: {
             backgroundColor: "red",
             color: "var(--white)",
             fontWeight: "bold",
-          },
-        });
-      });
+        },
+    	});
+    });
   };
 
   if (authenticated) {
@@ -87,52 +90,6 @@ const LoginPage = () => {
     <>
       <Container>
         <Content>
-          {/* <ContainerLogin onSubmit={handleSubmit(onSub)}>
-            <ContainerInput>
-              <h1>
-                <span style={{ color: "var(--pink)" }}>D</span>
-                evHealth
-                <span style={{ color: "var(--lightGreen)" }}>y</span>
-              </h1>
-
-              <TextField
-                className={classes.inputs}
-                variant="outlined"
-                placeholder="Usuário"
-                InputProps={{ startAdornment: <AccountCircle /> }}
-                {...register("username")}
-              />
-              <br />
-              {errors.username && (
-                <MessageBalloon
-                  message={errors.username.message}
-                  className="invalid_username_message"
-                />
-              )}
-              <TextField
-                className={classes.inputs}
-                variant="outlined"
-                placeholder="Senha"
-                InputProps={{ startAdornment: <LockOpen /> }}
-                type="password"
-                {...register("password")}
-              />
-              {errors.password && (
-                <MessageBalloon
-                  message="Senha obrigatória!"
-                  className="invalid_password_message"
-                />
-              )}
-              <div>
-                <PinkButton text="ENTRAR" type="submit" />
-                <p>
-                  Não possui uma conta?
-                  <Link to={"/registerPage"}> Cadastre-se</Link>
-                </p>
-              </div>
-            </ContainerInput>
-          </ContainerLogin> */}
-
           <ContainerRegisterForm>
             <h1>
               <span className="title_D">D</span>evHealth

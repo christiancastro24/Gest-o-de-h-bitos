@@ -10,7 +10,7 @@ export const Container = styled.div`
 	align-items: center;
 	text-align: center;
 	padding: 1rem 0rem;
-	/* overflow: hidden; */
+	z-index: 10;
 	box-sizing: border-box;
 	background: linear-gradient(
 		to bottom,
@@ -101,6 +101,7 @@ export const BurguerMenu = styled.div`
 
 	& svg {
 		font-size: 3rem;
+		cursor: pointer;
 	}
 	@media (max-width: 1000px) {
         display: grid;
@@ -202,7 +203,7 @@ export const Menu = styled.div`
 		display: ${(props) => (props.show ? "unset" : "none")};
 		position: absolute;
 		width: max-content;
-		bottom: -20rem;
+		bottom: -27rem;
 		left: 50%;
 		background-color: #6095b9;
 		box-sizing: border-box;
