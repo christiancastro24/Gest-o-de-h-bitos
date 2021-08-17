@@ -16,6 +16,8 @@ export const UserDataProvider = ({ children }) => {
 	);
     const [timer, setTimer] = useState(JSON.parse(localStorage.getItem('habitsLastUpdate')) || {});
 	const [userName, setUserName] = useState('');
+    const [userEmail, setUserEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const recarregarDados = () => {
         setReloadData(!reloadData)
@@ -41,6 +43,8 @@ export const UserDataProvider = ({ children }) => {
         api.get(`/users/${userId}/`)
 			.then((res) => {
 				setUserName(res.data.username);
+                setUserEmail(res.data.email)
+                console.log(res.data)
 			})
 			.catch((err) => console.log(err));
         }
@@ -57,7 +61,7 @@ export const UserDataProvider = ({ children }) => {
 
 	return (
 		<UserDataContext.Provider
-			value={{ token, setToken, habits, setHabits, userId, setUserId, groupsIn, setGroupsIn, recarregarDados, handleUpdateTimer, userName }}
+			value={{ token, setToken, habits, setHabits, userId, setUserId, groupsIn, setGroupsIn, recarregarDados, handleUpdateTimer, userName, userEmail, setPassword, password}}
 		>
 			{children}
 		</UserDataContext.Provider>

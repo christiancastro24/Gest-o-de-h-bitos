@@ -4,12 +4,11 @@ import {UserDataProvider} from './UserData'
 
 const Providers = ({ children }) => {
     return (
-		<AutheticationProvider>
 			<GroupsProvider>
-				<UserDataProvider>{children}</UserDataProvider>
+				<AutheticationProvider>
+					<UserDataProvider>{children}</UserDataProvider>
+				</AutheticationProvider>
 			</GroupsProvider>
-		</AutheticationProvider>
 	);
 }
- 
 export default Providers;

@@ -30,10 +30,9 @@ const Routes = () => {
 			<Route path="/profile">
 				<ProfilePage />
 			</Route>
-			{/* <Route path="/teste">
-				<CreateGroup />
-				<MessageBalloon />
-			</Route> */}
+			<Route path="/teste">
+
+			</Route>
 			<Route path="/myGroups">
 				<MyGroups />
 			</Route>

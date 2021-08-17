@@ -1,8 +1,8 @@
 import PinkButtonContainer from "./style"
 
-const PinkButton = ({text}) => {
+const PinkButton = ({text, onClick}) => {
     return (
-        <PinkButtonContainer>
+        <PinkButtonContainer onClick = {onClick}>
             {text}
         </PinkButtonContainer>
     )
