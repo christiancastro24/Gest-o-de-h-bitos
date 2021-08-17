@@ -22,7 +22,7 @@ const CreateGroup = () => {
 
                     <input value={category} onChange={evt => setCategory(evt.target.value)} type="text" placeholder="Categoria do grupo" />
 
-                    <Button variant="contained" color="secondary" onClick={handleCreate}>Criar Grupo</Button>
+                    <Button variant="contained" color="secondary" onClick={handleCreate}>Criar Grupo!</Button>
                 </ContainerPopUp>
 
                 }
