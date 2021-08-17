@@ -8,6 +8,7 @@ import AddHabit from "./AddHabit";
 import { DeleteForever, Help, ErrorOutline, CheckCircleOutline } from "@material-ui/icons";
 import { Switch } from "antd";
 import DelConfirmation from "./DelConfirmation";
+import Draggable from "react-draggable";
 
 const frases = [
 	<cite>
@@ -116,164 +117,174 @@ const HabitsList = () => {
     }
 
     return (
-		<Container>
-			<SectionTitle>Seus Hábitos:</SectionTitle>
-			<h3>Hábito e o Nº de vezes realizado:</h3>
-			{appIsThinking ? (
-				<CircularProgress
-					style={{
-						position: "absolute",
-						top: "50%",
-						right: "50%",
-						transform: "translate(50%, -50%)",
-					}}
-					color="secondary"
-				/>
-			) : null}
-			<TableRow>
-				{habits.length > 0 ? (
-					habits
-						.filter((item) => !handleRepeat(item.id))
-						.map((item, ind) => (
-							<ListItem key={ind}>
-								<Column>
-									<Title done={handleRepeat(item.id)}>
-										{item.title}
-									</Title>
-									<Tooltip
-										title="Quantas vezes você realizou essa tarefa."
-										placement="top"
-									>
-										<Counter>
-											{item.how_much_achieved}
-										</Counter>
-									</Tooltip>
-								</Column>
-								<ActionsColumn>
-									<Switch
-										checkedChildren={<CheckCircleOutline />}
-										unCheckedChildren={<ErrorOutline />}
-										disabled={handleRepeat(item.id)}
-										checked={handleRepeat(item.id)}
-										onClick={() =>
-											handleDoneTask(
-												item.id,
-												item.how_much_achieved
-											)
-										}
-									/>
+		<Draggable>
+			<Container>
+				<SectionTitle>Seus Hábitos:</SectionTitle>
+				<h3>Hábito e o Nº de vezes realizado:</h3>
+				{appIsThinking ? (
+					<CircularProgress
+						style={{
+							position: "absolute",
+							top: "50%",
+							right: "50%",
+							transform: "translate(50%, -50%)",
+						}}
+						color="secondary"
+					/>
+				) : null}
+				<TableRow>
+					{habits.length > 0 ? (
+						habits
+							.filter((item) => !handleRepeat(item.id))
+							.map((item, ind) => (
+								<ListItem key={ind}>
+									<Column>
+										<Title done={handleRepeat(item.id)}>
+											{item.title}
+										</Title>
+										<Tooltip
+											title="Quantas vezes você realizou essa tarefa."
+											placement="top"
+										>
+											<Counter>
+												{item.how_much_achieved}
+											</Counter>
+										</Tooltip>
+									</Column>
+									<ActionsColumn>
+										<Switch
+											checkedChildren={
+												<CheckCircleOutline />
+											}
+											unCheckedChildren={<ErrorOutline />}
+											disabled={handleRepeat(item.id)}
+											checked={handleRepeat(item.id)}
+											onClick={() =>
+												handleDoneTask(
+													item.id,
+													item.how_much_achieved
+												)
+											}
+										/>
 
-									<Fab
-										onClick={handleOpenDelConfirmation}
-										size="small"
-										color="secondary"
-										style={{ backgroundColor: "#d72a2a" }}
-									>
-										<DeleteForever
+										<Fab
+											onClick={handleOpenDelConfirmation}
+											size="small"
+											color="secondary"
 											style={{
-												fontSize: "16px",
-												color: "black",
+												backgroundColor: "#d72a2a",
 											}}
+										>
+											<DeleteForever
+												style={{
+													fontSize: "16px",
+													color: "black",
+												}}
+											/>
+										</Fab>
+										<DelConfirmation
+											itemId={item.id}
+											handleOpenDelConfirmation={
+												handleOpenDelConfirmation
+											}
+											handleDelete={handleDelete}
+											openDelConfirmation={
+												openDelConfirmation
+											}
 										/>
-									</Fab>
-									<DelConfirmation
-										itemId={item.id}
-										handleOpenDelConfirmation={
-											handleOpenDelConfirmation
-										}
-										handleDelete={handleDelete}
-										openDelConfirmation={
-											openDelConfirmation
-										}
-									/>
-								</ActionsColumn>
-							</ListItem>
-						))
-				) : (
-					<h3>
-						Clique no botão e adicione um hábito para monitorar!
-					</h3>
-				)}
-			</TableRow>
-			{habits &&
-			habits.filter((item) => handleRepeat(item.id)).length > 0 ? (
-				<h4>
-					Volte amanhã para continuar a desenvolver esses hábitos:
-					<Tooltip
-						title="Seus hábitos são reiniciados diariamente, mantenha uma rotina para acumular repetições."
-						placement="top"
-						open={openDoneInfo}
-						onClick={handleOpenDoneInfo}
-						onMouseEnter={handleOpenDoneInfo}
-					>
-						<Help fontSize="small" />
-					</Tooltip>
-				</h4>
-			) : null}
-			<TableRow>
+									</ActionsColumn>
+								</ListItem>
+							))
+					) : (
+						<h3>
+							Clique no botão e adicione um hábito para monitorar!
+						</h3>
+					)}
+				</TableRow>
 				{habits &&
-					habits
-						.filter((item) => handleRepeat(item.id))
-						.map((item, ind) => (
-							<ListItem key={ind}>
-								<Column>
-									<Title done={handleRepeat(item.id)}>
-										{item.title}
-									</Title>
-									<Tooltip
-										title="Quantas vezes você realizou essa tarefa."
-										placement="top"
-									>
-										<Counter>
-											{item.how_much_achieved}
-										</Counter>
-									</Tooltip>
-								</Column>
-								<ActionsColumn>
-									<Switch
-										checkedChildren={<CheckCircleOutline />}
-										unCheckedChildren={<ErrorOutline />}
-										onClick={() =>
-											handleBackDoneTask(
-												item.id,
-												item.how_much_achieved
-											)
-										}
-										checked={handleRepeat(item.id)}
-									/>
-									<Fab
-										onClick={handleOpenDelConfirmation}
-										size="small"
-										style={{ backgroundColor: "#d72a2a" }}
-									>
-										<DeleteForever
-											style={{ fontSize: "16px" }}
+				habits.filter((item) => handleRepeat(item.id)).length > 0 ? (
+					<h4>
+						Volte amanhã para continuar a desenvolver esses hábitos:
+						<Tooltip
+							title="Seus hábitos são reiniciados diariamente, mantenha uma rotina para acumular repetições."
+							placement="top"
+							open={openDoneInfo}
+							onClick={handleOpenDoneInfo}
+							onMouseEnter={handleOpenDoneInfo}
+						>
+							<Help fontSize="small" />
+						</Tooltip>
+					</h4>
+				) : null}
+				<TableRow>
+					{habits &&
+						habits
+							.filter((item) => handleRepeat(item.id))
+							.map((item, ind) => (
+								<ListItem key={ind}>
+									<Column>
+										<Title done={handleRepeat(item.id)}>
+											{item.title}
+										</Title>
+										<Tooltip
+											title="Quantas vezes você realizou essa tarefa."
+											placement="top"
+										>
+											<Counter>
+												{item.how_much_achieved}
+											</Counter>
+										</Tooltip>
+									</Column>
+									<ActionsColumn>
+										<Switch
+											checkedChildren={
+												<CheckCircleOutline />
+											}
+											unCheckedChildren={<ErrorOutline />}
+											onClick={() =>
+												handleBackDoneTask(
+													item.id,
+													item.how_much_achieved
+												)
+											}
+											checked={handleRepeat(item.id)}
 										/>
-									</Fab>
-									<DelConfirmation
-										itemId={item.id}
-										handleOpenDelConfirmation={
-											handleOpenDelConfirmation
-										}
-										handleDelete={handleDelete}
-										openDelConfirmation={
-											openDelConfirmation
-										}
-									/>
-								</ActionsColumn>
-							</ListItem>
-						))}
-			</TableRow>
-			<Cite>{getRandomFrase()}</Cite>
-			<Button
-				variant="contained"
-				style={{ display: "block", margin: "0 auto" }}
-				onClick={handleOpen}
-			>
-				Adicionar novo hábito
-			</Button>
-			<AddHabit open={open} handleClose={handleClose} />
-		</Container>
+										<Fab
+											onClick={handleOpenDelConfirmation}
+											size="small"
+											style={{
+												backgroundColor: "#d72a2a",
+											}}
+										>
+											<DeleteForever
+												style={{ fontSize: "16px" }}
+											/>
+										</Fab>
+										<DelConfirmation
+											itemId={item.id}
+											handleOpenDelConfirmation={
+												handleOpenDelConfirmation
+											}
+											handleDelete={handleDelete}
+											openDelConfirmation={
+												openDelConfirmation
+											}
+										/>
+									</ActionsColumn>
+								</ListItem>
+							))}
+				</TableRow>
+				<Cite>{getRandomFrase()}</Cite>
+				<Button
+					variant="contained"
+					style={{ display: "block", margin: "0 auto" }}
+					onClick={handleOpen}
+				>
+					Adicionar novo hábito
+				</Button>
+				<AddHabit open={open} handleClose={handleClose} />
+			</Container>
+		</Draggable>
 	);
 }
  
