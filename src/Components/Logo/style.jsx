@@ -5,6 +5,7 @@ const LogoContainer = styled.h1`
     font-family: 'Lobster', cursive;
 	cursor: pointer;
 	filter: drop-shadow(10px 8px 4px black);
+    margin: 0 auto;
 
     .logo_d {
         color: var(--pink)
