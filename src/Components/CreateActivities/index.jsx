@@ -14,8 +14,6 @@ const CreateActivities = ({itemId}) => {
 
                 <input value={title} onChange={evt => setTitle(evt.target.value)} placeholder="Título" />
 
-                
-                {/* <input value={group} onChange={evt => setGroup(evt.target.value)} placeholder="Grupo"/> */}
 
                 <Button className="btn-create-actv"variant="contained" color="secondary" onClick={()=>handleCreateActivity(itemId)}>Criar Atividade</Button>
             </ContainerPopUp>
