@@ -20,7 +20,6 @@ const ContainerRegisterForm = styled.div`
 
     form {
         width: 100%;
-        height: 380px;
         display: flex;
         flex-direction: column;
         justify-content: center;

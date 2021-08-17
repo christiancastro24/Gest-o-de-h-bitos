@@ -5,10 +5,13 @@ import { Container, ContainerAll, ContainerGroup } from "./styles";
 import CreateGroup from "../../Components/CreateGroup";
 import CreateGoals from "../../Components/CreateGoals";
 import CreateActivities from "../../Components/CreateActivities";
+import { useState } from "react";
 
 const MyGroups = () => {
 
-    const { myGroups, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities } = useGroups();
+    const { myGroups, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, groupGoals, handleInfo, groupActivities } = useGroups();
+
+    const [groupId, setGroupId] = useState("")
 
     return ( 
         <>
@@ -17,13 +20,34 @@ const MyGroups = () => {
 
         <ContainerAll>
             <h1>Meus Grupos</h1>
+            {groupGoals.length > 0 && groupGoals[0].goals.map(grou => {
+                
+                return (
+                    <div style={{color: "white", border: "2px solid red"}}>
+                        <h4 style={{color: "white"}}>Metas: </h4>
+                        Título: {grou.title} <br /> 
+                        Dificuldade: {grou.difficulty}
+                    </div>
+                )
+            })}
+
+            {groupGoals.length > 0 && groupActivities[0].activities.map(grou => {
+                
+                return (
+                    <div style={{color: "white", border: "2px solid red"}}>
+                        <h4 style={{color: "white"}}>Atividades: </h4>
+                        Título: {grou.title} <br /> 
+                        Dificuldade: {grou.realization_time}
+                    </div>
+                )
+            })}
 
             <CreateGroup />
-            <CreateGoals />         
-            <CreateActivities />
+            
             
         <Container>      
                 {myGroups.map(myGroup => {
+                   
                     return (
                         <ContainerGroup key={myGroup.id}>
                             <div className="Items">
@@ -32,16 +56,28 @@ const MyGroups = () => {
                                 <h3>Categoria: {myGroup.category}</h3>
                             </div>
 
-                            <button className="btn-info" variant="contained">...</button>
+                            <button 
+                            className="btn-info" 
+                            variant="contained" 
+                            onClick={() => handleInfo(myGroup.id)}
+                            >...</button>
 
-                            <button variant="contained" onClick={() => setPopUpMeta(!popUpMeta)}>Add metas</button>
+                            <CreateGoals itemId={groupId} /> 
 
-                            <button className="btn-add-actvi" variant="contained" onClick={() => setPopUpActivities(!popUpActivities)}>Add atv</button>
+                            <button variant="contained" 
+                                onClick={() => {
+                                setPopUpMeta(!popUpMeta);
+                                setGroupId(myGroup.id)}}>Add metas</button>
 
-                         
+                            <button className="btn-add-actvi" variant="contained" 
+                            onClick={() => { 
+                                setPopUpActivities(!popUpActivities); 
+                                setGroupId(myGroup.id)}}>Add atv</button>
+
+                         <CreateActivities itemId={groupId}/>
                         </ContainerGroup>
                     )
-                })}
+                })}             
             </Container>
             </ContainerAll>
         </Window>
