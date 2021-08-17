@@ -2,11 +2,13 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 	min-height: 70%;
+    max-height: 95%;
 	position: relative;
 	background-color: var(--lightBlue);
 	border-radius: 20px;
 	padding: 0.5rem;
 	width: 310px;
+    overflow-y: auto;
 `;
 export const Column = styled.div`
 	display: flex;

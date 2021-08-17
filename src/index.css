@@ -27,15 +27,19 @@ body {
 }
 button.ant-switch {
 	background-color: rgba(255, 60, 0, 0.541);
+    transition: all 280ms ease-in-out;
 }
 button.ant-switch svg {
 	transform: translate(30%, -7%);
+    transition: all 280ms ease-in-out;
 }
 button.ant-switch-checked {
 	background-color: green;
+    transition: all 280ms ease-in-out;
 }
 button.ant-switch-checked svg {
 	transform: translate(-30%, -5%);
+    transition: all 280ms ease-in-out;
 }
 button.MuiFab-root {
 	width: 25px;

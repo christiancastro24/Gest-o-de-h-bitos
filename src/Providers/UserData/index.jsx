@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "../../Services";
-import jwt_decode from "jwt-decode";
 
 const UserDataContext = createContext();
 
@@ -46,6 +45,7 @@ export const UserDataProvider = ({ children }) => {
         }
         
 		
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [token, reloadData]);
 
     const handleUpdateTimer = (habitId, dates) => {
