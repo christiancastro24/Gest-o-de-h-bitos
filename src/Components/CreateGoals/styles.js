@@ -18,6 +18,7 @@ export const ContainerPopUp = styled.div`
         input {
             height: 3rem;
             border: 2px solid var(--pink);
+            color: black;
         }
 
         button {
@@ -32,7 +33,7 @@ export const ContainerPopUp = styled.div`
             background-color: var(--pink);
         }
         
-        button:nth-child(6) {
+        button:nth-child(5) {
             display: block; 
             margin: 1.5rem auto;
             border-radius: 4%;
