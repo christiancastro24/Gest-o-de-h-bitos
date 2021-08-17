@@ -12,7 +12,6 @@ import {
 	EditHover,
 	MultiFrameContainer,
 	BurguerMenu,
-    RelativePoint
 } from "./style";
 import "antd/dist/antd.css";
 import AvatarSelector from "./AvatarSelector";

@@ -9,19 +9,17 @@ import {
 	Counter,
 } from "../HabitsList/styles";
 
-import { CircularProgress } from "@material-ui/core";
-import { Tooltip, Fab } from "@material-ui/core";
+import { Tooltip} from "@material-ui/core";
 import { Switch } from "antd";
-import { CheckCircleOutline, ErrorOutline, DeleteForever } from "@material-ui/icons";
+import { CheckCircleOutline, ErrorOutline} from "@material-ui/icons";
 import { useGroups } from "../../Providers/groups";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Draggable from "react-draggable";
 const ActivitiesToDo = () => {
 
     const { myGroups } = useGroups();
-    const [appIsThinking, setAppIsThinking] = useState(false);
     const activities = myGroups.map(item => item.activities).filter(item=> item.length > 0).map(item=> item[0]);
-    const [localActivitiesStore, setLocalActivitiesStore] = useState(JSON.parse(localStorage.getItem('localSaveActivities')) || {});
+    const [localActivitiesStore] = useState(JSON.parse(localStorage.getItem('localSaveActivities')) || {});
     const dateInfo = [new Date().getDate(), new Date().getMonth()];
     const [shouldReload, setShouldReload] = useState(false);
     
@@ -71,17 +69,7 @@ const ActivitiesToDo = () => {
 					Atividades a realizar por seus grupos:
 				</SectionTitle>
 				<p>Para gerenciar seus grupos utilize o menu "Meus Grupos"</p>
-				{appIsThinking ? (
-					<CircularProgress
-						style={{
-							position: "absolute",
-							top: "50%",
-							right: "50%",
-							transform: "translate(50%, -50%)",
-						}}
-						color="secondary"
-					/>
-				) : null}
+				
 				<TableRow>
 					{activities.length > 0 && (
 						<h3>Atividades para se realizar hoje:</h3>

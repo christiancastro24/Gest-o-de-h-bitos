@@ -32,9 +32,10 @@ export const GroupsProvider = ({ children }) => {
             headers: { Authorization: `Bearer ${token}`}
         
         })
-        .then(res => {setMyGroups(res.data); console.log(myGroups)})
+        .then(res => setMyGroups(res.data))
 
         .catch(err => console.log(err))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 
