@@ -13,7 +13,6 @@ const ContainerMessageBalloon = styled.span`
     padding: 7px;
     z-index: 1;
     right: -8%;
-    color: ${props => console.log(props)};
     margin: 0 auto;
     right: 50%;
     transform: translate(50%, -50%);
