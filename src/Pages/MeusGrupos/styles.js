@@ -1,43 +1,50 @@
 import styled from "styled-components"
 
 
+export const ContainerGoalsAndAct = styled.div`
+    position: absolute;
+    top: 5rem;
+    left: 30%;
+    z-index: 1000;
+    overflow-y: scroll;
+    background-color: rgb(19,15,64);
+    width: 30rem;
+    border-radius: 5%;
+    text-align: center;
+
+    .group-actv {
+        color: white; 
+        border-bottom: 2px solid var(--pink);
+        margin: 0.2rem;
+    }
+
+    h4 {
+        color: var(--white);
+    }
+
+    .btn-delete {
+        background-color: var(--pink);
+        color: var(--white);
+        cursor: pointer;
+    }
+
+    button:nth-child(1) {
+        display: block;
+        margin-left: auto;
+        background-color: var(--pink);
+        color: var(--white);
+        cursor: pointer;
+    }
+
+` 
+
 export const ContainerAll = styled.section `
     h1 {
         color: white;
         text-align: center;
         font-family: Helvetica;
     }
-`
 
-export const ContainerSearch = styled.section `
-    
-    input {
-        height: 2.2rem;
-        width: 95%;
-        border-radius: 10px;
-        margin-top: 0.5rem;
-        outline: none;
-        
-    }
-    
-    span:nth-child(4) {
-        padding-left: 1rem;
-    }
-    
-    button {
-        background-color: rgba(255,25,244,0.4);
-        color: var(--white);
-        font-weight: bold;
-        margin-left: auto;
-        margin-right: 2rem;
-        margin-bottom: 0.2rem;
-        height: 3rem;
-        width: 3rem;
-        font-size: 1.1rem;
-        display: block;
-        border-radius: 35rem;
-        cursor: pointer;
-    }
 `
 
 export const ContainerPopUp = styled.div`
@@ -113,8 +120,8 @@ export const Container = styled.section`
     max-height: 85vh;
     background-color: #000;
     color: var(--white);
-    overflow-y: scroll;
     margin-top: 0;
+    overflow-y: scroll;
 
     @media (min-width: 300px) and (max-width:508px) {
         display: flex;
@@ -137,6 +144,7 @@ export const ContainerGroup = styled.div `
     align-items: center;
     box-shadow: 5px 1px 5px 3px rgba(155, 155, 220);
     box-sizing: border-box;
+ 
 
     .btn-add-actvi {
         background-color: #0095f7;
