@@ -92,11 +92,11 @@ export const ContainerRegisterForm = styled.div`
         text-decoration: none;
     }
 
-    .title_D {
-        color: var(--pink);
+    .invalid_username_message {
+        top: -1%;
     }
 
-    .title_Y {
-        color: var(--lightGreen)
+    .invalid_password_message {
+        top: 38%;
     }
 `

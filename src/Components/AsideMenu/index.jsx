@@ -3,7 +3,6 @@ import {
 	Container,
 	SubContainer,
 	Header,
-	Logo,
 	Avatar,
 	UserName,
 	Menu,
@@ -24,6 +23,7 @@ import {
 import { useHistory } from "react-router";
 import { useAuthenticated } from "../../Providers/authentication";
 import { useUserData } from "../../Providers/UserData";
+import Logo from "../../Components/Logo";
 
 const getRandom = (max, min = 0) => {
 	return Math.round(Math.random() * (max - min) + min);
@@ -76,10 +76,7 @@ const AsideMenu = () => {
     
     return (
         <Container>
-				<Logo>
-					<span style={{ color: "var(--pink)" }}>D</span>evHealth
-					<span style={{ color: "var(--lightGreen)" }}>y</span>
-				</Logo>
+				<Logo onClick = {() => history.push("/")} />
 				<BurguerMenu onClick={handleShowMenu}>
 					{showMenu ? <ExpandLess /> : <Burguer />}
 				</BurguerMenu>
@@ -109,7 +106,7 @@ const AsideMenu = () => {
 								? "Bom dia, "
 								: "Boa noite, "}
 							<br />
-							{userName}
+							<span className = "username">{userName}</span>
 							{"!"}
 						</UserName>
 					</Header>

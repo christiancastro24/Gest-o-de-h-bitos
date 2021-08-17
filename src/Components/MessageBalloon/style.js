@@ -32,19 +32,19 @@ const ContainerMessageBalloon = styled.span`
     }
 
     &.invalid_user_message {
-        transform: translateX(180%);
-        top: 2%;
+        top: -1%;
+        /* transform: translateX(180%); */
     }
 
     &.invalid_email_message {
         top: 24%;
-        transform: translateX(170%)
+        /* transform: translateX(170%) */
 
     }
 
     &.invalid_password_message {
-        top: 46%;
-        transform: translateX(190%)
+        top: 50%;
+        /* transform: translateX(190%) */
     }    
 `
 

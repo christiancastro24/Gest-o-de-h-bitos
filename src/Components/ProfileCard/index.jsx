@@ -15,7 +15,7 @@ import { useAuthenticated } from "../../Providers/authentication";
 
 const ProfileCard = () => {
     
-    const { userName, userEmail, userId, password, token, userAvatar } = useUserData();
+    const { userName, userEmail, userId, token, userAvatar } = useUserData();
     
     const [changingProfile, setChangingProfile] = useState(false);
     
@@ -26,9 +26,8 @@ const ProfileCard = () => {
     const history = useHistory();
 
     const formSchema = yup.object().shape({
-        username: yup.string().required("Usuário inválido"),
+        username: yup.string().required("Usuário inválido").matches("^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$", "Usuário inválido"),
         email: yup.string().required("Email obrigatório!").email("E-mail inválido"),
-        // password: yup.string().min(6, "Mínimo 6 caracteres").required("Senha inválida")
     });
 
     const deleteProfile = () => {
@@ -74,7 +73,7 @@ const ProfileCard = () => {
         <>
         <ProfileContainer >
             <h1>{userName}</h1>
-            <img alt = {userName} src = {userAvatar} />
+                <img className = "user_avatar" alt = {userName} src = {userAvatar} />
             { deletingProfile && 
             <ConfirmationPopup >
                 <p>Tem certeza?</p>
@@ -88,16 +87,17 @@ const ProfileCard = () => {
             }
             <div></div>
             <form className = "profile_card" onSubmit = {handleSubmit(onSub)} noValidate>
-                <input id = "username_input" defaultValue = {userName}  type = "text" disabled = {changingProfile? "" : "true"} {...register("username")} 
-                />
-                {changingProfile && errors.username && <MessageBalloon className = "invalid_username_message" message = {errors.username.message} />}
-                <input id = "email_input" defaultValue = {userEmail} disabled = {changingProfile? "" : "true"} {...register("email")} 
-                />
                 
-                {changingProfile && errors.email && <MessageBalloon className = "invalid_email_message" message = {errors.email.message} />}
+                    <input id = "username_input" defaultValue = {userName}  type = "text" disabled = {changingProfile? "" : "true"} {...register("username")} 
+                    />
+                    {changingProfile && errors.username && <MessageBalloon className = "invalid_username_message" message = {errors.username.message} />}
                 
                 
-            
+                    <input id = "email_input" defaultValue = {userEmail} disabled = {changingProfile? "" : "true"} {...register("email")} 
+                    />
+                    {changingProfile && errors.email && <MessageBalloon className = "invalid_email_message" message = {errors.email.message} />}     
+                
+                
                 <div>
                     {changingProfile? 
                     <div className = "change_profile_buttons">
