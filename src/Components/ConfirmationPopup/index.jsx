@@ -5,7 +5,7 @@ const ConfirmationPopup = () => {
         <ConfirmationPopupContainer>
             <p>Tem certeza?</p>
             <div>
-            <button>Sim</button>
+            <button className = "">Sim</button>
             <button>Não</button>
             </div>
         </ConfirmationPopupContainer>
