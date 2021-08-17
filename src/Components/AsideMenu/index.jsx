@@ -12,6 +12,7 @@ import {
 	EditHover,
 	MultiFrameContainer,
 	BurguerMenu,
+    RelativePoint
 } from "./style";
 import "antd/dist/antd.css";
 import AvatarSelector from "./AvatarSelector";
@@ -73,77 +74,88 @@ const AsideMenu = () => {
 
     
     return (
-		<Container>
-			<Logo>
-				<span style={{ color: "var(--pink)" }}>D</span>evHealth
-				<span style={{ color: "var(--lightGreen)" }}>y</span>
-			</Logo>
-			<BurguerMenu onClick={handleShowMenu}>
-				{showMenu ? <ExpandLess /> : <Burguer />}
-			</BurguerMenu>
-			<SubContainer>
-				<Header>
-					<MultiFrameContainer>
-						<Avatar
-							src={getUserAvatar()}
-							alt="UserAvatar"
-							onClick={handleOpen}
-						></Avatar>
-						<EditHover onClick={handleOpen}>
-							<Edit />
-						</EditHover>
-					</MultiFrameContainer>
-					<AvatarSelector
-						open={open}
-						handleClose={handleClose}
-						handleChangeAvatarId={handleChangeAvatarId}
-					/>
-					<UserName>{hora > 18 ? 'Boa noite, ' : hora > 12 ? 'Boa tarde, ' : hora > 6 ? 'Bom dia, ' : 'Boa noite, '}<br/>{userName}{'!'}</UserName>
-				</Header>
-				<Menu show={showMenu}>
-					<br />
-					<MenuItem
-						foq={currentPath === "/habits"}
-						onClick={() => history.push("/habits")}
-					>
-						<b />
-						<b />
-						Hábitos
-					</MenuItem>
-					<MenuItem
-						foq={currentPath === "/profile"}
-						onClick={() => history.push("/profile")}
-					>
-						<b />
-						<b />
-						Profile
-					</MenuItem>
-					<MenuItem
-						foq={currentPath === "/groups"}
-						onClick={() => history.push("/groups")}
-					>
-						<b />
-						<b />
-						Grupos
-					</MenuItem>
-					<MenuItem
-						foq={currentPath === "/myGroups"}
-						onClick={() => history.push("/myGroups")}
-					>
-						<b />
-						<b />
-						Meus Grupos
-					</MenuItem>
-					{showMenu && (
-						<MenuItem onClick={handleLogout}>Deslogar</MenuItem>
-					)}
-				</Menu>
-				<Footer onClick={handleLogout}>
-					Deslogar{" "}
-					<MeetingRoom style={{ transform: "translateY(25%)" }} />{" "}
-				</Footer>
-			</SubContainer>
-		</Container>
+        <Container>
+				<Logo>
+					<span style={{ color: "var(--pink)" }}>D</span>evHealth
+					<span style={{ color: "var(--lightGreen)" }}>y</span>
+				</Logo>
+				<BurguerMenu onClick={handleShowMenu}>
+					{showMenu ? <ExpandLess /> : <Burguer />}
+				</BurguerMenu>
+				<SubContainer>
+					<Header>
+						<MultiFrameContainer>
+							<Avatar
+								src={getUserAvatar()}
+								alt="UserAvatar"
+								onClick={handleOpen}
+							></Avatar>
+							<EditHover onClick={handleOpen}>
+								<Edit />
+							</EditHover>
+						</MultiFrameContainer>
+						<AvatarSelector
+							open={open}
+							handleClose={handleClose}
+							handleChangeAvatarId={handleChangeAvatarId}
+						/>
+						<UserName>
+							{hora > 18
+								? "Boa noite, "
+								: hora > 12
+								? "Boa tarde, "
+								: hora > 6
+								? "Bom dia, "
+								: "Boa noite, "}
+							<br />
+							{userName}
+							{"!"}
+						</UserName>
+					</Header>
+					<Menu show={showMenu}>
+						<br />
+						<MenuItem
+							foq={currentPath === "/habits"}
+							onClick={() => history.push("/habits")}
+						>
+							<b />
+							<b />
+							Início
+						</MenuItem>
+						<MenuItem
+							foq={currentPath === "/profile"}
+							onClick={() => history.push("/profile")}
+						>
+							<b />
+							<b />
+							Profile
+						</MenuItem>
+						<MenuItem
+							foq={currentPath === "/groups"}
+							onClick={() => history.push("/groups")}
+						>
+							<b />
+							<b />
+							Grupos
+						</MenuItem>
+						<MenuItem
+							foq={currentPath === "/myGroups"}
+							onClick={() => history.push("/myGroups")}
+						>
+							<b />
+							<b />
+							Meus Grupos
+						</MenuItem>
+						{showMenu && (
+							<MenuItem onClick={handleLogout}>Deslogar</MenuItem>
+						)}
+					</Menu>
+					<Footer onClick={handleLogout}>
+						Deslogar{" "}
+						<MeetingRoom style={{ transform: "translateY(25%)" }} />{" "}
+					</Footer>
+				</SubContainer>
+			</Container>
 	);
 }
  
