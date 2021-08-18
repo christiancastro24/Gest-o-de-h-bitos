@@ -4,7 +4,7 @@ const PinkButtonContainer = styled.button`
         background-color: #B5179E;
         margin: 16px 0      ;
         width: 12rem;
-        height: 3rem;
+        height: 2.5rem;
         color: #fff;
         border: none;
         border-radius: .4rem;
