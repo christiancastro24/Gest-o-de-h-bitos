@@ -16,9 +16,13 @@ export const Container = styled.div`
 		to bottom,
 		#30336b 0%,
 		#6095b9 30%,
-		#6095b9 80%,
+		#6095b9 90%,
 		#30336b 100%
 	);
+
+	.username {
+		text-transform: capitalize;
+	}
 
 	@media (max-width: 1000px) {
 		position: fixed;
@@ -86,11 +90,6 @@ export const Header = styled.div`
 	} ;
 `;
 
-export const Logo = styled.h1`
-    color: white;
-    font-family: 'Lobster', cursive;
-`;
-
 export const BurguerMenu = styled.div`
 	display: none;
 	place-items: center;
@@ -125,6 +124,10 @@ export const Avatar = styled.img`
 	@media (max-width: 1000px) {
 		width: ${tamanhoAvatar};
 	} ;
+
+	@media screen and (max-width: 1450px) and (min-width: 1001px) {
+		width: 20%;
+	}
 `;
 
 export const MultiFrameContainer = styled.div`
@@ -136,6 +139,7 @@ export const MultiFrameContainer = styled.div`
 	@media (max-width: 1000px) {
 		width: ${tamanhoAvatar};
 	} ;
+	
 `;
 
 export const UserName = styled.h2`
@@ -156,6 +160,8 @@ export const MenuItem = styled.div`
 	font-weight: bold;
 	font-size: 1.6rem;
 	transition: all 280ms ease-in-out;
+
+
 	@media (min-width: 1000px) {
 		background-color: ${(props) =>
 			props.foq ? "var(--background)" : "transparent"};
@@ -192,12 +198,20 @@ export const MenuItem = styled.div`
 			display: ${(props) => (props.foq ? "unset" : "none")};
 		}
 	}
+
+	@media screen and (max-width: 1450px) and (min-width: 1001px) {
+		padding: .4rem 0;
+	}
 `;
 
 export const Menu = styled.div`
 	width: 100%;
 	height: auto;
 	transform: translateY(-10%);
+
+	@media screen and (max-width: 1450px) and (min-width: 1001px) {
+		transform: translateY(-10%);
+	}
 
 	@media (max-width: 1000px) {
 		display: ${(props) => (props.show ? "unset" : "none")};
@@ -210,9 +224,15 @@ export const Menu = styled.div`
 		border-radius: 20px;
 		transform: translateX(-50%);
 	}
-	@media (max-width: 580px){
-        bottom: -200%;
+
+	@media screen and (max-width: 580px) and (min-width: 321px) {
+		bottom: -235%;
         left: 30%;
+	}
+
+	@media (max-width: 320px){
+		bottom: -26rem;
+        transform: translateX(-50%);
     };
 `;
 
@@ -264,4 +284,8 @@ export const EditHover = styled.div`
 	@media (min-width: 1000px){
         width: 30%;
     };
+
+	@media screen and (max-width: 1450px) and (min-width: 1001px) {
+		width: 20%;
+	}
 `;

@@ -12,6 +12,7 @@ import { useAuthenticated } from "../../Providers/authentication";
 import MessageBalloon from "../MessageBalloon";
 import "../../index.css"
 import PinkButton from "../PinkButton";
+import Logo from "../../Components/Logo";
 
 const useStyles = makeStyles(() => ({
     inputs: {
@@ -74,7 +75,7 @@ const RegisterForm = () => {
     return (
         <>
             <ContainerRegisterForm>
-                <h1><span className = "title_D">D</span>evHealth<span className = "title_Y">y</span></h1>
+                <Logo />
                 <form onSubmit = {handleSubmit(onSub)} noValidate>
                     <TextField required 
                         className = {classes.inputs} 

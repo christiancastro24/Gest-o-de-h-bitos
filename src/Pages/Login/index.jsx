@@ -19,6 +19,7 @@ import { useUserData } from "../../Providers/UserData";
 import PinkButton from "../../Components/PinkButton";
 import MessageBalloon from "../../Components/MessageBalloon";
 import { useState } from "react";
+import Logo from "../../Components/Logo";
 
 const useStyles = makeStyles(() => ({
   inputs: {
@@ -44,8 +45,8 @@ const LoginPage = () => {
   const { authenticated, setAuthenticated } = useAuthenticated();
 
   const formSchema = yup.object().shape({
-    username: yup.string(),
-    password: yup.string().min(6, "Senha obrigatória de 6 dígitos"),
+    username: yup.string().required("Usuário obrigatório!"),
+    password: yup.string().min(6, "Senha obrigatória de 6 dígitos!"),
   });
 
   const {
@@ -91,10 +92,7 @@ const LoginPage = () => {
       <Container>
         <Content>
           <ContainerRegisterForm>
-            <h1>
-              <span className="title_D">D</span>evHealth
-              <span className="title_Y">y</span>
-            </h1>
+            <Logo />
             <form onSubmit={handleSubmit(onSub)} noValidate>
               <TextField
                 className={classes.inputs}
@@ -120,7 +118,7 @@ const LoginPage = () => {
               />
               {errors.password && (
                 <MessageBalloon
-                  message="Senha obrigatória!"
+                  message={errors.password.message}
                   className="invalid_password_message"
                 />
               )}
