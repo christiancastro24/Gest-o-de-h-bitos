@@ -262,6 +262,12 @@ export const Footer = styled.div`
 	@media (max-width: 1000px) {
 		display: none;
 	} ;
+
+	@media screen and (max-width: 1450px) and (min-width: 1001px) {
+		&::before {
+			background-color: transparent;
+		}
+	}
 `;
 
 export const EditHover = styled.div`
