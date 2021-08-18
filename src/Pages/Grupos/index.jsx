@@ -7,8 +7,7 @@ import { useState } from "react"
 
 const GroupsPage = () => {
 
-    const { groupGoals, handleInfo, groupActivities, isLoading, popUpActGoal, setPopUpActGoal, groups, handleSignIn, groupGoalsGroup, groupActivitiesGroup} = useGroups();
-
+    const { handleInfo, isLoading, popUpActGoal, setPopUpActGoal, groups, handleSignIn, groupGoalsGroup, groupActivitiesGroup } = useGroups();
         
             return ( 
                 <>

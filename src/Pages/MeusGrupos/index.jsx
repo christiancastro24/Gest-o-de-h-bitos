@@ -39,9 +39,7 @@ const MyGroups = () => {
                         Dificuldade: {grou.difficulty.length > 10 ? grou.difficulty.slice(0,10) + "..." : grou.difficulty}
                         <br />
                         <button className="btn-delete" onClick={() => handleDeleteGoal(grou.id)}
-                        >Excluir</button>
-
-                        <button className="btn-delete" onClick={() => handleUpdateGoals(grou.id)}>Concluir</button>           
+                        >Excluir</button>          
                     </div>
                 )
             })}
@@ -54,7 +52,6 @@ const MyGroups = () => {
                     <div className="group-actv" key={index}>
                         <h4>Atividades: </h4>
                         Título: {grouAtv.title} <br /> 
-                        Tempo de realização: {grouAtv.realization_time}
                         <br />
                         <button className="btn-delete" onClick={() => handleDeleteActv(grouAtv.id)}>Excluir</button>
                         <button className="btn-delete" onClick={() => setPopUpt(!popUpT)}>Editar</button>
