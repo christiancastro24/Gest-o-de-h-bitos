@@ -19,7 +19,7 @@ const HomePage = () => {
 			<img src={home} alt={home} />
 
 			<ContainerAbout>
-					<Logo />
+				<Logo />
 				<p>
 					O DevHealthy é um Aplicativo que busca ajudar o Dev a criar
 					seus hábitos e rotinas. podendo fazer parte de grupos para

@@ -15,7 +15,7 @@ const ContainerRegisterForm = styled.div`
     }
 
     @media(max-width: 450px) {
-        width: 130%;
+        width: 160%;
     }
 
     form {
@@ -70,6 +70,18 @@ const ContainerRegisterForm = styled.div`
 
     .title_Y {
         color: var(--lightGreen)
+    }
+
+    .invalid_username_message {
+        top: 0;
+    }
+
+    .invalid_email_message {
+        top: 26%;
+    }
+
+    .invalid_password_message {
+        top: 51%
     }
 `
 
