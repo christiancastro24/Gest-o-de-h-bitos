@@ -126,7 +126,7 @@ const AsideMenu = () => {
 						>
 							<b />
 							<b />
-							Profile
+							Perfil
 						</MenuItem>
 						<MenuItem
 							foq={currentPath === "/groups"}
