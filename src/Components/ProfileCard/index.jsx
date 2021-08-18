@@ -18,7 +18,7 @@ import { useGroups } from "../../Providers/groups";
 const useStyles = makeStyles((theme) => ({
   delete: {
     margin: "16px 0",
-    width: "12rem",
+    width: "10rem",
     border: "none",
     backgroundColor: "#f50000",
     color: "#fff",
@@ -134,6 +134,7 @@ const ProfileCard = () => {
           onSubmit={handleSubmit(onSub)}
           noValidate
         >
+          Nome de usuário:
           <input
             id="username_input"
             defaultValue={userName}
@@ -147,7 +148,7 @@ const ProfileCard = () => {
               message={errors.username.message}
             />
           )}
-
+          Email:
           <input
             id="email_input"
             defaultValue={userEmail}
@@ -171,7 +172,7 @@ const ProfileCard = () => {
               </div>
             ) : (
               <span
-                className="fake_button"
+                className="fake_button change_button"
                 onClick={() => setChangingProfile(true)}
               >
                 Alterar

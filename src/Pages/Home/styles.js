@@ -1,12 +1,18 @@
 import styled from "styled-components";
 
 export const ContainerHome = styled.section`
-        
     color: var(--white);
+
+    & h1 {
+        font-size: 3.5rem;
+    }
+
+    & section {
+        text-align: center;
+    }
 
     @media (min-width: 280px) and (max-width: 1109px) {
         display: flex;
-        margin: 20.5% 2rem;
         align-items: center;
         flex-direction: column;
         justify-content: center;

@@ -141,9 +141,7 @@ export const GroupsProvider = ({ children }) => {
         const data = { name: name, description: description, category: category }
         setLoading(true)
         api.post("/groups/", data, {
-
             headers: { 
-                "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`
             },
         })

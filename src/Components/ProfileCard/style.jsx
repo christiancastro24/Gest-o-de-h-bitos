@@ -120,19 +120,6 @@ const ProfileContainer = styled.div`
     width: 100%;
   }
 
-  .delete_button {
-    width: 104px;
-    height: 2rem;
-    background-color: #e41414;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    color: var(--white);
-
-    &:hover {
-      filter: var(--btnHover);
-    }
-  }
   @media (max-width: 1080px) {
     .profile_footer {
       text-align: center;
@@ -146,11 +133,13 @@ const ProfileContainer = styled.div`
       width: 50%;
     }
 
-    button,
-    .fake_button {
-      width: 88px;
-      height: 44px;
-      font-size: 0.9rem;
+    button {
+      /* width: 144px;  */
+    }
+
+    .change_profile_buttons button, .change_button, .change_profile_buttons .fake_button {
+      width: 92px;
+      font-size: 1rem;
     }
   }
 `;
