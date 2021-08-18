@@ -10,7 +10,7 @@ import ContainerRegisterForm from "./style";
 import api from "../../Services";
 import { useAuthenticated } from "../../Providers/authentication";
 import MessageBalloon from "../MessageBalloon";
-import "../../index.css"
+import "../../index.css";
 import PinkButton from "../PinkButton";
 import Logo from "../../Components/Logo";
 
@@ -34,7 +34,7 @@ const RegisterForm = () => {
     const history = useHistory();
 
     const formSchema = yup.object().shape({
-        username: yup.string().required("Usuário inválido"),
+        username: yup.string().required("Usuário inválido").matches("^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$", "Usuário inválido"),
         email: yup.string().required("Email obrigatório!").email("E-mail inválido"),
         password: yup.string().min(6, "Mínimo 6 caracteres").required("Senha inválida")
     });
@@ -85,7 +85,7 @@ const RegisterForm = () => {
                         InputProps = {{startAdornment : (<AccountCircle/>),}} 
                         {...register("username")}
                     />
-                        {errors.username && <MessageBalloon className = "invalid_user_message" message = {errors.username.message} />}
+                        {errors.username && <MessageBalloon className = "invalid_username_message" message = {errors.username.message} />}
                     <TextField required 
                         className={classes.inputs} 
                         variant = "outlined" 
