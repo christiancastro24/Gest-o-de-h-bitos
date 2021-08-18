@@ -12,9 +12,8 @@ import { useState } from "react";
 const MyGroups = () => {
 
     const { myGroups, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, groupGoals, handleInfo, groupActivities, handleDeleteGoal, handleDeleteActv, handleLogout, handleUpdateGoals,
-    popUpT, setPopUpt, title, setTitle, handleUpdateActivities } = useGroups();
+    popUpT, setPopUpt, title, setTitle, handleUpdateActivities, isLoading, popUpActGoal, setPopUpActGoal } = useGroups();
 
-    const [popUpActGoal, setPopUpActGoal] = useState(false)
 
     const [groupId, setGroupId] = useState("")
 
@@ -36,8 +35,8 @@ const MyGroups = () => {
                 return (
                     <div className="group-actv" key={index}>   
                         <h4 style={{color: "white"}}>Metas: </h4>
-                        Título: {grou.title} <br /> 
-                        Dificuldade: {grou.difficulty}
+                        Título: {grou.title.length > 10 ? grou.title.slice(0,10) + "..." : grou.title} <br /> 
+                        Dificuldade: {grou.difficulty.length > 10 ? grou.difficulty.slice(0,10) + "..." : grou.difficulty}
                         <br />
                         <button className="btn-delete" onClick={() => handleDeleteGoal(grou.id)}
                         >Excluir</button>
@@ -74,6 +73,9 @@ const MyGroups = () => {
             
             
         <Container>  
+
+            {isLoading && <span>Carregando...</span>}
+
                 {myGroups.map(myGroup => {
                    
                     return (

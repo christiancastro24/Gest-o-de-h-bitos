@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+
+export const ContainerAll = styled.div`
+	border: 2px solid red
+`
+
 export const Container = styled.div`
 	min-height: 70%;
     max-height: 95%;

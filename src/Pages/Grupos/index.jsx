@@ -6,7 +6,7 @@ import { ContainerAll } from "../MeusGrupos/styles";
 
 const GroupsPage = () => {
 
-    const { groups, handleSignIn } = useGroups();
+    const { groups, handleSignIn, isLoading } = useGroups();
 
     return ( 
         <>
@@ -17,6 +17,7 @@ const GroupsPage = () => {
             <h1>Grupos</h1>
 
         <Container>      
+            {isLoading && <h2 style={{color: "var(--white)"}}>Carregando...</h2>}
                 {groups.map(group => {
                     return (
                         <ContainerGroup key={group.id}>
