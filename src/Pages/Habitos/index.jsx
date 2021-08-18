@@ -8,6 +8,7 @@ import { Flex } from "./styles";
 import 'react-calendar/dist/Calendar.css';
 import Calendar from "react-calendar"
 import { useState } from "react"
+import Draggable from "react-draggable";
 
 const HabitsPage = () => {
 
@@ -29,12 +30,14 @@ const HabitsPage = () => {
 						<HabitsList />
 					<ActivitiesToDo />
 				</Flex>
+				<Draggable>
 				<div style={{display: "flex", justifyContent: "center"}}>
 				<Calendar
 					onChange={onChange}
 					value={value}
-				/>
+					/>
 				</div>
+					</Draggable>
 			</Window>
 		</>
 	);
