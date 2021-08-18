@@ -139,6 +139,7 @@ export const GroupsProvider = ({ children }) => {
     const handleCreate = () => {
 
         const data = { name: name, description: description, category: category }
+        setLoading(true)
         api.post("/groups/", data, {
 
             headers: { 
@@ -148,6 +149,7 @@ export const GroupsProvider = ({ children }) => {
         })
         .then(_ => {
             setMyGroups([...myGroups, {...data}])
+            setLoading(false)
             toast.success("Grupo criado!",
             {
                 style: {
@@ -159,6 +161,7 @@ export const GroupsProvider = ({ children }) => {
             setCategory("")
             setDescription("")
             setPopUp(!popUp)
+            window.location.reload();
             
         })
         .catch(_ => toast.error("Erro ao criar o grupo!",
@@ -173,12 +176,13 @@ export const GroupsProvider = ({ children }) => {
 
     // Entrar em um grupo 
     const handleSignIn = (id) => {
-
+        setLoading(true)
         api.post(`/groups/${id}/subscribe/`, null, {
 
             headers: { Authorization: `Bearer ${token}`},
         })
         .then(_ => {
+            setLoading(false)
             toast.success("Você entrou no grupo",
             {
                 style: {
@@ -202,11 +206,12 @@ export const GroupsProvider = ({ children }) => {
 
     // Sair de um grupo
     const handleLogout = (id) => {
+        setLoading(true)
         api.delete(`/groups/${id}/unsubscribe/`, {
             headers: { Authorization: `Bearer ${token}`}
 
         })
-        .then(() => window.location.reload())
+        .then(() => {setLoading(false); window.location.reload()})
         .catch(err => console.log(err))
     }
 
@@ -277,7 +282,7 @@ export const GroupsProvider = ({ children }) => {
 
 
     return (
-        <GroupsContext.Provider value={{groups, setGroups, name, setName, description, setDescription, category, setCategory, myGroups, setMyGroups, goals, setGoals, title, setTitle, difficulty, setDifficulty, group, setGroup, handleCreateGoal, handleCreateActivity, activities, setActivities, popUp, setPopUp, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, handleCreate, handleSignIn, handleInfo, groupGoals, groupActivities, setGroupActivities, handleDeleteGoal, handleDeleteActv, handleLogout, handleUpdateActivities, popUpT, setPopUpt, isLoading, popUpActGoal, setPopUpActGoal, groupGoalsGroup, groupActivitiesGroup}}>
+        <GroupsContext.Provider value={{groups, setGroups, name, setName, description, setDescription, category, setCategory, myGroups, setMyGroups, goals, setGoals, title, setTitle, difficulty, setDifficulty, group, setGroup, handleCreateGoal, handleCreateActivity, activities, setActivities, popUp, setPopUp, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, handleCreate, handleSignIn, handleInfo, groupGoals, groupActivities, setGroupActivities, handleDeleteGoal, handleDeleteActv, handleLogout, handleUpdateActivities, popUpT, setPopUpt, isLoading, setLoading, popUpActGoal, setPopUpActGoal, groupGoalsGroup, groupActivitiesGroup}}>
             {children}
         </GroupsContext.Provider>
     )

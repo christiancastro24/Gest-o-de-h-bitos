@@ -19,6 +19,7 @@ import { useUserData } from "../../Providers/UserData";
 import PinkButton from "../../Components/PinkButton";
 import MessageBalloon from "../../Components/MessageBalloon";
 import Logo from "../../Components/Logo";
+import { useGroups } from "../../Providers/groups";
 
 const useStyles = makeStyles(() => ({
   inputs: {
@@ -35,6 +36,7 @@ const useStyles = makeStyles(() => ({
 
 const LoginPage = () => {
   const { setToken, setUserId } = useUserData();
+  const { isLoading, setLoading } = useGroups();
   const classes = useStyles();
 
   const {setPassword} = useUserData();
@@ -57,6 +59,7 @@ const LoginPage = () => {
   });
 
   const onSub = (data) => {
+    setLoading(true)
     api
     .post("/sessions/", data)
     .then((res) => {
@@ -66,12 +69,14 @@ const LoginPage = () => {
         localStorage.setItem("userId", userId);
         setUserId(userId);
         setToken(access);
-		setPassword(data.password);
+        setPassword(data.password);
+        setLoading(false)
         setAuthenticated(true);
         history.push("/habits");
         toast.success("Sucesso!");
     })
     .catch(() => {
+        setLoading(false)
         toast.error("Usuário ou senha incorretos!", {
         style: {
             backgroundColor: "red",
@@ -121,6 +126,7 @@ const LoginPage = () => {
                   className="invalid_password_message"
                 />
               )}
+              {isLoading && <span>Carregando...</span>}
               <PinkButton type="submit" text="Entrar" />
             </form>
             <p>
