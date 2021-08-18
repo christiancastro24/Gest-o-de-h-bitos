@@ -20,6 +20,10 @@ export const Container = styled.div`
 		#30336b 100%
 	);
 
+	.username {
+		text-transform: capitalize;
+	}
+
 	@media (max-width: 1000px) {
 		position: fixed;
 		top: 0;
@@ -84,11 +88,6 @@ export const Header = styled.div`
         align-items: center;
         gap: 20px;
 	} ;
-`;
-
-export const Logo = styled.h1`
-    color: white;
-    font-family: 'Lobster', cursive;
 `;
 
 export const BurguerMenu = styled.div`

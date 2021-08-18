@@ -7,6 +7,7 @@ import GroupsPage from "../Pages/Grupos";
 import HabitsPage from "../Pages/Habitos";
 import ProfilePage from "../Pages/Profile";
 import MyGroups from "../Pages/MeusGrupos";
+import ProfileCard from "../Components/ProfileCard";
 
 const Routes = () => {
     return (
@@ -30,7 +31,7 @@ const Routes = () => {
 				<ProfilePage />
 			</Route>
 			<Route path="/teste">
-
+				<ProfileCard />
 			</Route>
 			<Route path="/myGroups">
 				<MyGroups />
