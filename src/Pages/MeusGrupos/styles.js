@@ -86,7 +86,7 @@ export const ContainerPopUp = styled.div`
         width: 17rem; 
         height: 19rem; 
         background-color: rgb(19, 15, 64);
-        position: absolute; 
+        position: fixed; 
         top: 25%;
         left: 10%; 
         z-index: 1000;

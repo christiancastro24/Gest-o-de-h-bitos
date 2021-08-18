@@ -1,4 +1,4 @@
-import { Container, Title, ListItem, Bold, SectionTitle, Column, TableRow, ActionsColumn, Counter, Cite } from "./styles";
+import { Container, Title, ListItem, Bold, SectionTitle, Column, TableRow, ActionsColumn, Counter, Cite, ContainerAll } from "./styles";
 import { useUserData } from "../../Providers/UserData";
 import { Tooltip, CircularProgress, Button, Fab } from "@material-ui/core";
 import api from "../../Services";
@@ -130,14 +130,14 @@ const HabitsList = () => {
 							transform: "translate(50%, -50%)",
 						}}
 						color="secondary"
-					/>
-				) : null}
+						/>
+						) : null}
 				<TableRow>
 					{habits.length > 0 ? (
 						habits
-							.filter((item) => !handleRepeat(item.id))
-							.map((item, ind) => (
-								<ListItem key={ind}>
+						.filter((item) => !handleRepeat(item.id))
+						.map((item, ind) => (
+							<ListItem key={ind}>
 									<Column>
 										<Title done={handleRepeat(item.id)}>
 											{item.title}
@@ -145,7 +145,7 @@ const HabitsList = () => {
 										<Tooltip
 											title="Quantas vezes você realizou essa tarefa."
 											placement="top"
-										>
+											>
 											<Counter>
 												{item.how_much_achieved}
 											</Counter>
@@ -163,9 +163,9 @@ const HabitsList = () => {
 												handleDoneTask(
 													item.id,
 													item.how_much_achieved
-												)
-											}
-										/>
+													)
+												}
+												/>
 
 										<Fab
 											onClick={handleOpenDelConfirmation}
@@ -174,7 +174,7 @@ const HabitsList = () => {
 											style={{
 												backgroundColor: "#d72a2a",
 											}}
-										>
+											>
 											<DeleteForever
 												style={{
 													fontSize: "16px",
@@ -191,7 +191,7 @@ const HabitsList = () => {
 											openDelConfirmation={
 												openDelConfirmation
 											}
-										/>
+											/>
 									</ActionsColumn>
 								</ListItem>
 							))
@@ -211,7 +211,7 @@ const HabitsList = () => {
 							open={openDoneInfo}
 							onClick={handleOpenDoneInfo}
 							onMouseEnter={handleOpenDoneInfo}
-						>
+							>
 							<Help fontSize="small" />
 						</Tooltip>
 					</h4>
@@ -219,9 +219,9 @@ const HabitsList = () => {
 				<TableRow>
 					{habits &&
 						habits
-							.filter((item) => handleRepeat(item.id))
-							.map((item, ind) => (
-								<ListItem key={ind}>
+						.filter((item) => handleRepeat(item.id))
+						.map((item, ind) => (
+							<ListItem key={ind}>
 									<Column>
 										<Title done={handleRepeat(item.id)}>
 											{item.title}
@@ -229,7 +229,7 @@ const HabitsList = () => {
 										<Tooltip
 											title="Quantas vezes você realizou essa tarefa."
 											placement="top"
-										>
+											>
 											<Counter>
 												{item.how_much_achieved}
 											</Counter>
@@ -248,14 +248,14 @@ const HabitsList = () => {
 												)
 											}
 											checked={handleRepeat(item.id)}
-										/>
+											/>
 										<Fab
 											onClick={handleOpenDelConfirmation}
 											size="small"
 											style={{
 												backgroundColor: "#d72a2a",
 											}}
-										>
+											>
 											<DeleteForever
 												style={{ fontSize: "16px" }}
 											/>
@@ -269,7 +269,7 @@ const HabitsList = () => {
 											openDelConfirmation={
 												openDelConfirmation
 											}
-										/>
+											/>
 									</ActionsColumn>
 								</ListItem>
 							))}
@@ -279,7 +279,7 @@ const HabitsList = () => {
 					variant="contained"
 					style={{ display: "block", margin: "0 auto" }}
 					onClick={handleOpen}
-				>
+					>
 					Adicionar novo hábito
 				</Button>
 				<AddHabit open={open} handleClose={handleClose} />

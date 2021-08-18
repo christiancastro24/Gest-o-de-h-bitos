@@ -1,6 +1,6 @@
 import ProfileContainer from "./style";
 import { useUserData } from "../../Providers/UserData";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import PinkButton from "../PinkButton";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
@@ -10,6 +10,8 @@ import MessageBalloon from "../MessageBalloon";
 import api from "../../Services";
 import ConfirmationPopup from "../ConfirmationPopup";
 
+
+
 const ProfileCard = () => {
     
     const { userName, userEmail, userId, password, token } = useUserData();
@@ -18,11 +20,14 @@ const ProfileCard = () => {
 
     const [deletingProfile, setDeletingProfile] = useState(false);
 
+    
+
     const formSchema = yup.object().shape({
         username: yup.string().required("Usuário inválido"),
         email: yup.string().required("Email obrigatório!").email("E-mail inválido"),
         // password: yup.string().min(6, "Mínimo 6 caracteres").required("Senha inválida")
     });
+
 
     const deleteProfile = () => {
         api.delete(`/users/${userId}/`, {
@@ -81,6 +86,9 @@ const ProfileCard = () => {
             <div className = "profile_footer">
                 <button onClick = {() => setDeletingProfile(true)}>Excluir Conta</button>
             </div>
+            <div>
+       
+        </div>
         </ProfileContainer>
         </>
     )
