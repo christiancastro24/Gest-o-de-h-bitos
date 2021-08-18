@@ -20,6 +20,9 @@ export const GroupsProvider = ({ children }) => {
     const [groupGoals, setGroupGoals] = useState([])
     const [groupActivities, setGroupActivities] = useState([])
 
+    const [groupGoalsGroup, setGroupGoalsGroup] = useState([])
+    const [groupActivitiesGroup, setGroupActivitiesGroup] = useState([])
+
     const [title, setTitle] = useState("")
     const [difficulty, setDifficulty] = useState("")
     const [group, setGroup] = useState("")
@@ -244,6 +247,13 @@ export const GroupsProvider = ({ children }) => {
 
         const filtActivities =  myGroups.filter(item => item.id === itemId)
         setGroupActivities(filtActivities)
+
+        const filtGroupsGoals = groups.filter(item => item.id === itemId)
+        setGroupGoalsGroup(filtGroupsGoals)
+
+        const filtGroupsActvs = groups.filter(item => item.id === itemId)
+        setGroupActivitiesGroup(filtGroupsActvs)
+        
     }
 
 
@@ -283,7 +293,7 @@ export const GroupsProvider = ({ children }) => {
 
 
     return (
-        <GroupsContext.Provider value={{groups, setGroups, name, setName, description, setDescription, category, setCategory, myGroups, setMyGroups, goals, setGoals, title, setTitle, difficulty, setDifficulty, group, setGroup, handleCreateGoal, handleCreateActivity, activities, setActivities, popUp, setPopUp, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, handleCreate, handleSignIn, handleInfo, groupGoals, groupActivities, setGroupActivities, handleDeleteGoal, handleDeleteActv, handleLogout, handleUpdateGoals, handleUpdateActivities, popUpT, setPopUpt, isLoading, popUpActGoal, setPopUpActGoal}}>
+        <GroupsContext.Provider value={{groups, setGroups, name, setName, description, setDescription, category, setCategory, myGroups, setMyGroups, goals, setGoals, title, setTitle, difficulty, setDifficulty, group, setGroup, handleCreateGoal, handleCreateActivity, activities, setActivities, popUp, setPopUp, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, handleCreate, handleSignIn, handleInfo, groupGoals, groupActivities, setGroupActivities, handleDeleteGoal, handleDeleteActv, handleLogout, handleUpdateGoals, handleUpdateActivities, popUpT, setPopUpt, isLoading, popUpActGoal, setPopUpActGoal, groupGoalsGroup, groupActivitiesGroup}}>
             {children}
         </GroupsContext.Provider>
     )

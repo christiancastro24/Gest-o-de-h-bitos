@@ -12,9 +12,6 @@ import ConfirmationPopup from "../ConfirmationPopup";
 import { useHistory } from "react-router-dom";
 import { useAuthenticated } from "../../Providers/authentication";
 
-
-
-
 const ProfileCard = () => {
     
     const { userName, userEmail, userId, token, userAvatar } = useUserData();
