@@ -257,22 +257,6 @@ export const GroupsProvider = ({ children }) => {
     }
 
 
-    const handleUpdateGoals = (id) => {
-        const updateGoal = { achieved: true, how_much_achieved: 100 }
-
-        api.patch(`/goals/${id}/`, updateGoal, {
-            headers: { 
-                "Content-Type": "application/json", 
-                Authorization: `Bearer ${token}`
-            }
-        })
-        .then(() => {
-            setGroupGoals(groupGoals.filter(gro => gro !== id))
-            setPopUpActGoal(!popUpActGoal)
-        })
-        .catch(err => console.log(err))
-    }
-
     const handleUpdateActivities = (id) => {
         const teste = { title: title }
         
@@ -293,7 +277,7 @@ export const GroupsProvider = ({ children }) => {
 
 
     return (
-        <GroupsContext.Provider value={{groups, setGroups, name, setName, description, setDescription, category, setCategory, myGroups, setMyGroups, goals, setGoals, title, setTitle, difficulty, setDifficulty, group, setGroup, handleCreateGoal, handleCreateActivity, activities, setActivities, popUp, setPopUp, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, handleCreate, handleSignIn, handleInfo, groupGoals, groupActivities, setGroupActivities, handleDeleteGoal, handleDeleteActv, handleLogout, handleUpdateGoals, handleUpdateActivities, popUpT, setPopUpt, isLoading, popUpActGoal, setPopUpActGoal, groupGoalsGroup, groupActivitiesGroup}}>
+        <GroupsContext.Provider value={{groups, setGroups, name, setName, description, setDescription, category, setCategory, myGroups, setMyGroups, goals, setGoals, title, setTitle, difficulty, setDifficulty, group, setGroup, handleCreateGoal, handleCreateActivity, activities, setActivities, popUp, setPopUp, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, handleCreate, handleSignIn, handleInfo, groupGoals, groupActivities, setGroupActivities, handleDeleteGoal, handleDeleteActv, handleLogout, handleUpdateActivities, popUpT, setPopUpt, isLoading, popUpActGoal, setPopUpActGoal, groupGoalsGroup, groupActivitiesGroup}}>
             {children}
         </GroupsContext.Provider>
     )
