@@ -18,7 +18,6 @@ import jwt_decode from "jwt-decode";
 import { useUserData } from "../../Providers/UserData";
 import PinkButton from "../../Components/PinkButton";
 import MessageBalloon from "../../Components/MessageBalloon";
-import { useState } from "react";
 import Logo from "../../Components/Logo";
 
 const useStyles = makeStyles(() => ({
@@ -46,7 +45,7 @@ const LoginPage = () => {
 
   const formSchema = yup.object().shape({
     username: yup.string().required("Usuário obrigatório!"),
-    password: yup.string().min(6, "Senha obrigatória de 6 dígitos!"),
+    password: yup.string().min(6, "Mínimo 6 caracteres!"),
   });
 
   const {

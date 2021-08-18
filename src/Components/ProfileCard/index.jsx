@@ -80,12 +80,12 @@ const ProfileCard = () => {
                 <img className = "user_avatar" alt = {userName} src = {userAvatar} />
             { deletingProfile && 
             <ConfirmationPopup >
-                <p>Tem certeza?</p>
+                <p>Tem certeza disso?</p>
                 A Exclusão da conta é irreversível e você deverá fazer outro cadastro se desejar
                 continuar usando nossos serviços. 
                 <div>
-                    <button className = "yes_button" onClick = {deleteProfile}>Sim</button>
-                    <button className = "no_button" onClick = {() => setDeletingProfile(false)}>Não</button>
+                    <button className = "yes_button" onClick = {deleteProfile}>Excluir</button>
+                    <button className = "no_button" onClick = {() => setDeletingProfile(false)}>Voltar</button>
                 </div>
             </ConfirmationPopup>
             }

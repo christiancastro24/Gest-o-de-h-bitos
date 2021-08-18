@@ -36,7 +36,7 @@ const ProfileContainer = styled.div`
             color: white;
             text-transform: capitalize;
             filter: drop-shadow(10px 5px 4px #000000);
-            animation: logoAnimation 5s infinite;
+            animation: logoAnimation 6s ease-out infinite running;
         }
 
         @keyframes logoAnimation {
@@ -70,7 +70,7 @@ const ProfileContainer = styled.div`
     }
 
     & input {
-        margin: 4px auto;
+        margin: 8px auto;
         outline: none;
         border: none;
         height: 28px;
@@ -87,11 +87,11 @@ const ProfileContainer = styled.div`
     }
 
     .invalid_username_message {
-   
+        top: 23%;
     }
 
     .invalid_email_message {
-
+        top: 37%;
     }
 
     .fake_button {
@@ -137,6 +137,14 @@ const ProfileContainer = styled.div`
     @media (max-width: 1080px) {
         .profile_footer {
             text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        .user_avatar {
+            width: 50%;
         }
 
         button, .fake_button {
