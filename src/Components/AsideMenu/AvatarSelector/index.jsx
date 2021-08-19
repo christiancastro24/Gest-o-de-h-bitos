@@ -84,7 +84,7 @@ const AvatarSelector = ({open, handleClose, handleChangeAvatarId}) => {
 				</Tabs>
 			</DialogContent>
 			<DialogActions>
-				<Button onClick={handleClose} color="secondary" autoFocus>
+				<Button onClick={handleClose} color="secondary" variant='contained'>
 					Close
 				</Button>
 			</DialogActions>

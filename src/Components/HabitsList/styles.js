@@ -14,6 +14,7 @@ export const Container = styled.div`
 	padding: 0.5rem;
 	width: 310px;
     overflow-y: auto;
+    cursor: default;
 `;
 export const Column = styled.div`
 	display: flex;
@@ -29,6 +30,7 @@ export const ListItem = styled.div`
 	align-content: space-between;
 	gap: 10px;
 	padding: 0.19rem;
+    text-align: left;
 `;
 export const SectionTitle = styled.h2`
 	text-align: center;
@@ -68,6 +70,7 @@ export const ActionsColumn = styled.div`
 
 export const Counter = styled.span`
 	margin: 0 1ch;
+    cursor: help;
 `;
 
 export const Cite = styled.div`

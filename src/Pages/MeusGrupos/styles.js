@@ -48,6 +48,10 @@ export const ContainerAll = styled.section `
         padding-left: 2.5rem;
         font-family: 'Georama', sans-serif;
     }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
 `
 

@@ -210,11 +210,13 @@ export const ContainerGoalsAndAct = styled.div`
     top: 5rem;
     left: 30%;
     z-index: 1000;
-    overflow-y: scroll;
+    overflow-y: auto;
     background-color: rgb(19,15,64);
     width: 30rem;
     border-radius: 5%;
     text-align: center;
+    max-height: 100vh;
+    padding: 1rem;
 
     .group-actv {
         color: white; 
@@ -241,3 +243,7 @@ export const ContainerGoalsAndAct = styled.div`
     }
 
 ` 
+
+export const Loading = styled.span`
+    color: ${props=> props.visible ? 'white' : 'var(--background)'}
+`

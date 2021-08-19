@@ -9,6 +9,8 @@ export const GroupsProvider = ({ children }) => {
 
     const [groups, setGroups] = useState([])
     const [myGroups, setMyGroups] = useState([])
+    const [page, setPage] = useState([1]);
+    const [totalPages, setTotalPages] = useState(1)
 
     const [goals, setGoals] = useState([])
     const [activities, setActivities] = useState([])
@@ -52,16 +54,17 @@ export const GroupsProvider = ({ children }) => {
         
 
         .catch(err => console.log(err))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [groupGoals])
 
 
     // Todos grupos que não precisam de ("Autorização")
     useEffect(() => {
         setLoading(true)
-        api.get(`/groups/`)
-        .then(res => {setGroups(res.data.results); setLoading(false)})
+        api.get(`/groups/?page=${page}`)
+        .then(res => {setGroups(res.data.results); setLoading(false); setTotalPages(Math.ceil(res.data.count / 15))})
         .catch(err => console.log(err))
-    }, [])
+    }, [page])
 
 
     // Criando meta 
@@ -280,7 +283,7 @@ export const GroupsProvider = ({ children }) => {
 
 
     return (
-        <GroupsContext.Provider value={{groups, setGroups, name, setName, description, setDescription, category, setCategory, myGroups, setMyGroups, goals, setGoals, title, setTitle, difficulty, setDifficulty, group, setGroup, handleCreateGoal, handleCreateActivity, activities, setActivities, popUp, setPopUp, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, handleCreate, handleSignIn, handleInfo, groupGoals, groupActivities, setGroupActivities, handleDeleteGoal, handleDeleteActv, handleLogout, handleUpdateActivities, popUpT, setPopUpt, isLoading, setLoading, popUpActGoal, setPopUpActGoal, groupGoalsGroup, groupActivitiesGroup}}>
+        <GroupsContext.Provider value={{groups, setGroups, name, setName, description, setDescription, category, setCategory, myGroups, setMyGroups, goals, setGoals, title, setTitle, difficulty, setDifficulty, group, setGroup, handleCreateGoal, handleCreateActivity, activities, setActivities, popUp, setPopUp, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, handleCreate, handleSignIn, handleInfo, groupGoals, groupActivities, setGroupActivities, handleDeleteGoal, handleDeleteActv, handleLogout, handleUpdateActivities, popUpT, setPopUpt, isLoading, setLoading, popUpActGoal, setPopUpActGoal, groupGoalsGroup, groupActivitiesGroup, page, setPage, totalPages}}>
             {children}
         </GroupsContext.Provider>
     )

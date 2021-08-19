@@ -1,11 +1,11 @@
-import { Container, Title, ListItem, Bold, SectionTitle, Column, TableRow, ActionsColumn, Counter, Cite, ContainerAll } from "./styles";
+import { Container, Title, ListItem, Bold, SectionTitle, Column, TableRow, ActionsColumn, Counter, Cite, } from "./styles";
 import { useUserData } from "../../Providers/UserData";
 import { Tooltip, CircularProgress, Button, Fab } from "@material-ui/core";
 import api from "../../Services";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import AddHabit from "./AddHabit";
-import { DeleteForever, Help, ErrorOutline, CheckCircleOutline } from "@material-ui/icons";
+import { DeleteForever, Help, ErrorOutline, CheckCircleOutline,} from "@material-ui/icons";
 import { Switch } from "antd";
 import DelConfirmation from "./DelConfirmation";
 import Draggable from "react-draggable";
@@ -51,6 +51,8 @@ const HabitsList = () => {
     const handleOpenDelConfirmation = () => {
         setOpenDelConfirmation(!openDelConfirmation);
     }
+
+    
     const handleDoneTask = (habitId, repeticoes) => {
         setAppIsThinking(true);
         api.patch(
@@ -182,6 +184,7 @@ const HabitsList = () => {
 												}}
 											/>
 										</Fab>
+										
 										<DelConfirmation
 											itemId={item.id}
 											handleOpenDelConfirmation={
