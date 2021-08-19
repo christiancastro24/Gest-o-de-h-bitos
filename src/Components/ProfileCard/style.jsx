@@ -133,8 +133,10 @@ const ProfileContainer = styled.div`
       width: 50%;
     }
 
-    button {
-      /* width: 144px;  */
+    .user_infos {
+      margin: 0;
+      font-weight: 500;
+      font-size: 1rem;
     }
 
     .change_profile_buttons button, .change_button, .change_profile_buttons .fake_button {
