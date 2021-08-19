@@ -9,6 +9,11 @@ const ProfileContainer = styled.div`
   justify-content: center;
   margin: 0 auto;
 
+  @media screen and (max-width: 1450px) and (min-width: 1001px) {
+    width: 95%;
+    height: 100vh;
+  }
+
   .profile_card {
     border-radius: 21px;
     background: linear-gradient(
@@ -28,6 +33,11 @@ const ProfileContainer = styled.div`
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+
+    @media screen and (max-width: 1450px) and (min-width: 1001px) {
+      width: 95%;
+      height: 100vh;
+    }
   }
 
   .user_avatar {
@@ -65,6 +75,40 @@ const ProfileContainer = styled.div`
     max-width: 1200px;
     text-align: right;
     margin-top: 100px;
+  }
+
+  .user_infos {
+    margin: 0;
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--white);
+    font-weight: bold;
+  }
+
+  @media screen and (max-width: 1450px) and (min-width: 1001px) {
+    .profile_footer {
+      width: 100%;
+      max-width: 1200px;
+      text-align: right;
+      margin-top: 3rem;
+    }
+
+    .user_infos {
+      margin: 0;
+      font-weight: 500;
+      font-size: 1rem;
+      color: var(--white);
+      font-weight: bold;
+    }
+  }
+
+  @media (max-width: 580px) {
+    .profile_footer {
+      width: 100%;
+      max-width: 1200px;
+      text-align: right;
+      margin: 1rem;
+    }
   }
 
   form {
@@ -137,9 +181,13 @@ const ProfileContainer = styled.div`
       margin: 0;
       font-weight: 500;
       font-size: 1rem;
+      color: var(--white);
+      font-weight: bold;
     }
 
-    .change_profile_buttons button, .change_button, .change_profile_buttons .fake_button {
+    .change_profile_buttons button,
+    .change_button,
+    .change_profile_buttons .fake_button {
       width: 92px;
       font-size: 1rem;
     }
