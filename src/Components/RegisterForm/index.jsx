@@ -13,6 +13,7 @@ import MessageBalloon from "../MessageBalloon";
 import "../../index.css";
 import PinkButton from "../PinkButton";
 import Logo from "../../Components/Logo";
+import { useGroups } from "../../Providers/groups";
 
 const useStyles = makeStyles(() => ({
     inputs: {
@@ -30,6 +31,7 @@ const useStyles = makeStyles(() => ({
 const RegisterForm = () => {
 
     const { authenticated } = useAuthenticated();
+    const { isLoading, setLoading } = useGroups();
 
     const history = useHistory();
 
@@ -44,6 +46,7 @@ const RegisterForm = () => {
     });
 
     const onSub = (data) => {
+        setLoading(true)
         api.post("/users/", data)
         .then((res) => {
 
@@ -54,9 +57,11 @@ const RegisterForm = () => {
                     color: "#fff"
                 }
             })
+            setLoading(false)
             history.push("/loginPage")
         })
         .catch(() => {
+            setLoading(false)
             toast.error("Usuário ou e-mail já existente!",
             {
                 style: {
@@ -103,6 +108,7 @@ const RegisterForm = () => {
                         {...register("password")}
                     /> 
                     {errors.password && <MessageBalloon className = "invalid_password_message" message = {errors.password.message} />}
+                    {isLoading && <span>Carregando...</span>}
                     <PinkButton type = "submit" text = "Registrar-se" />
                 </form>
                 <p>

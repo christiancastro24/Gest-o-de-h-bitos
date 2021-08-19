@@ -3,7 +3,7 @@ import { Window } from "../../Components/GlobalStyle/styles";
 import { useGroups } from "../../Providers/groups";
 import { Container, ContainerGoalsAndAct, ContainerGroup } from "./styles";
 import { ContainerAll } from "../MeusGrupos/styles";
-import { useState } from "react"
+
 
 const GroupsPage = () => {
 
@@ -16,7 +16,7 @@ const GroupsPage = () => {
 
         <ContainerAll>
             <h1>Grupos</h1>
-
+            {isLoading && <span style={{color: "var(--white)"}}>Carregando...</span>}
             {popUpActGoal && 
             <ContainerGoalsAndAct>
             <button onClick={() => setPopUpActGoal(!popUpActGoal)}>X</button>

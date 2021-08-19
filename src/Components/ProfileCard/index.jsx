@@ -13,6 +13,7 @@ import ConfirmationPopup from "../ConfirmationPopup";
 import { useHistory } from "react-router-dom";
 import { useAuthenticated } from "../../Providers/authentication";
 import { Button } from "@material-ui/core";
+import { useGroups } from "../../Providers/groups";
 
 const useStyles = makeStyles((theme) => ({
   delete: {
@@ -44,6 +45,8 @@ const ProfileCard = () => {
 
   const history = useHistory();
 
+  const { isLoading, setLoading } = useGroups();
+
   const formSchema = yup.object().shape({
     username: yup
       .string()
@@ -56,6 +59,7 @@ const ProfileCard = () => {
   });
 
   const deleteProfile = () => {
+    setLoading(true)
     api
       .delete(`/users/${userId}/`, {
         headers: {
@@ -66,8 +70,10 @@ const ProfileCard = () => {
         toast.success("Conta excluída!");
         setAuthenticated(false);
         localStorage.clear();
+        setLoading(false)
         history.push("/");
-      });
+      })
+      .catch(res => setLoading(false))
   };
 
   const {
@@ -171,7 +177,9 @@ const ProfileCard = () => {
               >
                 Alterar
               </span>
+              
             )}
+            {isLoading && <span>Carregando...</span>}
           </div>
         </form>
 
