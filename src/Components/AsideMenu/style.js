@@ -19,7 +19,8 @@ export const Container = styled.div`
     #6095b9 90%,
     #30336b 100%
   );
-
+  position: fixed;
+  left: 0;
   .username {
     text-transform: capitalize;
   }
@@ -28,7 +29,7 @@ export const Container = styled.div`
     position: fixed;
     top: 0;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     flex-wrap: nowrap;
     width: 100%;
@@ -216,7 +217,7 @@ export const Menu = styled.div`
     display: ${(props) => (props.show ? "unset" : "none")};
     position: absolute;
     width: max-content;
-    bottom: -27rem;
+    bottom: -29rem;
     left: 50%;
     background-color: #6095b9;
     box-sizing: border-box;

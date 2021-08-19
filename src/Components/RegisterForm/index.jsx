@@ -36,7 +36,7 @@ const RegisterForm = () => {
     const history = useHistory();
 
     const formSchema = yup.object().shape({
-        username: yup.string().required("Usuário inválido").matches("^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$", "Usuário inválido"),
+        username: yup.string().required("Usuário inválido").matches("^[A-Za-z0-9-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$", "Usuário inválido"),
         email: yup.string().required("Email obrigatório!").email("E-mail inválido"),
         password: yup.string().min(6, "Mínimo 6 caracteres").required("Senha inválida")
     });

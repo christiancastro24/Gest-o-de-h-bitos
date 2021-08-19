@@ -53,7 +53,7 @@ const ProfileCard = () => {
       .string()
       .required("Usuário inválido")
       .matches(
-        "^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$",
+        "^[A-Za-z0-9-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$",
         "Usuário inválido"
       ),
     email: yup.string().required("Email obrigatório!").email("E-mail inválido"),

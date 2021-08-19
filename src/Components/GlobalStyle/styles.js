@@ -36,5 +36,8 @@ export const Window = styled.div`
   }
   @media (max-width: 580px) {
     margin-top: 175px;
-  } ;
+  }
+  @media (min-width: 1000px) {
+    margin-left: 25%;
+  }
 `;

@@ -144,10 +144,14 @@ export const ContainerGroup = styled.div`
     color: var(--white);
     padding-left: 1rem;
   }
+
+  @media only screen and (min-width: 768) {
+    width: 40vw;
+  }
 `;
 
 export const ContainerMyGroups = styled.div`
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

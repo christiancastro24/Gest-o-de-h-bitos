@@ -14,9 +14,9 @@ import {
 import CreateGroup from "../../Components/CreateGroup";
 import CreateGoals from "../../Components/CreateGoals";
 import CreateActivities from "../../Components/CreateActivities";
-import UpdateGroup from "../../Components/UpdateGroup";
 import { useState } from "react";
 import { Button, Input } from "@material-ui/core";
+import { useUserData } from "../../Providers/UserData";
 
 const MyGroups = () => {
   const {
@@ -46,6 +46,7 @@ const MyGroups = () => {
     setCategory,
   } = useGroups();
 
+  const { userId } = useUserData();
   const [groupId, setGroupId] = useState("");
 
   const [groupAtv, setGroupAtv] = useState();
@@ -188,17 +189,19 @@ const MyGroups = () => {
 
                   <CreateGoals itemId={groupId} />
 
-                  <Button
-                    size="small"
-                    variant="contained"
-                    color="primary"
-                    onClick={() => {
-                      setUpdateGroup(!popUpUpdateGroup);
-                      setGroupId(myGroup.id);
-                    }}
-                  >
-                    Editar
-                  </Button>
+                  {myGroup.creator && myGroup.creator.id === userId ? (
+                    <Button
+                      size="small"
+                      variant="contained"
+                      color="primary"
+                      onClick={() => {
+                        setUpdateGroup(!popUpUpdateGroup);
+                        setGroupId(myGroup.id);
+                      }}
+                    >
+                      Editar
+                    </Button>
+                  ) : null}
 
                   {popUpUpdateGroup && (
                     <ContainerPopUpInput>

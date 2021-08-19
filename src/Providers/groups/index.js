@@ -18,12 +18,13 @@ export const GroupsProvider = ({ children }) => {
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [category, setCategory] = useState("")
-    const [categoryTeste, setCategoryTeste] = useState([])
+    // const [categoryTeste, setCategoryTeste] = useState([])
 
     const [groupGoals, setGroupGoals] = useState([])
     const [groupActivities, setGroupActivities] = useState([])
 
     const [groupGoalsGroup, setGroupGoalsGroup] = useState([])
+    // eslint-disable-next-line no-unused-vars
     const [groupActivitiesGroup, setGroupActivitiesGroup] = useState([])
 
     const [title, setTitle] = useState("")
@@ -39,6 +40,9 @@ export const GroupsProvider = ({ children }) => {
     const [popUpActivities, setPopUpActivities] = useState(false)
 
     const [isLoading, setLoading] = useState(false)
+
+    // eslint-disable-next-line no-unused-vars
+    const [reload, setReload] = useState(false);
 
    const [token] = useState(JSON.parse(localStorage.getItem("@DevHealthy/user")) || "")
 
@@ -57,7 +61,7 @@ export const GroupsProvider = ({ children }) => {
 
         .catch(err => console.log(err))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [groupGoals])
+    }, [groupGoals, reload])
 
 
     // Todos grupos que não precisam de ("Autorização")
@@ -250,19 +254,17 @@ export const GroupsProvider = ({ children }) => {
     }
 
     // Imprimindo metas e atividades de um grupo
+    
+    
     const handleInfo = (itemId) => {
-        const filtGoals = myGroups.filter(item => item.id === itemId)
-        setGroupGoals(filtGoals)
+		const filtGoals = myGroups.filter((item) => item.id === itemId);
+		setGroupGoals(filtGoals);
 
-        const filtActivities =  myGroups.filter(item => item.id === itemId)
-        setGroupActivities(filtActivities)
+		const filtActivities = myGroups.filter((item) => item.id === itemId);
+		setGroupActivities(filtActivities);
 
-        const filtGroupsGoals = groups.filter(item => item.id === itemId)
-        setGroupGoalsGroup(filtGroupsGoals)
-
-        const filtGroupsActvs = groups.filter(item => item.id === itemId)
-        setGroupActivitiesGroup(filtGroupsActvs)
-        
+		const filtGroupsGoals = groups.filter((item) => item.id === itemId);
+		setGroupGoalsGroup(filtGroupsGoals);
     }
 
     const handleUpdateGroup = (id) => {
@@ -294,6 +296,7 @@ export const GroupsProvider = ({ children }) => {
             setPopUpActGoal(!popUpActGoal)
             setTitle("")
             window.location.reload();
+
         })
         .catch(err => console.log(err))
     }

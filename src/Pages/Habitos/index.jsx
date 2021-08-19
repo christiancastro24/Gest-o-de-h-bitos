@@ -14,7 +14,8 @@ const HabitsPage = () => {
 
 	const history = useHistory()
 
-	const { authenticated } = useAuthenticated() 
+	const { authenticated } = useAuthenticated();
+    
 
 	const [value, onChange] = useState(new Date());
 
@@ -25,19 +26,22 @@ const HabitsPage = () => {
 	return (
 		<>
 			<AsideMenu />
-			<Window>
+			<Window >
 				<Flex>
-						<HabitsList />
+                    <HabitsList />
 					<ActivitiesToDo />
-				</Flex>
-				<Draggable>
-				<div style={{display: "flex", justifyContent: "center"}}>
-				<Calendar
-					onChange={onChange}
-					value={value}
-					/>
-				</div>
+
+					<Draggable>
+						<div
+							style={{
+								display: "flex",
+								justifyContent: "center",
+							}}
+						>
+							<Calendar onChange={onChange} value={value} />
+						</div>
 					</Draggable>
+				</Flex>
 			</Window>
 		</>
 	);
