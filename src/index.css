@@ -49,6 +49,9 @@ button.MuiFab-root {
 .MuiTooltip-tooltip {
 	background-color: white;
 }
+.MuiPagination-root .MuiPagination-ul li button {
+    color: white;
+}
 b:nth-child(1) {
 	position: absolute;
 	top: -20px;

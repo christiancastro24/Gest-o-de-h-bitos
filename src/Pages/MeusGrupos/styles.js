@@ -44,6 +44,10 @@ export const ContainerAll = styled.section `
         text-align: center;
         font-family: Helvetica;
     }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
 `
 

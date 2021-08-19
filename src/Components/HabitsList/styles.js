@@ -29,6 +29,7 @@ export const ListItem = styled.div`
 	align-content: space-between;
 	gap: 10px;
 	padding: 0.19rem;
+    text-align: left;
 `;
 export const SectionTitle = styled.h2`
 	text-align: center;
