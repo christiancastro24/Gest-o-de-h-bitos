@@ -23,6 +23,7 @@ import {
   Modal,
   Typography,
 } from "@material-ui/core";
+import { useUserData } from "../../Providers/UserData";
 
 const MyGroups = () => {
   const {
@@ -52,6 +53,7 @@ const MyGroups = () => {
     setCategory,
   } = useGroups();
 
+  const { userId } = useUserData();
   const [groupId, setGroupId] = useState("");
 
   return (
@@ -183,7 +185,7 @@ const MyGroups = () => {
 
                   <CreateGoals itemId={groupId} />
 
-                  <Button
+                  {myGroup.creator && myGroup.creator.id === userId ? <Button
                     size="small"
                     variant="contained"
                     color="primary"
@@ -193,7 +195,7 @@ const MyGroups = () => {
                     }}
                   >
                     Editar
-                  </Button>
+                  </Button> : null}
 
                   {popUpUpdateGroup && (
                     <div

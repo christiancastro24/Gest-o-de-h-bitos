@@ -35,7 +35,7 @@ export const Window = styled.div`
 		margin-top: clamp(3rem, 15vw, 7rem);
 	}
 	@media (max-width: 580px) {
-		margin-top: 155px;
+		margin-top: 190px;
 	}
 	@media (min-width: 1000px) {
 		margin-left: 25%;
