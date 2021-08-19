@@ -81,7 +81,10 @@ const MyGroups = () => {
               size="small"
               variant="contained"
               color="primary"
-              onClick={() => handleUpdateGroup(groupPopUp)}
+              onClick={() => {
+                handleUpdateGroup(groupPopUp);
+                setUpdateGroup(!popUpUpdateGroup);
+              }}
             >
               Salvar
             </Button>
