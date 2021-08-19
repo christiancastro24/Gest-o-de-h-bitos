@@ -30,13 +30,14 @@ const MyGroups = () => {
             <button onClick={() => setPopUpActGoal(!popUpActGoal)}>X</button>
             <h1>Metas e Atividades</h1>
 
-            {groupGoals.length > 0 && groupGoals[0].goals.map((grou, index) => {
-                
+            {groupGoals[0].goals?.map((grou, index) => {
+           
                 return (
                     <div className="group-actv" key={index}>   
+
                         <h4>Metas: </h4>
-                        Título: {grou.title.length > 10 ? grou.title.slice(0,10) + "..." : grou.title} <br /> 
-                        Dificuldade: {grou.difficulty.length > 10 ? grou.difficulty.slice(0,10) + "..." : grou.difficulty}
+                        Título: {grou.title.length > 10 ? grou.title.slice(0,10) + "..." : grou?.title} <br /> 
+                        Dificuldade: {grou.difficulty.length > 10 ? grou.difficulty.slice(0,10) + "..." : grou?.difficulty}
                         <br />
                         <button className="btn-delete" onClick={() => handleDeleteGoal(grou.id)}
                         >Excluir</button>          
@@ -46,12 +47,12 @@ const MyGroups = () => {
 
             {popUpT && <div style={{position: "absolute", top: "10rem", left: "15%"}}><input value={title} onChange={evt => setTitle(evt.target.value)}/></div>}
 
-            {groupActivities.length > 0 && groupActivities[0].activities.map((grouAtv, index) => {
+            {groupActivities[0].activities?.map((grouAtv, index) => {
                 
                 return (
                     <div className="group-actv" key={index}>
                         <h4>Atividades: </h4>
-                        Título: {grouAtv.title} <br /> 
+                        Título: {grouAtv?.title} <br /> 
                         <br />
                         <button className="btn-delete" onClick={() => handleDeleteActv(grouAtv.id)}>Excluir</button>
                         <button className="btn-delete" onClick={() => setPopUpt(!popUpT)}>Editar</button>

@@ -159,7 +159,7 @@ export const GroupsProvider = ({ children }) => {
             setCategory("")
             setDescription("")
             setPopUp(!popUp)
-            window.location.reload();
+            // window.location.reload();
             
         })
         .catch(_ => toast.error("Erro ao criar o grupo!",
@@ -238,6 +238,7 @@ export const GroupsProvider = ({ children }) => {
         .then(_ => {
             const removeItem = myGroups.filter(item => item !== id)
             setGroupActivities(removeItem)
+            setPopUpActGoal(!popUpActGoal)
             // window.location.reload();
         })
         .catch(err => console.log(err))
