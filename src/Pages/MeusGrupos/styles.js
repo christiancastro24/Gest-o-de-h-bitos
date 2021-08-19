@@ -33,6 +33,11 @@ export const ContainerGoalsAndAct = styled.div`
   input {
     background-color: var(--white);
   }
+
+  @media (min-width: 1024px) {
+    height: 60vh;
+    width: 30vw;
+  }
 `;
 
 export const ContainerAll = styled.section`
@@ -52,37 +57,41 @@ export const ContainerAll = styled.section`
 `;
 
 export const ContainerPopUp = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.1rem;
   border: 2px solid var(--white);
+  width: 17rem;
+  height: 18rem;
+  background-color: rgb(19, 15, 64);
+  position: absolute;
+  top: 25%;
+  left: 10%;
+  z-index: 1000;
+  gap: 1rem;
 
-  @media (min-width: 300px) and (max-width: 767px) {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 1rem;
-    width: 17rem;
-    height: 19rem;
-    background-color: rgb(19, 15, 64);
-    position: fixed;
-    top: 25%;
-    left: 10%;
-    z-index: 1000;
+  input {
+    border-radius: 0.1rem;
+    background-color: var(--white);
   }
 
-  @media (min-width: 768px) {
-    display: flex;
-    flex-direction: column;
-    width: 22rem;
-    height: 22rem;
-    background-color: rgb(19, 15, 64);
-    position: absolute;
-    top: 25%;
-    left: 38%;
-    padding: 0.3rem;
-    justify-content: center;
-    align-items: center;
-    border-radius: 1rem;
-    padding: 1rem;
+  h4 {
+    font-size: 2rem;
+    color: var(--white);
+  }
+
+  button:nth-child(1) {
+    width: 0;
+    bottom: 0.6rem;
+    left: 6rem;
+  }
+
+  button:nth-last-child() {
+    cursor: pointer;
+    color: var(--white);
+    width: 37vw;
   }
 `;
 
@@ -118,6 +127,23 @@ export const Container = styled.section`
       width: 23vw;
     }
   }
+
+  @media (min-width: 1024px) {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    max-height: 85vh;
+    background-color: #000;
+    color: var(--white);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-top: 0;
+
+    button:nth-last-child(1) {
+      width: 17vw;
+    }
+  }
 `;
 
 export const ContainerGroup = styled.div`
@@ -134,19 +160,20 @@ export const ContainerGroup = styled.div`
   padding: 0.5rem;
   gap: 0.5rem;
 
-  .Items {
-    display: flex;
-    flex-direction: column;
-  }
-
   h2,
   h3 {
     color: var(--white);
     padding-left: 1rem;
   }
 
-  @media only screen and (min-width: 768) {
+  @media (min-width: 768px) {
     width: 40vw;
+  }
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    width: 72vw;
+    justify-content: space-between;
   }
 `;
 
@@ -197,6 +224,50 @@ export const ContainerPopUpInput = styled.div`
     left: 6rem;
     bottom: 0.8rem;
   }
+
+  @media (min-width: 375px) {
+    left: 3.3rem;
+  }
+
+  @media (min-width: 425px) {
+    left: 4.6rem;
+  }
+
+  @media (min-width: 768px) {
+    left: 16rem;
+  }
+
+  @media (min-width: 1024px) {
+    left: 31.5rem;
+  }
+
+  @media (min-width: 1440px) {
+    left: 47.5rem;
+  }
+
+  @media (min-width: 1866px) {
+    left: 64.5rem;
+  }
 `;
 
 export const Atividades = styled.h4``;
+
+export const ContainerTextDesktop = styled.div`
+  @media (min-width: 1024px) {
+    width: 50vw;
+    text-align: left;
+  }
+`;
+
+export const ContainerButton = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+
+  @media (min-width: 1024px) {
+    button {
+      width: 17vw;
+    }
+  }
+`;

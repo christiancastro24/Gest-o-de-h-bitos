@@ -1,29 +1,56 @@
 import { useGroups } from "../../Providers/groups";
 import { ContainerPopUp } from "./styles";
-import { Button } from "@material-ui/core"
+import { Button, Input } from "@material-ui/core";
 
 const CreateGoals = ({ itemId }) => {
+  const {
+    popUpMeta,
+    setPopUpMeta,
+    title,
+    setTitle,
+    difficulty,
+    setDifficulty,
+    handleCreateGoal,
+  } = useGroups();
+  return (
+    <>
+      {popUpMeta && (
+        <ContainerPopUp>
+          <Button
+            size="small"
+            variant="contained"
+            color="secondary"
+            onClick={() => setPopUpMeta(!popUpMeta)}
+          >
+            X
+          </Button>
 
-    const {popUpMeta, setPopUpMeta, title, setTitle, difficulty, setDifficulty, handleCreateGoal} = useGroups()
-    return (
-        <>
-        
-            {popUpMeta && 
+          <h4>Metas</h4>
 
-            <ContainerPopUp>
-                <button onClick={() => setPopUpMeta(!popUpMeta)}>X</button>
+          <Input
+            value={title}
+            onChange={(evt) => setTitle(evt.target.value)}
+            placeholder="Título"
+          />
 
-                <h3>Metas</h3>
+          <Input
+            value={difficulty}
+            onChange={(evt) => setDifficulty(evt.target.value)}
+            placeholder="Dificuldade"
+          />
 
-                <input value={title} onChange={evt => setTitle(evt.target.value)} placeholder="Título" />
+          <Button
+            size="small"
+            variant="contained"
+            color="primary"
+            onClick={() => handleCreateGoal(itemId)}
+          >
+            Criar meta
+          </Button>
+        </ContainerPopUp>
+      )}
+    </>
+  );
+};
 
-                <input value={difficulty} onChange={evt => setDifficulty(evt.target.value)} placeholder="Dificuldade" />
-
-                <Button variant="contained" color="secondary"  onClick={() => handleCreateGoal(itemId)}>Criar meta</Button>
-            </ContainerPopUp>
-            }
-        </>
-    )
-}
-
-export default CreateGoals
+export default CreateGoals;

@@ -5,11 +5,13 @@ import {
   Atividades,
   Container,
   ContainerAll,
+  ContainerButton,
   ContainerGoalsAndAct,
   ContainerGroup,
   ContainerMyGroups,
   ContainerPopUp,
   ContainerPopUpInput,
+  ContainerTextDesktop,
 } from "./styles";
 import CreateGroup from "../../Components/CreateGroup";
 import CreateGoals from "../../Components/CreateGoals";
@@ -51,10 +53,40 @@ const MyGroups = () => {
 
   const [groupAtv, setGroupAtv] = useState();
 
+  const [groupPopUp, setGroupPopUp] = useState();
+
   return (
     <>
       <AsideMenu />
       <Window>
+        <CreateActivities itemId={groupId} />
+        <CreateGoals itemId={groupId} />
+        {popUpUpdateGroup && (
+          <ContainerPopUpInput>
+            <Button
+              size="small"
+              color="secondary"
+              variant="contained"
+              onClick={() => setUpdateGroup(!popUpUpdateGroup)}
+            >
+              X
+            </Button>
+            <h4>Editar categoria</h4>
+            <Input
+              placeholder="Nova categoria"
+              value={category}
+              onChange={(evt) => setCategory(evt.target.value)}
+            />
+            <Button
+              size="small"
+              variant="contained"
+              color="primary"
+              onClick={() => handleUpdateGroup(groupPopUp)}
+            >
+              Salvar
+            </Button>
+          </ContainerPopUpInput>
+        )}
         {popUpT && (
           <ContainerPopUpInput>
             <Button
@@ -86,7 +118,7 @@ const MyGroups = () => {
         )}
         <ContainerAll>
           <ContainerMyGroups>
-            <h2>Meus Grupos</h2>
+            <h1>Meus Grupos</h1>
 
             <CreateGroup />
           </ContainerMyGroups>
@@ -168,101 +200,68 @@ const MyGroups = () => {
             {myGroups.map((myGroup) => {
               return (
                 <ContainerGroup key={myGroup.id}>
-                  <div className="Items">
-                    <h2>{myGroup.name}</h2>
-                    <h3>{myGroup.description}</h3>
+                  <ContainerTextDesktop>
+                    <h2>Título: {myGroup.name}</h2>
+                    <h3>Descrição: {myGroup.description}</h3>
                     <h3>Categoria: {myGroup.category}</h3>
-                    <br />
-                  </div>
+                  </ContainerTextDesktop>
 
-                  <Button
-                    size="small"
-                    variant="contained"
-                    color="primary"
-                    onClick={() => {
-                      setPopUpActGoal(!popUpActGoal);
-                      handleInfo(myGroup.id);
-                    }}
-                  >
-                    Ver Mais
-                  </Button>
-
-                  <CreateGoals itemId={groupId} />
-
-                  {myGroup.creator && myGroup.creator.id === userId ? (
+                  <ContainerButton>
                     <Button
                       size="small"
                       variant="contained"
                       color="primary"
                       onClick={() => {
-                        setUpdateGroup(!popUpUpdateGroup);
-                        setGroupId(myGroup.id);
+                        setPopUpActGoal(!popUpActGoal);
+                        handleInfo(myGroup.id);
                       }}
                     >
-                      Editar
+                      Ver Mais
                     </Button>
-                  ) : null}
-
-                  {popUpUpdateGroup && (
-                    <ContainerPopUpInput>
-                      <Button
-                        size="small"
-                        color="secondary"
-                        variant="contained"
-                        onClick={() => setUpdateGroup(!popUpUpdateGroup)}
-                      >
-                        X
-                      </Button>
-                      <h4>Editar categoria</h4>
-                      <Input
-                        placeholder="Nova categoria"
-                        value={category}
-                        onChange={(evt) => setCategory(evt.target.value)}
-                      />
+                    {myGroup.creator && myGroup.creator.id === userId ? (
                       <Button
                         size="small"
                         variant="contained"
                         color="primary"
-                        onClick={() => handleUpdateGroup(myGroup.id)}
+                        onClick={() => {
+                          setUpdateGroup(!popUpUpdateGroup);
+                          setGroupId(setGroupPopUp(myGroup.id));
+                        }}
                       >
-                        Salvar
+                        Editar
                       </Button>
-                    </ContainerPopUpInput>
-                  )}
-
-                  <Button
-                    size="small"
-                    variant="contained"
-                    color="primary"
-                    onClick={() => {
-                      setPopUpMeta(!popUpMeta);
-                      setGroupId(myGroup.id);
-                    }}
-                  >
-                    Adicionar Metas
-                  </Button>
-
-                  <Button
-                    size="small"
-                    variant="contained"
-                    color="primary"
-                    onClick={() => {
-                      setPopUpActivities(!popUpActivities);
-                      setGroupId(myGroup.id);
-                    }}
-                  >
-                    Adicionar Atividades
-                  </Button>
-                  <Button
-                    size="small"
-                    variant="contained"
-                    color="secondary"
-                    onClick={() => handleLogout(myGroup.id)}
-                  >
-                    Sair
-                  </Button>
-
-                  <CreateActivities itemId={groupId} />
+                    ) : null}
+                    <Button
+                      size="small"
+                      variant="contained"
+                      color="primary"
+                      onClick={() => {
+                        setPopUpMeta(!popUpMeta);
+                        setGroupId(myGroup.id);
+                      }}
+                    >
+                      Adicionar Metas
+                    </Button>
+                    <Button
+                      size="small"
+                      variant="contained"
+                      color="primary"
+                      onClick={() => {
+                        setPopUpActivities(!popUpActivities);
+                        setGroupId(myGroup.id);
+                      }}
+                    >
+                      Adicionar Atividades
+                    </Button>
+                    <Button
+                      size="small"
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => handleLogout(myGroup.id)}
+                    >
+                      Sair
+                    </Button>
+                  </ContainerButton>
                 </ContainerGroup>
               );
             })}
