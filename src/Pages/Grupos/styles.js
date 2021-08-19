@@ -165,13 +165,14 @@ export const ContainerGroup = styled.div `
 
     h2, h3 {
         color: var(--white);
-        padding-left: 1rem;
     }
 
 
     .Items {
         display: flex;
         flex-direction: column;
+        padding-left: 1rem;
+        text-align: left;
     }
 
     button:nth-child(2) {

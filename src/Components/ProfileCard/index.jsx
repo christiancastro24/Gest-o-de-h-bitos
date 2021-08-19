@@ -134,7 +134,7 @@ const ProfileCard = () => {
           onSubmit={handleSubmit(onSub)}
           noValidate
         >
-          Nome de usuário:
+          <p className = "user_infos">Nome de usuário:</p>
           <input
             id="username_input"
             defaultValue={userName}
@@ -148,7 +148,7 @@ const ProfileCard = () => {
               message={errors.username.message}
             />
           )}
-          Email:
+          <p className = "user_infos">Email:</p>
           <input
             id="email_input"
             defaultValue={userEmail}
