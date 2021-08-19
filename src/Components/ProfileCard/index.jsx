@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
   delete: {
     margin: "16px 0",
     width: "10rem",
+    height: "2.5rem",
     border: "none",
     backgroundColor: "#f50000",
     color: "#fff",
@@ -59,7 +60,7 @@ const ProfileCard = () => {
   });
 
   const deleteProfile = () => {
-    setLoading(true)
+    setLoading(true);
     api
       .delete(`/users/${userId}/`, {
         headers: {
@@ -70,10 +71,10 @@ const ProfileCard = () => {
         toast.success("Conta excluída!");
         setAuthenticated(false);
         localStorage.clear();
-        setLoading(false)
+        setLoading(false);
         history.push("/");
       })
-      .catch(res => setLoading(false))
+      .catch((res) => setLoading(false));
   };
 
   const {
@@ -134,7 +135,7 @@ const ProfileCard = () => {
           onSubmit={handleSubmit(onSub)}
           noValidate
         >
-          Nome de usuário:
+          <p className="user_infos">Nome de usuário:</p>
           <input
             id="username_input"
             defaultValue={userName}
@@ -148,7 +149,7 @@ const ProfileCard = () => {
               message={errors.username.message}
             />
           )}
-          Email:
+          <p className="user_infos">Email:</p>
           <input
             id="email_input"
             defaultValue={userEmail}
@@ -177,7 +178,6 @@ const ProfileCard = () => {
               >
                 Alterar
               </span>
-              
             )}
             {isLoading && <span>Carregando...</span>}
           </div>
