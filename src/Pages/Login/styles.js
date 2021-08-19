@@ -52,7 +52,7 @@ export const ContainerRegisterForm = styled.div`
 	}
 
 	input {
-		width: 340px;
+		width: 210px;
 		height: 24px;
 		padding-left: 6px;
 	}
