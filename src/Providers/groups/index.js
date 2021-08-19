@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react"
 import api from "../../Services/"
 import toast from "react-hot-toast";
+import { useUserData } from "../UserData";
 
 
 const GroupsContext = createContext()
@@ -44,7 +45,8 @@ export const GroupsProvider = ({ children }) => {
     // eslint-disable-next-line no-unused-vars
     const [reload, setReload] = useState(false);
 
-   const [token] = useState(JSON.parse(localStorage.getItem("@DevHealthy/user")) || "")
+    const {token} = useUserData()
+//    const [token] = useState(JSON.parse(localStorage.getItem("@DevHealthy/user")) || "")
 
    // Grupos inscritos 
     useEffect(() => {
