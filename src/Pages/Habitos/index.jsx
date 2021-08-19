@@ -27,17 +27,20 @@ const HabitsPage = () => {
 			<AsideMenu />
 			<Window>
 				<Flex>
-						<HabitsList />
+					<HabitsList />
 					<ActivitiesToDo />
-				</Flex>
-				<Draggable>
-				<div style={{display: "flex", justifyContent: "center"}}>
-				<Calendar
-					onChange={onChange}
-					value={value}
-					/>
-				</div>
+
+					<Draggable>
+						<div
+							style={{
+								display: "flex",
+								justifyContent: "center",
+							}}
+						>
+							<Calendar onChange={onChange} value={value} />
+						</div>
 					</Draggable>
+				</Flex>
 			</Window>
 		</>
 	);
