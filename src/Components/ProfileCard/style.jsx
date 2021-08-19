@@ -130,11 +130,49 @@ const ProfileContainer = styled.div`
   }
 
   .invalid_username_message {
-    top: 23%;
+    top: 20%;
+    transform: translateX(220px);
   }
 
   .invalid_email_message {
-    top: 37%;
+    top: 43%;
+    transform: translateX(225px);
+  }
+
+  @media screen and (max-width: 1450px) and (min-width: 1001px) {
+    .invalid_username_message {
+      top: 10%;
+      transform: translateX(220px);
+    }
+
+    .invalid_email_message {
+      top: 40%;
+      transform: translateX(225px);
+    }
+  }
+
+  @media screen and (max-width: 580px) and (min-width: 321px) {
+    .invalid_username_message {
+      top: 22%;
+      transform: translateX(137px);
+    }
+
+    .invalid_email_message {
+      top: 45%;
+      transform: translateX(142px);
+    }
+  }
+
+  @media (max-width: 320px) {
+    .invalid_username_message {
+      top: 22%;
+      transform: translateX(125px);
+    }
+
+    .invalid_email_message {
+      top: 45%;
+      transform: translateX(130px);
+    }
   }
 
   .fake_button {
