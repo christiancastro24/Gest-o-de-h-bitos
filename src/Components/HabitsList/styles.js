@@ -14,6 +14,7 @@ export const Container = styled.div`
 	padding: 0.5rem;
 	width: 310px;
     overflow-y: auto;
+    cursor: default;
 `;
 export const Column = styled.div`
 	display: flex;
@@ -69,6 +70,7 @@ export const ActionsColumn = styled.div`
 
 export const Counter = styled.span`
 	margin: 0 1ch;
+    cursor: help;
 `;
 
 export const Cite = styled.div`

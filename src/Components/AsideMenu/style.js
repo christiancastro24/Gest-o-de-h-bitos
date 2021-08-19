@@ -156,7 +156,7 @@ export const MenuItem = styled.div`
 	position: relative;
 	border-radius: 20px;
 	cursor: pointer;
-	margin: 0.5rem 0;
+	margin: .85rem 0;
 	font-weight: bold;
 	font-size: 1.6rem;
 	transition: all 280ms ease-in-out;

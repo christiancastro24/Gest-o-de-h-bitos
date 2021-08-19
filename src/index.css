@@ -46,11 +46,29 @@ button.MuiFab-root {
 	height: 25px;
 	min-height: 0;
 }
+.ant-tabs-tabpane {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
 .MuiTooltip-tooltip {
 	background-color: white;
 }
 .MuiPagination-root .MuiPagination-ul li button {
     color: white;
+}
+.MuiDialog-root .MuiDialog-paper{
+    background-color: #130f40;
+    
+}
+.MuiDialogTitle-root .MuiTypography-root{
+    color: white;
+}
+.MuiDialog-root .MuiDialog-paper .MuiInputBase-input{
+    background-color: white;
+    border-radius: 10px;
+    background: white;
 }
 b:nth-child(1) {
 	position: absolute;
