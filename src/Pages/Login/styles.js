@@ -9,6 +9,7 @@ export const Container = styled.div`
     width: 100%;
     justify-content: center;
     overflow: hidden;
+    text-align: center;
 `;
 
 export const Background = styled.div`
@@ -29,74 +30,72 @@ export const Content = styled.div`
 `;
 
 export const ContainerRegisterForm = styled.div`
-    font-family: sans-serif;
-    color: #fff;
-    height: 724px; 
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+	font-family: sans-serif;
+	color: #fff;
+	height: 724px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 
-    h1 {
-        color: var(--white);
-    }
+	@media (max-width: 450px) {
+		width: 180%;
+	}
 
-    @media(max-width: 450px) {
-        width: 130%;
-    }
+	form {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+	}
 
-    form {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-    }
+	input {
+		width: 340px;
+		height: 24px;
+		padding-left: 6px;
+	}
 
-    input {
-        width: 100%;
-        height: 24px;
-        padding-left: 6px;
-    }
+	input::placeholder {
+		color: black;
+		opacity: 1;
+	}
 
-    input::placeholder {
-        color: black;
-        opacity: 1;
-    }
+	button {
+		background-color: #b5179e;
+		margin-top: 16px;
+		width: 12rem;
+		height: 3rem;
+		color: #fff;
+		border: none;
+		border-radius: 0.4rem;
+		font-size: 1.3rem;
+		box-shadow: 5px 6px 10px -2px black;
+		cursor: pointer;
+	}
 
-    button {
-        background-color: #B5179E;
-        margin-top: 16px;
-        width: 12rem;
-        height: 3rem;
-        color: #fff;
-        border: none;
-        border-radius: .4rem;
-        font-size: 1.3rem;
-        box-shadow: 5px 6px 10px -2px black;
-        cursor: pointer;
-    }
+	button:hover {
+		filter: var(--btnHover);
+	}
 
-    button:hover {
-        filter: var(--btnHover)
-    }
+	p {
+		font-size: 1rem;
+		width: 90%;
+	}
 
-    p {
-        font-size: 1rem;
-    }
+	p > span > a {
+		color: var(--lightGreen);
+		text-decoration: none;
+	}
 
-    p > span > a {
-        color: var(--lightGreen);
-        text-decoration: none;
-    }
+	.invalid_username_message {
+		top: 0%;
+		right: 10%;
+	}
 
-    .title_D {
-        color: var(--pink);
-    }
-
-    .title_Y {
-        color: var(--lightGreen)
-    }
-`
+	.invalid_password_message {
+		top: 39%;
+		right: 10%;
+	}
+`;

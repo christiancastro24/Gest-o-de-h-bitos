@@ -1,20 +1,21 @@
 import AsideMenu from "../../Components/AsideMenu";
 import { Window } from "../../Components/GlobalStyle/styles";
 import { useGroups } from "../../Providers/groups";
-import { Container, ContainerAll, ContainerGoalsAndAct, ContainerGroup } from "./styles";
+import {
+	Container,
+	ContainerAll,
+	ContainerGoalsAndAct,
+	ContainerGroup,
+} from "./styles";
 import CreateGroup from "../../Components/CreateGroup";
 import CreateGoals from "../../Components/CreateGoals";
 import CreateActivities from "../../Components/CreateActivities";
 import { useState } from "react";
 
-
-
 const MyGroups = () => {
 
-    const { myGroups, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, groupGoals, handleInfo, groupActivities, handleDeleteGoal, handleDeleteActv, handleLogout, handleUpdateGoals,
-    popUpT, setPopUpt, title, setTitle, handleUpdateActivities } = useGroups();
+    const { myGroups, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, groupGoals, handleInfo, groupActivities, handleDeleteGoal, handleDeleteActv, handleLogout, category, handleUpdateGroup, popUpT, setPopUpt, title, setTitle, handleUpdateActivities, isLoading, popUpActGoal, setPopUpActGoal, popUpUpdateGroup, setUpdateGroup, setCategory } = useGroups();
 
-    const [popUpActGoal, setPopUpActGoal] = useState(false)
 
     const [groupId, setGroupId] = useState("")
 
@@ -25,37 +26,35 @@ const MyGroups = () => {
 
         <ContainerAll>
             <h1>Meus grupos</h1>
-
+            
             {popUpActGoal && 
             <ContainerGoalsAndAct>
             <button onClick={() => setPopUpActGoal(!popUpActGoal)}>X</button>
             <h1>Metas e Atividades</h1>
 
-            {groupGoals.length > 0 && groupGoals[0].goals.map((grou, index) => {
-                
+            {groupGoals[0].goals?.map((grou, index) => {
+           
                 return (
                     <div className="group-actv" key={index}>   
-                        <h4 style={{color: "white"}}>Metas: </h4>
-                        Título: {grou.title} <br /> 
-                        Dificuldade: {grou.difficulty}
+
+                        <h4>Metas: </h4>
+                        Título: {grou.title.length > 10 ? grou.title.slice(0,10) + "..." : grou?.title} <br /> 
+                        Dificuldade: {grou.difficulty.length > 10 ? grou.difficulty.slice(0,10) + "..." : grou?.difficulty}
                         <br />
                         <button className="btn-delete" onClick={() => handleDeleteGoal(grou.id)}
-                        >Excluir</button>
-
-                        <button className="btn-delete" onClick={() => handleUpdateGoals(grou.id)}>Concluir</button>           
+                        >Excluir</button>          
                     </div>
                 )
             })}
 
             {popUpT && <div style={{position: "absolute", top: "10rem", left: "15%"}}><input value={title} onChange={evt => setTitle(evt.target.value)}/></div>}
 
-            {groupActivities.length > 0 && groupActivities[0].activities.map((grouAtv, index) => {
+            {groupActivities[0].activities?.map((grouAtv, index) => {
                 
                 return (
                     <div className="group-actv" key={index}>
                         <h4>Atividades: </h4>
-                        Título: {grouAtv.title} <br /> 
-                        Tempo de realização: {grouAtv.realization_time}
+                        Título: {grouAtv?.title} <br /> 
                         <br />
                         <button className="btn-delete" onClick={() => handleDeleteActv(grouAtv.id)}>Excluir</button>
                         <button className="btn-delete" onClick={() => setPopUpt(!popUpT)}>Editar</button>
@@ -74,6 +73,9 @@ const MyGroups = () => {
             
             
         <Container>  
+
+            {isLoading && <span>Carregando...</span>}
+
                 {myGroups.map(myGroup => {
                    
                     return (
@@ -96,10 +98,21 @@ const MyGroups = () => {
 
                             <CreateGoals itemId={groupId} /> 
 
+                            <button onClick={() => setUpdateGroup(!popUpUpdateGroup)}style={{width: "4%"}}>Edit</button>
+
+                            {popUpUpdateGroup && 
+                             <div style={{position: "absolute", top: "5%", left: "25%"}}>
+                                <input style={{color: "black"}} value={category} onChange={evt => setCategory(evt.target.value)
+                                }/>
+                                <button onClick={() => handleUpdateGroup(myGroup.id)}>Salvar</button>
+                            </div>}
+                           
+
                             <button variant="contained" 
                                 onClick={() => {
                                 setPopUpMeta(!popUpMeta);
                                 setGroupId(myGroup.id)}}>Add metas</button>
+
 
                             <button className="btn-add-actvi" variant="contained" 
                             onClick={() => { 

@@ -18,7 +18,8 @@ import jwt_decode from "jwt-decode";
 import { useUserData } from "../../Providers/UserData";
 import PinkButton from "../../Components/PinkButton";
 import MessageBalloon from "../../Components/MessageBalloon";
-import { useState } from "react";
+import Logo from "../../Components/Logo";
+import { useGroups } from "../../Providers/groups";
 
 const useStyles = makeStyles(() => ({
   inputs: {
@@ -35,6 +36,7 @@ const useStyles = makeStyles(() => ({
 
 const LoginPage = () => {
   const { setToken, setUserId } = useUserData();
+  const { isLoading, setLoading } = useGroups();
   const classes = useStyles();
 
   const {setPassword} = useUserData();
@@ -51,8 +53,8 @@ const LoginPage = () => {
 >>>>>>> 648a12a390d7b4c410250653f69ae7f7e86073f4
 
   const formSchema = yup.object().shape({
-    username: yup.string(),
-    password: yup.string().min(6, "Senha obrigatória de 6 dígitos"),
+    username: yup.string().required("Usuário obrigatório!"),
+    password: yup.string().min(6, "Mínimo 6 caracteres!"),
   });
 
   const {
@@ -64,6 +66,7 @@ const LoginPage = () => {
   });
 
   const onSub = (data) => {
+    setLoading(true)
     api
     .post("/sessions/", data)
     .then((res) => {
@@ -73,12 +76,14 @@ const LoginPage = () => {
         localStorage.setItem("userId", userId);
         setUserId(userId);
         setToken(access);
-		setPassword(data.password);
+        setPassword(data.password);
+        setLoading(false)
         setAuthenticated(true);
         history.push("/habits");
         toast.success("Sucesso!");
     })
     .catch(() => {
+        setLoading(false)
         toast.error("Usuário ou senha incorretos!", {
         style: {
             backgroundColor: "red",
@@ -98,10 +103,7 @@ const LoginPage = () => {
       <Container>
         <Content>
           <ContainerRegisterForm>
-            <h1>
-              <span className="title_D">D</span>evHealth
-              <span className="title_Y">y</span>
-            </h1>
+            <Logo />
             <form onSubmit={handleSubmit(onSub)} noValidate>
               <TextField
                 className={classes.inputs}
@@ -127,10 +129,11 @@ const LoginPage = () => {
               />
               {errors.password && (
                 <MessageBalloon
-                  message="Senha obrigatória!"
+                  message={errors.password.message}
                   className="invalid_password_message"
                 />
               )}
+              {isLoading && <span>Carregando...</span>}
               <PinkButton type="submit" text="Entrar" />
             </form>
             <p>

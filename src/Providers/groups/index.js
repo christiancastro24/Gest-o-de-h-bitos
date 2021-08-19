@@ -2,12 +2,15 @@ import { createContext, useContext, useState, useEffect } from "react"
 import api from "../../Services/"
 import toast from "react-hot-toast";
 
+
 const GroupsContext = createContext()
 
 export const GroupsProvider = ({ children }) => {
 
     const [groups, setGroups] = useState([])
     const [myGroups, setMyGroups] = useState([])
+    const [page, setPage] = useState([1]);
+    const [totalPages, setTotalPages] = useState(1)
 
     const [goals, setGoals] = useState([])
     const [activities, setActivities] = useState([])
@@ -15,40 +18,55 @@ export const GroupsProvider = ({ children }) => {
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [category, setCategory] = useState("")
+    const [categoryTeste, setCategoryTeste] = useState("")
 
     const [groupGoals, setGroupGoals] = useState([])
     const [groupActivities, setGroupActivities] = useState([])
+
+    const [groupGoalsGroup, setGroupGoalsGroup] = useState([])
+    const [groupActivitiesGroup, setGroupActivitiesGroup] = useState([])
 
     const [title, setTitle] = useState("")
     const [difficulty, setDifficulty] = useState("")
     const [group, setGroup] = useState("")
 
     const [popUpT, setPopUpt] = useState(false)
+    const [popUpActGoal, setPopUpActGoal] = useState(false)
+    const [popUpUpdateGroup, setUpdateGroup] = useState(false)
 
     const [popUp, setPopUp] = useState(false)
     const [popUpMeta, setPopUpMeta] = useState(false)
     const [popUpActivities, setPopUpActivities] = useState(false)
 
+    const [isLoading, setLoading] = useState(false)
+
    const [token] = useState(JSON.parse(localStorage.getItem("@DevHealthy/user")) || "")
 
    // Grupos inscritos 
     useEffect(() => {
+        setLoading(true)
         api.get(`/groups/subscriptions/`, {         
             headers: { Authorization: `Bearer ${token}`}
         
         })
-        .then(res => setMyGroups(res.data))
+        .then(res => {
+            setMyGroups(res.data)
+            setLoading(false)
+        })
+        
 
         .catch(err => console.log(err))
-    }, [groupGoals, groupActivities])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [groupGoals])
 
 
     // Todos grupos que não precisam de ("Autorização")
     useEffect(() => {
-        api.get(`/groups/`)
-        .then(res => setGroups(res.data.results))
+        setLoading(true)
+        api.get(`/groups/?page=${page}`)
+        .then(res => {setGroups(res.data.results); setLoading(false); setTotalPages(Math.ceil(res.data.count / 15))})
         .catch(err => console.log(err))
-    }, [])
+    }, [page])
 
 
     // Criando meta 
@@ -126,15 +144,15 @@ export const GroupsProvider = ({ children }) => {
     const handleCreate = () => {
 
         const data = { name: name, description: description, category: category }
+        setLoading(true)
         api.post("/groups/", data, {
-
             headers: { 
-                "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`
             },
         })
         .then(_ => {
             setMyGroups([...myGroups, {...data}])
+            setLoading(false)
             toast.success("Grupo criado!",
             {
                 style: {
@@ -146,6 +164,7 @@ export const GroupsProvider = ({ children }) => {
             setCategory("")
             setDescription("")
             setPopUp(!popUp)
+            // window.location.reload();
             
         })
         .catch(_ => toast.error("Erro ao criar o grupo!",
@@ -160,12 +179,13 @@ export const GroupsProvider = ({ children }) => {
 
     // Entrar em um grupo 
     const handleSignIn = (id) => {
-
+        setLoading(true)
         api.post(`/groups/${id}/subscribe/`, null, {
 
             headers: { Authorization: `Bearer ${token}`},
         })
         .then(_ => {
+            setLoading(false)
             toast.success("Você entrou no grupo",
             {
                 style: {
@@ -189,11 +209,12 @@ export const GroupsProvider = ({ children }) => {
 
     // Sair de um grupo
     const handleLogout = (id) => {
+        setLoading(true)
         api.delete(`/groups/${id}/unsubscribe/`, {
             headers: { Authorization: `Bearer ${token}`}
 
         })
-        .then(() => window.location.reload())
+        .then(() => {setLoading(false); window.location.reload()})
         .catch(err => console.log(err))
     }
 
@@ -205,16 +226,13 @@ export const GroupsProvider = ({ children }) => {
             headers: { Authorization: `Bearer ${token}`}
         })
         .then(_ => {
-            const removeItem = groupGoals.filter(item => item !== id)
-            setGroupGoals(removeItem)
+            setGroupGoals(myGroups.filter(item => item !== id))
+            setPopUpActGoal(!popUpActGoal)
             // window.location.reload();
         })
         .catch(err => console.log(err))
     }
 
-    // useEffect(() => {
-    //     handleDeleteGoal();
-    // }, [])
 
     // Deletando Atividade
     const handleDeleteActv = (id) => {
@@ -223,13 +241,13 @@ export const GroupsProvider = ({ children }) => {
             headers: { Authorization: `Bearer ${token}`}
         })
         .then(_ => {
-            const removeItem = groupGoals.filter(item => item !== id)
+            const removeItem = myGroups.filter(item => item !== id)
             setGroupActivities(removeItem)
-            window.location.reload();
+            setPopUpActGoal(!popUpActGoal)
+            // window.location.reload();
         })
         .catch(err => console.log(err))
     }
-
 
     // Imprimindo metas e atividades de um grupo
     const handleInfo = (itemId) => {
@@ -238,23 +256,28 @@ export const GroupsProvider = ({ children }) => {
 
         const filtActivities =  myGroups.filter(item => item.id === itemId)
         setGroupActivities(filtActivities)
+
+        const filtGroupsGoals = groups.filter(item => item.id === itemId)
+        setGroupGoalsGroup(filtGroupsGoals)
+
+        const filtGroupsActvs = groups.filter(item => item.id === itemId)
+        setGroupActivitiesGroup(filtGroupsActvs)
+        
     }
 
-    const handleUpdateGoals = (id) => {
-        const updateGoal = { achieved: true }
+    const handleUpdateGroup = (id) => {
+        const dataGroup = { category: category }
 
-        api.patch(`/goals/${id}/`, updateGoal, {
-            headers: { 
-                "Content-Type": "application/json", 
+        api.patch(`/groups/${id}/`, dataGroup, {
+            headers: {
+                "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`
             }
         })
-        .then(() => {
-            const filterAct = groupGoals.filter(gro => gro !== updateGoal)
-            setGroupGoals(filterAct)
-        })
+        .then(_ => setMyGroups(myGroups.filter(gro => gro !== dataGroup)))
         .catch(err => console.log(err))
     }
+
 
     const handleUpdateActivities = (id) => {
         const teste = { title: title }
@@ -266,15 +289,17 @@ export const GroupsProvider = ({ children }) => {
             }
         })
         .then(() => {
-            const filterAct = groupActivities.filter(gro => gro !== teste)
-            setGroupGoals(filterAct)
+            setGroupActivities(myGroups.filter(gro => gro !== teste))
+            setPopUpActGoal(!popUpActGoal)
+            setTitle("")
+            window.location.reload();
         })
         .catch(err => console.log(err))
     }
 
 
     return (
-        <GroupsContext.Provider value={{groups, setGroups, name, setName, description, setDescription, category, setCategory, myGroups, setMyGroups, goals, setGoals, title, setTitle, difficulty, setDifficulty, group, setGroup, handleCreateGoal, handleCreateActivity, activities, setActivities, popUp, setPopUp, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, handleCreate, handleSignIn, handleInfo, groupGoals, groupActivities, setGroupActivities, handleDeleteGoal, handleDeleteActv, handleLogout, handleUpdateGoals, handleUpdateActivities, popUpT, setPopUpt}}>
+        <GroupsContext.Provider value={{groups, setGroups, name, setName, description, setDescription, category, setCategory, myGroups, setMyGroups, goals, setGoals, title, setTitle, difficulty, setDifficulty, group, setGroup, handleCreateGoal, handleCreateActivity, activities, setActivities, popUp, setPopUp, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, handleCreate, handleSignIn, handleInfo, groupGoals, groupActivities, setGroupActivities, handleDeleteGoal, handleDeleteActv, handleLogout, handleUpdateActivities, popUpT, setPopUpt, isLoading, setLoading, popUpActGoal, setPopUpActGoal, groupGoalsGroup, groupActivitiesGroup, page, setPage, totalPages, handleUpdateGroup, popUpUpdateGroup, setUpdateGroup}}>
             {children}
         </GroupsContext.Provider>
     )

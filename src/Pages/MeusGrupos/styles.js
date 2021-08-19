@@ -41,9 +41,17 @@ export const ContainerGoalsAndAct = styled.div`
 export const ContainerAll = styled.section `
     h1 {
         color: white;
-        text-align: center;
-        font-family: Helvetica;
+        text-align: left;
+        font-size: 2.2rem;
+        text-decoration: underline;
+        letter-spacing: 1.2px;
+        padding-left: 2.5rem;
+        font-family: 'Georama', sans-serif;
     }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
 `
 
@@ -86,7 +94,7 @@ export const ContainerPopUp = styled.div`
         width: 17rem; 
         height: 19rem; 
         background-color: rgb(19, 15, 64);
-        position: absolute; 
+        position: fixed; 
         top: 25%;
         left: 10%; 
         z-index: 1000;

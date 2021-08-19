@@ -203,3 +203,47 @@ export const ContainerGroup = styled.div `
         filter: brightness(90%);
     }
 `
+
+
+export const ContainerGoalsAndAct = styled.div`
+    position: absolute;
+    top: 5rem;
+    left: 30%;
+    z-index: 1000;
+    overflow-y: auto;
+    background-color: rgb(19,15,64);
+    width: 30rem;
+    border-radius: 5%;
+    text-align: center;
+    max-height: 100vh;
+    padding: 1rem;
+
+    .group-actv {
+        color: white; 
+        border-bottom: 2px solid var(--pink);
+        margin: 0.2rem;
+    }
+
+    h4 {
+        color: var(--white);
+    }
+
+    .btn-delete {
+        background-color: var(--pink);
+        color: var(--white);
+        cursor: pointer;
+    }
+
+    button:nth-child(1) {
+        display: block;
+        margin-left: auto;
+        background-color: var(--pink);
+        color: var(--white);
+        cursor: pointer;
+    }
+
+` 
+
+export const Loading = styled.span`
+    color: ${props=> props.visible ? 'white' : 'var(--background)'}
+`
