@@ -1,16 +1,14 @@
-import { PinDropSharp } from "@material-ui/icons";
+
 import styled from "styled-components";
-import {css} from "styled-components";
 
 const ContainerMessageBalloon = styled.span`
     position: absolute;
     background-color: red;
     color: #FFFFFF;
-    font-family: Arial;
-    font-size: .8rem;
+    font-size: .75rem;
     text-align: center;
-    border-radius: 10px;
-    padding: 7px;
+    border-radius: 8px;
+    padding: 4px;
     z-index: 1;
     right: -8%;
     margin: 0 auto;
@@ -24,28 +22,12 @@ const ContainerMessageBalloon = styled.span`
         width: 0;
         z-index: 1;
         border-style: solid;
-        border-width: 20px 16px 0px 16px;
+        border-width: 6px 10px 0px 10px;
         border-color: red transparent transparent transparent;
-        bottom: -10px;
+        bottom: -6px;
         left: 50%;
         margin-left: -10.5px;
     }
-
-    &.invalid_user_message {
-        top: -1%;
-        /* transform: translateX(180%); */
-    }
-
-    &.invalid_email_message {
-        top: 24%;
-        /* transform: translateX(170%) */
-
-    }
-
-    &.invalid_password_message {
-        top: 50%;
-        /* transform: translateX(190%) */
-    }    
 `
 
 

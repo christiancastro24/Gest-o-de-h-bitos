@@ -10,9 +10,10 @@ import ContainerRegisterForm from "./style";
 import api from "../../Services";
 import { useAuthenticated } from "../../Providers/authentication";
 import MessageBalloon from "../MessageBalloon";
-import "../../index.css"
+import "../../index.css";
 import PinkButton from "../PinkButton";
 import Logo from "../../Components/Logo";
+import { useGroups } from "../../Providers/groups";
 
 const useStyles = makeStyles(() => ({
     inputs: {
@@ -30,11 +31,12 @@ const useStyles = makeStyles(() => ({
 const RegisterForm = () => {
 
     const { authenticated } = useAuthenticated();
+    const { isLoading, setLoading } = useGroups();
 
     const history = useHistory();
 
     const formSchema = yup.object().shape({
-        username: yup.string().required("Usuário inválido"),
+        username: yup.string().required("Usuário inválido").matches("^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$", "Usuário inválido"),
         email: yup.string().required("Email obrigatório!").email("E-mail inválido"),
         password: yup.string().min(6, "Mínimo 6 caracteres").required("Senha inválida")
     });
@@ -44,6 +46,7 @@ const RegisterForm = () => {
     });
 
     const onSub = (data) => {
+        setLoading(true)
         api.post("/users/", data)
         .then((res) => {
 
@@ -54,9 +57,11 @@ const RegisterForm = () => {
                     color: "#fff"
                 }
             })
+            setLoading(false)
             history.push("/loginPage")
         })
         .catch(() => {
+            setLoading(false)
             toast.error("Usuário ou e-mail já existente!",
             {
                 style: {
@@ -85,7 +90,7 @@ const RegisterForm = () => {
                         InputProps = {{startAdornment : (<AccountCircle/>),}} 
                         {...register("username")}
                     />
-                        {errors.username && <MessageBalloon className = "invalid_user_message" message = {errors.username.message} />}
+                        {errors.username && <MessageBalloon className = "invalid_username_message" message = {errors.username.message} />}
                     <TextField required 
                         className={classes.inputs} 
                         variant = "outlined" 
@@ -103,6 +108,7 @@ const RegisterForm = () => {
                         {...register("password")}
                     /> 
                     {errors.password && <MessageBalloon className = "invalid_password_message" message = {errors.password.message} />}
+                    {isLoading && <span>Carregando...</span>}
                     <PinkButton type = "submit" text = "Registrar-se" />
                 </form>
                 <p>

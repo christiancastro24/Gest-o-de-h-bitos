@@ -9,6 +9,7 @@ export const Container = styled.div`
     width: 100%;
     justify-content: center;
     overflow: hidden;
+    text-align: center;
 `;
 
 export const Background = styled.div`
@@ -32,18 +33,13 @@ export const ContainerRegisterForm = styled.div`
     font-family: sans-serif;
     color: #fff;
     height: 724px; 
-    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    h1 {
-        color: var(--white);
-    }
-
     @media(max-width: 450px) {
-        width: 130%;
+        width: 180%;
     }
 
     form {
@@ -56,7 +52,7 @@ export const ContainerRegisterForm = styled.div`
     }
 
     input {
-        width: 100%;
+        width: 340px;
         height: 24px;
         padding-left: 6px;
     }
@@ -85,6 +81,7 @@ export const ContainerRegisterForm = styled.div`
 
     p {
         font-size: 1rem;
+        width: 90%;
     }
 
     p > span > a {
@@ -93,10 +90,10 @@ export const ContainerRegisterForm = styled.div`
     }
 
     .invalid_username_message {
-        top: -1%;
+        top: 0%;
     }
 
     .invalid_password_message {
-        top: 38%;
+        top: 39%;
     }
 `
