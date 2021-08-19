@@ -18,6 +18,7 @@ export const GroupsProvider = ({ children }) => {
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [category, setCategory] = useState("")
+    const [categoryTeste, setCategoryTeste] = useState("")
 
     const [groupGoals, setGroupGoals] = useState([])
     const [groupActivities, setGroupActivities] = useState([])
@@ -31,6 +32,7 @@ export const GroupsProvider = ({ children }) => {
 
     const [popUpT, setPopUpt] = useState(false)
     const [popUpActGoal, setPopUpActGoal] = useState(false)
+    const [popUpUpdateGroup, setUpdateGroup] = useState(false)
 
     const [popUp, setPopUp] = useState(false)
     const [popUpMeta, setPopUpMeta] = useState(false)
@@ -162,7 +164,7 @@ export const GroupsProvider = ({ children }) => {
             setCategory("")
             setDescription("")
             setPopUp(!popUp)
-            window.location.reload();
+            // window.location.reload();
             
         })
         .catch(_ => toast.error("Erro ao criar o grupo!",
@@ -241,6 +243,7 @@ export const GroupsProvider = ({ children }) => {
         .then(_ => {
             const removeItem = myGroups.filter(item => item !== id)
             setGroupActivities(removeItem)
+            setPopUpActGoal(!popUpActGoal)
             // window.location.reload();
         })
         .catch(err => console.log(err))
@@ -260,6 +263,19 @@ export const GroupsProvider = ({ children }) => {
         const filtGroupsActvs = groups.filter(item => item.id === itemId)
         setGroupActivitiesGroup(filtGroupsActvs)
         
+    }
+
+    const handleUpdateGroup = (id) => {
+        const dataGroup = { category: category }
+
+        api.patch(`/groups/${id}/`, dataGroup, {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(_ => setMyGroups(myGroups.filter(gro => gro !== dataGroup)))
+        .catch(err => console.log(err))
     }
 
 
@@ -283,7 +299,7 @@ export const GroupsProvider = ({ children }) => {
 
 
     return (
-        <GroupsContext.Provider value={{groups, setGroups, name, setName, description, setDescription, category, setCategory, myGroups, setMyGroups, goals, setGoals, title, setTitle, difficulty, setDifficulty, group, setGroup, handleCreateGoal, handleCreateActivity, activities, setActivities, popUp, setPopUp, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, handleCreate, handleSignIn, handleInfo, groupGoals, groupActivities, setGroupActivities, handleDeleteGoal, handleDeleteActv, handleLogout, handleUpdateActivities, popUpT, setPopUpt, isLoading, setLoading, popUpActGoal, setPopUpActGoal, groupGoalsGroup, groupActivitiesGroup, page, setPage, totalPages}}>
+        <GroupsContext.Provider value={{groups, setGroups, name, setName, description, setDescription, category, setCategory, myGroups, setMyGroups, goals, setGoals, title, setTitle, difficulty, setDifficulty, group, setGroup, handleCreateGoal, handleCreateActivity, activities, setActivities, popUp, setPopUp, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, handleCreate, handleSignIn, handleInfo, groupGoals, groupActivities, setGroupActivities, handleDeleteGoal, handleDeleteActv, handleLogout, handleUpdateActivities, popUpT, setPopUpt, isLoading, setLoading, popUpActGoal, setPopUpActGoal, groupGoalsGroup, groupActivitiesGroup, page, setPage, totalPages, handleUpdateGroup, popUpUpdateGroup, setUpdateGroup}}>
             {children}
         </GroupsContext.Provider>
     )
