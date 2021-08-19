@@ -58,6 +58,9 @@ button.MuiFab-root {
 .MuiPagination-root .MuiPagination-ul li button {
     color: white;
 }
+.MuiPagination-root .MuiPagination-ul{
+    flex-wrap: nowrap;
+}
 .MuiDialog-root .MuiDialog-paper{
     background-color: #130f40;
     

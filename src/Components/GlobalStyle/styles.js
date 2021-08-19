@@ -27,14 +27,17 @@ export const GlobalStyle = createGlobalStyle`
     }
 `;
 export const Window = styled.div`
-  width: 75%;
-  text-align: center;
-  margin: 0 auto;
+	width: 75%;
+	text-align: center;
+	margin: 0 auto;
 
-  @media (max-width: 1000px) {
-    margin-top: clamp(3rem, 15vw, 7rem);
-  }
-  @media (max-width: 580px) {
-    margin-top: 155px;
-  } ;
+	@media (max-width: 1000px) {
+		margin-top: clamp(3rem, 15vw, 7rem);
+	}
+	@media (max-width: 580px) {
+		margin-top: 190px;
+	}
+	@media (min-width: 1000px) {
+		margin-left: 25%;
+	}
 `;

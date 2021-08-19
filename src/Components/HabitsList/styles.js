@@ -7,7 +7,7 @@ export const ContainerAll = styled.div`
 
 export const Container = styled.div`
 	min-height: 70%;
-    max-height: 95%;
+    max-height: 95vh;
 	position: relative;
 	background-color: var(--lightBlue);
 	border-radius: 20px;
@@ -25,9 +25,9 @@ export const Column = styled.div`
 export const ListItem = styled.div`
 	width: 100%;
 	height: auto;
-	display: grid;
-	grid-template-columns: minmax(63%, 63%) 1fr;
-	align-content: space-between;
+	display: flex;
+	/* grid-template-columns: minmax(63%, 63%) 1fr; */
+	justify-content: space-between;
 	gap: 10px;
 	padding: 0.19rem;
     text-align: left;
