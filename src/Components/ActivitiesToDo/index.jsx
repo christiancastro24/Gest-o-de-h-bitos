@@ -13,18 +13,23 @@ import { Tooltip} from "@material-ui/core";
 import { Switch } from "antd";
 import { CheckCircleOutline, ErrorOutline} from "@material-ui/icons";
 import { useGroups } from "../../Providers/groups";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Draggable from "react-draggable";
 const ActivitiesToDo = () => {
 
     const { myGroups } = useGroups();
-    const activities = myGroups.map(item => item.activities).filter(item=> item.length > 0).map(item=> item[0]);
     const [localActivitiesStore] = useState(JSON.parse(localStorage.getItem('localSaveActivities')) || {});
     const dateInfo = [new Date().getDate(), new Date().getMonth()];
     const [shouldReload, setShouldReload] = useState(false);
+    const [allActivities, setAllActivities] = useState([]);
     
-    
-//     
+    useEffect(()=> {
+        let temp = [];
+        myGroups.map((item) => item.activities).map(item => temp.push(...item));
+        setAllActivities(temp);
+
+    },[myGroups])
+ 
     const handleRepeat = (activityId) => {
 		if (!JSON.parse(localStorage.getItem("localSaveActivities"))) {
 			return false;
@@ -71,21 +76,21 @@ const ActivitiesToDo = () => {
 				<p>Para gerenciar seus grupos utilize o menu "Meus Grupos"</p>
 				
 				<TableRow>
-					{activities.length > 0 && (
+					{allActivities.length > 0 && (
 						<h3>Atividades para se realizar hoje:</h3>
 					)}
-					{activities.length > 0 &&
-					activities.filter((item) => !handleRepeat(item.id))
+					{allActivities.length > 0 &&
+					allActivities.filter((item) => !handleRepeat(item.id))
 						.length === 0 ? (
 						<h5>Tudo certo por hoje! Relaxe e volte amanhã!</h5>
 					) : null}
 
-					{activities.length > 0 ? (
-						activities
+					{allActivities.length > 0 ? (
+						allActivities
 							.filter((item) => !handleRepeat(item.id))
 							.map((item, ind) => (
 								<ListItem key={ind}>
-									<Column>
+                                    <Column>
 										<Title done={false}>{item.title}</Title>
 										<Tooltip
 											title="Quantas vezes você realizou essa tarefa."
@@ -120,15 +125,15 @@ const ActivitiesToDo = () => {
 							atividades que lhe ajudem a desenvolver um hábito.
 						</h3>
 					)}
-					{activities.length > 0 &&
-					activities.filter((item) => handleRepeat(item.id)).length >
+					{allActivities.length > 0 &&
+					allActivities.filter((item) => handleRepeat(item.id)).length >
 						0 ? (
 						<h3>Atividades já completadas hoje:</h3>
 					) : null}
-					{activities.length > 0 &&
-					activities.filter((item) => handleRepeat(item.id)).length >
+					{allActivities.length > 0 &&
+					allActivities.filter((item) => handleRepeat(item.id)).length >
 						0
-						? activities
+						? allActivities
 								.filter((item) => handleRepeat(item.id))
 								.map((item, ind) => (
 									<ListItem key={ind}>

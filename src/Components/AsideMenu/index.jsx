@@ -3,7 +3,6 @@ import {
 	Container,
 	SubContainer,
 	Header,
-	Logo,
 	Avatar,
 	UserName,
 	Menu,
@@ -24,6 +23,7 @@ import {
 import { useHistory } from "react-router";
 import { useAuthenticated } from "../../Providers/authentication";
 import { useUserData } from "../../Providers/UserData";
+import Logo from "../../Components/Logo";
 
 const getRandom = (max, min = 0) => {
 	return Math.round(Math.random() * (max - min) + min);
@@ -39,12 +39,14 @@ const AsideMenu = () => {
     const [avatarType, setAvatarType] = useState(localStorage.getItem('userAvatarType') || getRandom(5,2));
     const currentPath = window.location.pathname;
     const history = useHistory();
-    const { userName } = useUserData();
+    const { userName, userAvatar, setUserAvatar } = useUserData();
     const hora = new Date().getHours();
 
     const getUserAvatar = () => {
-        return `https://robohash.org/${avatarId}.png?set=set${avatarType}`;
+        return setUserAvatar(`https://robohash.org/${avatarId}.png?set=set${avatarType}`);
     };
+
+	getUserAvatar();
 
     const handleChangeAvatarId = (id, type) => {
         setAvatarId(id);
@@ -74,10 +76,7 @@ const AsideMenu = () => {
     
     return (
         <Container>
-				<Logo>
-					<span style={{ color: "var(--pink)" }}>D</span>evHealth
-					<span style={{ color: "var(--lightGreen)" }}>y</span>
-				</Logo>
+				<Logo onClick = {() => history.push("/")} />
 				<BurguerMenu onClick={handleShowMenu}>
 					{showMenu ? <ExpandLess /> : <Burguer />}
 				</BurguerMenu>
@@ -85,7 +84,7 @@ const AsideMenu = () => {
 					<Header>
 						<MultiFrameContainer>
 							<Avatar
-								src={getUserAvatar()}
+								src={userAvatar}
 								alt="UserAvatar"
 								onClick={handleOpen}
 							></Avatar>
@@ -107,7 +106,7 @@ const AsideMenu = () => {
 								? "Bom dia, "
 								: "Boa noite, "}
 							<br />
-							{userName}
+							<span className = "username">{userName}</span>
 							{"!"}
 						</UserName>
 					</Header>
@@ -127,7 +126,7 @@ const AsideMenu = () => {
 						>
 							<b />
 							<b />
-							Profile
+							Perfil
 						</MenuItem>
 						<MenuItem
 							foq={currentPath === "/groups"}

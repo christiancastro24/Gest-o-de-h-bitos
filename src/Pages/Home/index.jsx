@@ -3,6 +3,7 @@ import home from "../../Assets/Images/home.svg";
 import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { useAuthenticated } from "../../Providers/authentication";
+import Logo from "../../Components/Logo";
 
 const HomePage = () => {
 	const history = useHistory();
@@ -18,11 +19,7 @@ const HomePage = () => {
 			<img src={home} alt={home} />
 
 			<ContainerAbout>
-				<h2>
-					<span style={{ color: "var(--pink)" }}>D</span>evHealth
-					<span style={{ color: "var(--lightGreen)" }}>y</span>
-				</h2>
-
+				<Logo />
 				<p>
 					O DevHealthy é um Aplicativo que busca ajudar o Dev a criar
 					seus hábitos e rotinas. podendo fazer parte de grupos para

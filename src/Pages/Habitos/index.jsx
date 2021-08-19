@@ -5,12 +5,19 @@ import HabitsList from "../../Components/HabitsList";
 import { useAuthenticated } from "../../Providers/authentication";
 import ActivitiesToDo from "../../Components/ActivitiesToDo";
 import { Flex } from "./styles";
+import 'react-calendar/dist/Calendar.css';
+import Calendar from "react-calendar"
+import { useState } from "react"
+import Draggable from "react-draggable";
 
 const HabitsPage = () => {
 
 	const history = useHistory()
 
-	const { authenticated } = useAuthenticated() 
+	const { authenticated } = useAuthenticated();
+    
+
+	const [value, onChange] = useState(new Date());
 
 	if(!authenticated) {
 		history.push("/loginPage")
@@ -19,10 +26,21 @@ const HabitsPage = () => {
 	return (
 		<>
 			<AsideMenu />
-			<Window>
+			<Window >
 				<Flex>
-						<HabitsList />
+                    <HabitsList />
 					<ActivitiesToDo />
+
+					<Draggable>
+						<div
+							style={{
+								display: "flex",
+								justifyContent: "center",
+							}}
+						>
+							<Calendar onChange={onChange} value={value} />
+						</div>
+					</Draggable>
 				</Flex>
 			</Window>
 		</>

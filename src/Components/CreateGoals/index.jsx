@@ -4,7 +4,8 @@ import { Button } from "@material-ui/core"
 
 const CreateGoals = ({ itemId }) => {
 
-    const {popUpMeta, setPopUpMeta, title, setTitle, difficulty, setDifficulty, handleCreateGoal} = useGroups()
+    const {popUpMeta, setPopUpMeta, title, setTitle, difficulty, setDifficulty, handleCreateGoal,} = useGroups()
+    console.log(itemId);
     return (
         <>
         

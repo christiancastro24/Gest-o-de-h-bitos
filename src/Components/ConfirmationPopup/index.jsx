@@ -1,13 +1,9 @@
 import ConfirmationPopupContainer from "./style";
 
-const ConfirmationPopup = () => {
+const ConfirmationPopup = ({children}) => {
     return (
         <ConfirmationPopupContainer>
-            <p>Tem certeza?</p>
-            <div>
-            <button>Sim</button>
-            <button>Não</button>
-            </div>
+            {children}
         </ConfirmationPopupContainer>
 
     )

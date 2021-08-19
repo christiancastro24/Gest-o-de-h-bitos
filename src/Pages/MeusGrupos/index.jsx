@@ -1,88 +1,268 @@
 import AsideMenu from "../../Components/AsideMenu";
 import { Window } from "../../Components/GlobalStyle/styles";
 import { useGroups } from "../../Providers/groups";
-import { Container, ContainerAll, ContainerGroup } from "./styles";
+import {
+  Container,
+  ContainerAll,
+  ContainerGoalsAndAct,
+  ContainerGroup,
+  ContainerMyGroups,
+  ContainerPopUp,
+} from "./styles";
 import CreateGroup from "../../Components/CreateGroup";
 import CreateGoals from "../../Components/CreateGoals";
 import CreateActivities from "../../Components/CreateActivities";
 import { useState } from "react";
+import {
+  Button,
+  Input,
+} from "@material-ui/core";
+import { useUserData } from "../../Providers/UserData";
 
 const MyGroups = () => {
+  const {
+    myGroups,
+    popUpMeta,
+    setPopUpMeta,
+    popUpActivities,
+    setPopUpActivities,
+    groupGoals,
+    handleInfo,
+    groupActivities,
+    handleDeleteGoal,
+    handleDeleteActv,
+    handleLogout,
+    category,
+    handleUpdateGroup,
+    popUpT,
+    setPopUpt,
+    title,
+    setTitle,
+    handleUpdateActivities,
+    isLoading,
+    popUpActGoal,
+    setPopUpActGoal,
+    popUpUpdateGroup,
+    setUpdateGroup,
+    setCategory,
+  } = useGroups();
 
-    const { myGroups, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, groupGoals, handleInfo, groupActivities } = useGroups();
+  const { userId } = useUserData();
+  const [groupId, setGroupId] = useState("");
 
-    const [groupId, setGroupId] = useState("")
-
-    return ( 
-        <>
-        <AsideMenu />
-        <Window>
-
+  return (
+    <>
+      <AsideMenu />
+      <Window>
         <ContainerAll>
-            <h1>Meus Grupos</h1>
-            {groupGoals.length > 0 && groupGoals[0].goals.map(grou => {
-                
-                return (
-                    <div style={{color: "white", border: "2px solid red"}}>
-                        <h4 style={{color: "white"}}>Metas: </h4>
-                        Título: {grou.title} <br /> 
-                        Dificuldade: {grou.difficulty}
-                    </div>
-                )
-            })}
-
-            {groupGoals.length > 0 && groupActivities[0].activities.map(grou => {
-                
-                return (
-                    <div style={{color: "white", border: "2px solid red"}}>
-                        <h4 style={{color: "white"}}>Atividades: </h4>
-                        Título: {grou.title} <br /> 
-                        Dificuldade: {grou.realization_time}
-                    </div>
-                )
-            })}
+          <ContainerMyGroups>
+            <h1>Meus grupos</h1>
 
             <CreateGroup />
-            
-            
-        <Container>      
-                {myGroups.map(myGroup => {
-                   
-                    return (
-                        <ContainerGroup key={myGroup.id}>
-                            <div className="Items">
-                                <h2>{myGroup.name}</h2>
-                                <h3>{myGroup.description}</h3>
-                                <h3>Categoria: {myGroup.category}</h3>
-                            </div>
+          </ContainerMyGroups>
 
-                            <button 
-                            className="btn-info" 
-                            variant="contained" 
-                            onClick={() => handleInfo(myGroup.id)}
-                            >...</button>
+          {popUpActGoal && (
+            <ContainerGoalsAndAct>
+              <Button
+                size="small"
+                color="secondary"
+                variant="contained"
+                onClick={() => setPopUpActGoal(!popUpActGoal)}
+              >
+                X
+              </Button>
+              <h2>Metas e Atividades</h2>
 
-                            <CreateGoals itemId={groupId} /> 
+              {groupGoals[0].goals?.map((grou, index) => {
+                return (
+                  <div className="group-actv" key={index}>
+                    <h4>Metas</h4>
+                    Título:{" "}
+                    {grou.title.length > 10
+                      ? grou.title.slice(0, 10) + "..."
+                      : grou?.title}{" "}
+                    <br />
+                    Dificuldade:{" "}
+                    {grou.difficulty.length > 10
+                      ? grou.difficulty.slice(0, 10) + "..."
+                      : grou?.difficulty}
+                    <br />
+                    <Button
+                      size="small"
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => handleDeleteGoal(grou.id)}
+                    >
+                      Excluir
+                    </Button>
+                  </div>
+                );
+              })}
 
-                            <button variant="contained" 
-                                onClick={() => {
-                                setPopUpMeta(!popUpMeta);
-                                setGroupId(myGroup.id)}}>Add metas</button>
+              {groupActivities[0].activities?.map((grouAtv, index) => {
+                return (
+                  <div className="group-actv" key={index}>
+                    <h4>Atividades: </h4>
+                    Título: {grouAtv?.title} <br />
+                    <br />
+                    <Button
+                      size="small"
+                      variant="contained"
+                      color="primary"
+                      onClick={() => setPopUpt(!popUpT)}
+                    >
+                      Editar
+                    </Button>
+                    <Button
+                      size="small"
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => handleDeleteActv(grouAtv.id)}
+                    >
+                      Excluir
+                    </Button>
+                    {popUpT && (
+                      <ContainerPopUp
+                        style={{
+                          position: "absolute",
+                          top: "10rem",
+                          left: "15%",
+                        }}
+                      >
+                        <Input
+                          value={title}
+                          onChange={(evt) => setTitle(evt.target.value)}
+                        />
+                        <Button
+                          size="small"
+                          variant="contained"
+                          color="primary"
+                          onClick={() => {
+                            setPopUpt(!popUpT);
+                            handleUpdateActivities(grouAtv.id);
+                          }}
+                        >
+                          Salvar
+                        </Button>
+                      </ContainerPopUp>
+                    )}
+                  </div>
+                );
+              })}
+            </ContainerGoalsAndAct>
+          )}
 
-                            <button className="btn-add-actvi" variant="contained" 
-                            onClick={() => { 
-                                setPopUpActivities(!popUpActivities); 
-                                setGroupId(myGroup.id)}}>Add atv</button>
+          <Container>
+            {isLoading && <span>Carregando...</span>}
 
-                         <CreateActivities itemId={groupId}/>
-                        </ContainerGroup>
-                    )
-                })}             
-            </Container>
-            </ContainerAll>
-        </Window>
-        </>
-     );
-}
- 
+            {myGroups.map((myGroup) => {
+              return (
+					<ContainerGroup key={myGroup.id}>
+						<div className="Items">
+							<h2>{myGroup.name}</h2>
+							<h3>{myGroup.description}</h3>
+							<h3>Categoria: {myGroup.category}</h3>
+							<br />
+						</div>
+						<Button
+							size="small"
+							variant="contained"
+							color="primary"
+							onClick={() => {
+								setPopUpActGoal(!popUpActGoal);
+								handleInfo(myGroup.id);
+							}}
+						>
+							Ver Mais
+						</Button>
+
+						{myGroup.creator && myGroup.creator.id === userId ? (
+							<Button
+								size="small"
+								variant="contained"
+								color="primary"
+								onClick={() => {
+									setUpdateGroup(!popUpUpdateGroup);
+									setGroupId(myGroup.id);
+								}}
+							>
+								Editar
+							</Button>
+						) : null}
+
+						{popUpUpdateGroup && (
+							<div
+								style={{
+									position: "absolute",
+									top: "5%",
+									left: "25%",
+								}}
+							>
+								<input
+									style={{ color: "black" }}
+									value={category}
+									onChange={(evt) =>
+										setCategory(evt.target.value)
+									}
+								/>
+								<Button
+									size="small"
+									variant="container"
+									color="primary"
+									onClick={() =>
+										handleUpdateGroup(myGroup.id)
+									}
+								>
+									Salvar
+								</Button>
+							</div>
+						)}
+{console.log(myGroups)}
+						<Button
+							size="small"
+							variant="contained"
+							color="primary"
+							onClick={() => {
+								setPopUpMeta(!popUpMeta);
+								setGroupId(myGroup.id);
+							}}
+						>
+							Adicionar Metas
+						</Button>
+
+						<Button
+							size="small"
+							variant="contained"
+							color="primary"
+							onClick={() => {
+								setPopUpActivities(!popUpActivities);
+								setGroupId(myGroup.id);
+							}}
+						>
+							Adicionar Atividades
+						</Button>
+						<CreateGoals itemId={groupId} />
+						<Button
+							size="small"
+							variant="contained"
+							color="secondary"
+							onClick={() => {
+								console.log(myGroup.id);
+								handleLogout(myGroup.id);
+							}}
+						>
+							Sair
+						</Button>
+
+						<CreateActivities itemId={groupId} />
+					</ContainerGroup>
+				);
+            })}
+          </Container>
+        </ContainerAll>
+      </Window>
+    </>
+  );
+};
+
 export default MyGroups;
