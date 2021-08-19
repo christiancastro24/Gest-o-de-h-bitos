@@ -56,7 +56,9 @@ export const GroupsProvider = ({ children }) => {
         
         })
         .then(res => {
+            console.log("resposta api", res.data)
             setMyGroups(res.data)
+console.log('após set', myGroups)
             setLoading(false)
         })
         
@@ -99,7 +101,7 @@ export const GroupsProvider = ({ children }) => {
                     color: "#fff"
                 }
             })
-            window.location.reload();
+            setReload(!reload);
         })
         .catch(_ => toast.error("Erro ao cadastrar uma meta",
         {
@@ -170,6 +172,7 @@ export const GroupsProvider = ({ children }) => {
             setCategory("")
             setDescription("")
             setPopUp(!popUp)
+            setReload(!reload)
             // window.location.reload();
             
         })
@@ -214,13 +217,14 @@ export const GroupsProvider = ({ children }) => {
 
 
     // Sair de um grupo
-    const handleLogout = (id) => {
+    const handleLogout = (chave) => {
+        console.log(chave)
         setLoading(true)
-        api.delete(`/groups/${id}/unsubscribe/`, {
+        api.delete(`/groups/${chave}/unsubscribe/`, {
             headers: { Authorization: `Bearer ${token}`}
 
         })
-        .then(() => {setLoading(false); window.location.reload()})
+        .then(() => {setLoading(false); setReload(!reload)})
         .catch(err => console.log(err))
     }
 
@@ -250,6 +254,7 @@ export const GroupsProvider = ({ children }) => {
             const removeItem = myGroups.filter(item => item !== id)
             setGroupActivities(removeItem)
             setPopUpActGoal(!popUpActGoal)
+            setReload(!reload)
             // window.location.reload();
         })
         .catch(err => console.log(err))
@@ -297,7 +302,7 @@ export const GroupsProvider = ({ children }) => {
             setGroupActivities(myGroups.filter(gro => gro !== teste))
             setPopUpActGoal(!popUpActGoal)
             setTitle("")
-            window.location.reload();
+            setReload(!reload);
 
         })
         .catch(err => console.log(err))
