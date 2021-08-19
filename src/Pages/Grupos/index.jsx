@@ -4,6 +4,7 @@ import { useGroups } from "../../Providers/groups";
 import { Container, ContainerGoalsAndAct, ContainerGroup, Loading } from "./styles";
 import { ContainerAll } from "../MeusGrupos/styles";
 import Pagination from "@material-ui/lab/Pagination";
+import { useState } from "react";
 
 
 const GroupsPage = () => {
@@ -22,7 +23,14 @@ const GroupsPage = () => {
         reload
 	} = useGroups();
 
+    const handleWidth = () => {
+        return window.innerWidth > 570 ? 3 : 1;
+    }
+    const [countPageSize, setCountPageSize] = useState(handleWidth);
     
+    window.addEventListener('resize', ()=> {
+        setCountPageSize(handleWidth());
+    })
     const handleChange = (event, value) => {
 		console.log(value);
 		setPage(value);
@@ -31,7 +39,7 @@ const GroupsPage = () => {
             return (
 				<>
 					<AsideMenu />
-					<Window reload={() => (reload ? true : true)}>
+					<Window >
 						<ContainerAll>
 							<h1>Grupos</h1>
 							<Pagination
@@ -39,7 +47,8 @@ const GroupsPage = () => {
 								onChange={handleChange}
 								defaultPage={1}
 								count={totalPages}
-								boundaryCount={2}
+								boundaryCount={countPageSize} //2
+								siblingCount={1}
 							/>
 
 							<Loading visible={isLoading}>Carregando...</Loading>

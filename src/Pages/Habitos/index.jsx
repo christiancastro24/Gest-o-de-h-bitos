@@ -9,6 +9,7 @@ import 'react-calendar/dist/Calendar.css';
 import Calendar from "react-calendar"
 import { useState } from "react"
 import Draggable from "react-draggable";
+
 const HabitsPage = () => {
 
 	const history = useHistory()
