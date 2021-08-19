@@ -12,6 +12,7 @@ import {
 import CreateGroup from "../../Components/CreateGroup";
 import CreateGoals from "../../Components/CreateGoals";
 import CreateActivities from "../../Components/CreateActivities";
+import UpdateGroup from "../../Components/UpdateGroup";
 import { useState } from "react";
 import {
   Button,
@@ -186,7 +187,10 @@ const MyGroups = () => {
                     size="small"
                     variant="contained"
                     color="primary"
-                    onClick={() => setUpdateGroup(!popUpUpdateGroup)}
+                    onClick={() => {
+                      setUpdateGroup(!popUpUpdateGroup);
+                      setGroupId(myGroup.id);
+                    }}
                   >
                     Editar
                   </Button>
