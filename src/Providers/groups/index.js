@@ -18,12 +18,13 @@ export const GroupsProvider = ({ children }) => {
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [category, setCategory] = useState("")
-    const [categoryTeste, setCategoryTeste] = useState([])
+    // const [categoryTeste, setCategoryTeste] = useState([])
 
     const [groupGoals, setGroupGoals] = useState([])
     const [groupActivities, setGroupActivities] = useState([])
 
     const [groupGoalsGroup, setGroupGoalsGroup] = useState([])
+    // eslint-disable-next-line no-unused-vars
     const [groupActivitiesGroup, setGroupActivitiesGroup] = useState([])
 
     const [title, setTitle] = useState("")
@@ -39,6 +40,8 @@ export const GroupsProvider = ({ children }) => {
     const [popUpActivities, setPopUpActivities] = useState(false)
 
     const [isLoading, setLoading] = useState(false)
+
+    // eslint-disable-next-line no-unused-vars
     const [reload, setReload] = useState(false);
 
    const [token] = useState(JSON.parse(localStorage.getItem("@DevHealthy/user")) || "")
@@ -263,7 +266,7 @@ export const GroupsProvider = ({ children }) => {
 		const filtGroupsGoals = groups.filter((item) => item.id === itemId);
 		setGroupGoalsGroup(filtGroupsGoals);
     }
-    
+
     const handleUpdateGroup = (id) => {
         const dataGroup = { category: category }
         

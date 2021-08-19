@@ -20,7 +20,6 @@ const GroupsPage = () => {
 		groupActivitiesGroup,
 		setPage,
 		totalPages,
-        reload
 	} = useGroups();
 
     const handleWidth = () => {

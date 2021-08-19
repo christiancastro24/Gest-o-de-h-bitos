@@ -12,16 +12,10 @@ import {
 import CreateGroup from "../../Components/CreateGroup";
 import CreateGoals from "../../Components/CreateGoals";
 import CreateActivities from "../../Components/CreateActivities";
-import UpdateGroup from "../../Components/UpdateGroup";
 import { useState } from "react";
 import {
   Button,
-  Dialog,
-  DialogContent,
-  DialogTitle,
   Input,
-  Modal,
-  Typography,
 } from "@material-ui/core";
 import { useUserData } from "../../Providers/UserData";
 
