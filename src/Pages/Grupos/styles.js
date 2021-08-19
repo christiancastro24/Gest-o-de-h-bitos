@@ -135,7 +135,6 @@ export const Container = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 20rem;
     margin: 0 -2rem;
   }
 `;

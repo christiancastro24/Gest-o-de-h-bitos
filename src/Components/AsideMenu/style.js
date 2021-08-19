@@ -133,7 +133,7 @@ export const MultiFrameContainer = styled.div`
   display: none;
   place-items: center;
 
-  @media (min-width: 768px) {
+  @media (min-width: 425px) {
     display: grid;
   }
 
@@ -230,7 +230,7 @@ export const Menu = styled.div`
   }
 
   @media (max-width: 320px) {
-    bottom: -26rem;
+    bottom: -29rem;
     transform: translateX(-50%);
   } ;
 `;

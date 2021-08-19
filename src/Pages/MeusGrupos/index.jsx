@@ -2,27 +2,21 @@ import AsideMenu from "../../Components/AsideMenu";
 import { Window } from "../../Components/GlobalStyle/styles";
 import { useGroups } from "../../Providers/groups";
 import {
+  Atividades,
   Container,
   ContainerAll,
   ContainerGoalsAndAct,
   ContainerGroup,
   ContainerMyGroups,
   ContainerPopUp,
+  ContainerPopUpInput,
 } from "./styles";
 import CreateGroup from "../../Components/CreateGroup";
 import CreateGoals from "../../Components/CreateGoals";
 import CreateActivities from "../../Components/CreateActivities";
 import UpdateGroup from "../../Components/UpdateGroup";
 import { useState } from "react";
-import {
-  Button,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  Input,
-  Modal,
-  Typography,
-} from "@material-ui/core";
+import { Button, Input } from "@material-ui/core";
 
 const MyGroups = () => {
   const {
@@ -54,13 +48,44 @@ const MyGroups = () => {
 
   const [groupId, setGroupId] = useState("");
 
+  const [groupAtv, setGroupAtv] = useState();
+
   return (
     <>
       <AsideMenu />
       <Window>
+        {popUpT && (
+          <ContainerPopUpInput>
+            <Button
+              size="small"
+              color="secondary"
+              variant="contained"
+              onClick={() => setPopUpt(!popUpT)}
+            >
+              X
+            </Button>
+            <h4>Editar título da atividade</h4>
+            <Input
+              placeholder="Novo título"
+              value={title}
+              onChange={(evt) => setTitle(evt.target.value)}
+            />
+            <Button
+              size="small"
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                setPopUpt(!popUpT);
+                handleUpdateActivities(groupAtv);
+              }}
+            >
+              Salvar
+            </Button>
+          </ContainerPopUpInput>
+        )}
         <ContainerAll>
           <ContainerMyGroups>
-            <h1>Meus grupos</h1>
+            <h2>Meus Grupos</h2>
 
             <CreateGroup />
           </ContainerMyGroups>
@@ -106,14 +131,17 @@ const MyGroups = () => {
               {groupActivities[0].activities?.map((grouAtv, index) => {
                 return (
                   <div className="group-actv" key={index}>
-                    <h4>Atividades: </h4>
+                    <Atividades>Atividades</Atividades>
                     Título: {grouAtv?.title} <br />
                     <br />
                     <Button
                       size="small"
                       variant="contained"
                       color="primary"
-                      onClick={() => setPopUpt(!popUpT)}
+                      onClick={() => {
+                        setPopUpt(!popUpT);
+                        setGroupAtv(grouAtv.id);
+                      }}
                     >
                       Editar
                     </Button>
@@ -121,35 +149,12 @@ const MyGroups = () => {
                       size="small"
                       variant="contained"
                       color="secondary"
-                      onClick={() => handleDeleteActv(grouAtv.id)}
+                      onClick={() => {
+                        handleDeleteActv(grouAtv.id);
+                      }}
                     >
                       Excluir
                     </Button>
-                    {popUpT && (
-                      <ContainerPopUp
-                        style={{
-                          position: "absolute",
-                          top: "10rem",
-                          left: "15%",
-                        }}
-                      >
-                        <Input
-                          value={title}
-                          onChange={(evt) => setTitle(evt.target.value)}
-                        />
-                        <Button
-                          size="small"
-                          variant="contained"
-                          color="primary"
-                          onClick={() => {
-                            setPopUpt(!popUpT);
-                            handleUpdateActivities(grouAtv.id);
-                          }}
-                        >
-                          Salvar
-                        </Button>
-                      </ContainerPopUp>
-                    )}
                   </div>
                 );
               })}
@@ -196,23 +201,30 @@ const MyGroups = () => {
                   </Button>
 
                   {popUpUpdateGroup && (
-                    <div
-                      style={{ position: "absolute", top: "5%", left: "25%" }}
-                    >
-                      <input
-                        style={{ color: "black" }}
+                    <ContainerPopUpInput>
+                      <Button
+                        size="small"
+                        color="secondary"
+                        variant="contained"
+                        onClick={() => setUpdateGroup(!popUpUpdateGroup)}
+                      >
+                        X
+                      </Button>
+                      <h4>Editar categoria</h4>
+                      <Input
+                        placeholder="Nova categoria"
                         value={category}
                         onChange={(evt) => setCategory(evt.target.value)}
                       />
                       <Button
                         size="small"
-                        variant="container"
+                        variant="contained"
                         color="primary"
                         onClick={() => handleUpdateGroup(myGroup.id)}
                       >
                         Salvar
                       </Button>
-                    </div>
+                    </ContainerPopUpInput>
                   )}
 
                   <Button

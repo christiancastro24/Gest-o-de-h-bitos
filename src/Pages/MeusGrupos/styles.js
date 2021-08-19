@@ -53,10 +53,6 @@ export const ContainerAll = styled.section`
 
 export const ContainerPopUp = styled.div`
   border: 2px solid var(--white);
-  input {
-    height: 3rem;
-    border: 2px solid var(--pink);
-  }
 
   @media (min-width: 300px) and (max-width: 767px) {
     display: flex;
@@ -91,10 +87,10 @@ export const ContainerPopUp = styled.div`
 `;
 
 export const Container = styled.section`
-  width: 100%;
+  width: 100vw;
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
+  justify-content: flex-start;
   max-height: 85vh;
   background-color: #000;
   color: var(--white);
@@ -108,16 +104,24 @@ export const Container = styled.section`
   button:last-child {
     width: 20vw;
   }
-  @media (min-width: 300px) and (max-width: 508px) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 20rem;
-    margin: 0 -2rem;
+
+  @media (min-width: 425px) {
+    width: 87vw;
+
+    button:nth-last-child(1) {
+      width: 10vw;
+    }
+  }
+
+  @media (min-width: 768px) {
+    button {
+      width: 23vw;
+    }
   }
 `;
+
 export const ContainerGroup = styled.div`
-  width: 100%;
+  width: 90vw;
   display: flex;
   flex-direction: column;
   margin: 0.8rem;
@@ -148,4 +152,47 @@ export const ContainerMyGroups = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 0.5rem;
+
+  h2 {
+    color: var(--white);
+  }
 `;
+
+export const ContainerPopUpInput = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.2rem;
+  position: absolute;
+  border: 2px solid var(--white);
+  width: 17rem;
+  height: 13rem;
+  background-color: rgb(19, 15, 64);
+  z-index: 1010;
+  top: 20rem;
+  left: 1.5rem;
+
+  h4 {
+    font-size: 1.4rem;
+    color: var(--white);
+  }
+
+  input {
+    background-color: var(--white);
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+
+  button {
+    width: 0px;
+    margin: 0.8rem 0;
+  }
+
+  button:nth-child(1) {
+    left: 6rem;
+    bottom: 0.8rem;
+  }
+`;
+
+export const Atividades = styled.h4``;
