@@ -19,6 +19,8 @@ export const Container = styled.div`
 		#6095b9 90%,
 		#30336b 100%
 	);
+    position: fixed;
+    left:0;
 
 	.username {
 		text-transform: capitalize;
