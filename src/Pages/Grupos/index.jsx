@@ -19,8 +19,10 @@ const GroupsPage = () => {
 		groupActivitiesGroup,
 		setPage,
 		totalPages,
+        reload
 	} = useGroups();
 
+    
     const handleChange = (event, value) => {
 		console.log(value);
 		setPage(value);
@@ -29,7 +31,7 @@ const GroupsPage = () => {
             return (
 				<>
 					<AsideMenu />
-					<Window>
+					<Window reload={() => (reload ? true : true)}>
 						<ContainerAll>
 							<h1>Grupos</h1>
 							<Pagination
@@ -39,11 +41,9 @@ const GroupsPage = () => {
 								count={totalPages}
 								boundaryCount={2}
 							/>
-							
-								<Loading visible={isLoading} >
-									Carregando...
-								</Loading>
-							
+
+							<Loading visible={isLoading}>Carregando...</Loading>
+
 							{popUpActGoal && (
 								<ContainerGoalsAndAct>
 									<button

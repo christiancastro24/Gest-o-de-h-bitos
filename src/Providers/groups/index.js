@@ -37,6 +37,7 @@ export const GroupsProvider = ({ children }) => {
     const [popUpActivities, setPopUpActivities] = useState(false)
 
     const [isLoading, setLoading] = useState(false)
+    const [reload, setReload] = useState(false);
 
    const [token] = useState(JSON.parse(localStorage.getItem("@DevHealthy/user")) || "")
 
@@ -55,7 +56,7 @@ export const GroupsProvider = ({ children }) => {
 
         .catch(err => console.log(err))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [groupGoals])
+    }, [groupGoals, reload])
 
 
     // Todos grupos que não precisam de ("Autorização")
@@ -247,21 +248,21 @@ export const GroupsProvider = ({ children }) => {
     }
 
     // Imprimindo metas e atividades de um grupo
+    
+    
     const handleInfo = (itemId) => {
-        const filtGoals = myGroups.filter(item => item.id === itemId)
-        setGroupGoals(filtGoals)
+		const filtGoals = myGroups.filter((item) => item.id === itemId);
+		setGroupGoals(filtGoals);
 
-        const filtActivities =  myGroups.filter(item => item.id === itemId)
-        setGroupActivities(filtActivities)
+		const filtActivities = myGroups.filter((item) => item.id === itemId);
+		setGroupActivities(filtActivities);
 
-        const filtGroupsGoals = groups.filter(item => item.id === itemId)
-        setGroupGoalsGroup(filtGroupsGoals)
+		const filtGroupsGoals = groups.filter((item) => item.id === itemId);
+		setGroupGoalsGroup(filtGroupsGoals);
 
-        const filtGroupsActvs = groups.filter(item => item.id === itemId)
-        setGroupActivitiesGroup(filtGroupsActvs)
-        
-    }
-
+		const filtGroupsActvs = groups.filter((item) => item.id === itemId);
+		setGroupActivitiesGroup(filtGroupsActvs);
+	};
 
     const handleUpdateActivities = (id) => {
         const teste = { title: title }
@@ -273,17 +274,19 @@ export const GroupsProvider = ({ children }) => {
             }
         })
         .then(() => {
+            api.
             setGroupActivities(myGroups.filter(gro => gro !== teste))
-            setPopUpActGoal(!popUpActGoal)
-            setTitle("")
-            window.location.reload();
+            // setPopUpActGoal(!popUpActGoal)
+            // handleInfo(id)
+            // setTitle("")
+            setReload(!reload);
         })
         .catch(err => console.log(err))
     }
 
 
     return (
-        <GroupsContext.Provider value={{groups, setGroups, name, setName, description, setDescription, category, setCategory, myGroups, setMyGroups, goals, setGoals, title, setTitle, difficulty, setDifficulty, group, setGroup, handleCreateGoal, handleCreateActivity, activities, setActivities, popUp, setPopUp, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, handleCreate, handleSignIn, handleInfo, groupGoals, groupActivities, setGroupActivities, handleDeleteGoal, handleDeleteActv, handleLogout, handleUpdateActivities, popUpT, setPopUpt, isLoading, setLoading, popUpActGoal, setPopUpActGoal, groupGoalsGroup, groupActivitiesGroup, page, setPage, totalPages}}>
+        <GroupsContext.Provider value={{groups, setGroups, name, setName, description, setDescription, category, setCategory, myGroups, setMyGroups, goals, setGoals, title, setTitle, difficulty, setDifficulty, group, setGroup, handleCreateGoal, handleCreateActivity, activities, setActivities, popUp, setPopUp, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, handleCreate, handleSignIn, handleInfo, groupGoals, groupActivities, setGroupActivities, handleDeleteGoal, handleDeleteActv, handleLogout, handleUpdateActivities, popUpT, setPopUpt, isLoading, setLoading, popUpActGoal, setPopUpActGoal, groupGoalsGroup, groupActivitiesGroup, page, setPage, totalPages, reload, setReload}}>
             {children}
         </GroupsContext.Provider>
     )

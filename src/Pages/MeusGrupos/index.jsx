@@ -45,7 +45,7 @@ const MyGroups = () => {
 					<h1>Meus grupos</h1>
 
 					{popUpActGoal && (
-						<ContainerGoalsAndAct>
+						<ContainerGoalsAndAct >
 							<button
 								onClick={() => setPopUpActGoal(!popUpActGoal)}
 							>
