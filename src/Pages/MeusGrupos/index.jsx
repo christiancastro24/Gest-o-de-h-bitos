@@ -10,12 +10,12 @@ import {
 import CreateGroup from "../../Components/CreateGroup";
 import CreateGoals from "../../Components/CreateGoals";
 import CreateActivities from "../../Components/CreateActivities";
+import UpdateGroup from "../../Components/UpdateGroup";
 import { useState } from "react";
 
 const MyGroups = () => {
 
-    const { myGroups, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, groupGoals, handleInfo, groupActivities, handleDeleteGoal, handleDeleteActv, handleLogout, category, handleUpdateGroup, popUpT, setPopUpt, title, setTitle, handleUpdateActivities, isLoading, popUpActGoal, setPopUpActGoal, popUpUpdateGroup, setUpdateGroup, setCategory } = useGroups();
-
+    const { myGroups, popUpMeta, setPopUpMeta, popUpActivities, setPopUpActivities, groupGoals, handleInfo, groupActivities, handleDeleteGoal, handleDeleteActv, handleLogout, handleUpdateGroup, popUpT, setPopUpt, title, setTitle, handleUpdateActivities, isLoading, popUpActGoal, setPopUpActGoal, popUpUpdateGroup, setUpdateGroup } = useGroups();
 
     const [groupId, setGroupId] = useState("")
 
@@ -98,16 +98,13 @@ const MyGroups = () => {
 
                             <CreateGoals itemId={groupId} /> 
 
-                            <button onClick={() => setUpdateGroup(!popUpUpdateGroup)}style={{width: "4%"}}>Edit</button>
-
-                            {popUpUpdateGroup && 
-                             <div style={{position: "absolute", top: "5%", left: "25%"}}>
-                                <input style={{color: "black"}} value={category} onChange={evt => setCategory(evt.target.value)
-                                }/>
-                                <button onClick={() => handleUpdateGroup(myGroup.id)}>Salvar</button>
-                            </div>}
+                            <button onClick={() => {
+                                setUpdateGroup(!popUpUpdateGroup); 
+                                setGroupId(myGroup.id)}} 
+                                style={{width: "4%"}}>Edit</button>
                            
-
+                            <UpdateGroup itemId={groupId} />
+                        
                             <button variant="contained" 
                                 onClick={() => {
                                 setPopUpMeta(!popUpMeta);
