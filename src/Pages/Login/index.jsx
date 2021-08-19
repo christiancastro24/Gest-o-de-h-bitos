@@ -43,14 +43,7 @@ const LoginPage = () => {
 
   const history = useHistory();
 
-<<<<<<< HEAD
-	const formSchema = yup.object().shape({
-		username: yup.string().required("Usuário obrigatório!"),
-		password: yup.string().min(4, "Mínimo 4 dígitos!").required("Senha obrigatória!"),
-	});
-=======
   const { authenticated, setAuthenticated } = useAuthenticated();
->>>>>>> 648a12a390d7b4c410250653f69ae7f7e86073f4
 
   const formSchema = yup.object().shape({
     username: yup.string().required("Usuário obrigatório!"),
