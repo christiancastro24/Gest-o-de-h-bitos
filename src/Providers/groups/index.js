@@ -18,7 +18,7 @@ export const GroupsProvider = ({ children }) => {
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [category, setCategory] = useState("")
-    const [categoryTeste, setCategoryTeste] = useState("")
+    const [categoryTeste, setCategoryTeste] = useState([])
 
     const [groupGoals, setGroupGoals] = useState([])
     const [groupActivities, setGroupActivities] = useState([])
@@ -267,15 +267,16 @@ export const GroupsProvider = ({ children }) => {
 
     const handleUpdateGroup = (id) => {
         const dataGroup = { category: category }
-
+        
         api.patch(`/groups/${id}/`, dataGroup, {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`
             }
         })
-        .then(_ => setMyGroups(myGroups.filter(gro => gro !== dataGroup)))
+        .then(_ => {setMyGroups(myGroups.filter(gro => gro !== dataGroup)); })
         .catch(err => console.log(err))
+       
     }
 
 
