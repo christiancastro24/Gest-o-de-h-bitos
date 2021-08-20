@@ -105,7 +105,7 @@ const ProfileCard = () => {
 				toast.success("Sucesso!");
 				window.location.reload();
 			})
-			.catch(() => toast.error("Erro ao atualizar perfil!"));
+			.catch(() => toast.error("Usuário já existente!"));
 	};
 
 	return (
