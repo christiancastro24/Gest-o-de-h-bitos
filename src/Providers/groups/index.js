@@ -63,7 +63,19 @@ export const GroupsProvider = ({ children }) => {
       .catch((err) => console.log(err));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [groupGoals, reload]);
+  useEffect(()=>{
+      api.get(`/groups/subscriptions/`, {
+			headers: { Authorization: `Bearer ${token}` },
+		})
+			.then((res) => {
+				console.log("resposta api", res.data);
+				setMyGroups(res.data);
+				console.log("após set", myGroups);
+				setLoading(false);
+			})
 
+			.catch((err) => console.log(err));
+  },[token])
   // Todos grupos que não precisam de ("Autorização")
   useEffect(() => {
     setLoading(true);
