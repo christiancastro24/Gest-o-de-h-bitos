@@ -14,6 +14,7 @@ import { useHistory } from "react-router-dom";
 import { useAuthenticated } from "../../Providers/authentication";
 import { Button } from "@material-ui/core";
 import { useGroups } from "../../Providers/groups";
+import { motion } from 'framer-motion'
 
 const useStyles = makeStyles((theme) => ({
   delete: {
@@ -108,6 +109,12 @@ const ProfileCard = () => {
 
   return (
     <>
+    <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.8 }}
+      >
       <ProfileContainer>
         <h1>{userName}</h1>
         <img className="user_avatar" alt={userName} src={userAvatar} />
@@ -195,6 +202,7 @@ const ProfileCard = () => {
         </div>
         <div></div>
       </ProfileContainer>
+    </motion.div>
     </>
   );
 };

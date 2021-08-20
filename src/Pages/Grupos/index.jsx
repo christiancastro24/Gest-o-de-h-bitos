@@ -5,6 +5,7 @@ import { Container, ContainerGoalsAndAct, ContainerGroup, Loading } from "./styl
 import { ContainerAll } from "../MeusGrupos/styles";
 import Pagination from "@material-ui/lab/Pagination";
 import { useState } from "react";
+import { motion } from 'framer-motion'
 
 
 const GroupsPage = () => {
@@ -39,6 +40,12 @@ const GroupsPage = () => {
 				<>
 					<AsideMenu />
 					<Window >
+					<motion.div 
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+						transition={{ duration: 0.8 }}
+     				 >
 						<ContainerAll>
 							<h1>Grupos</h1>
 							<Pagination
@@ -168,6 +175,7 @@ const GroupsPage = () => {
 								})}
 							</Container>
 						</ContainerAll>
+						</motion.div>
 					</Window>
 				</>
 			);
