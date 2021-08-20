@@ -39,7 +39,7 @@ const LoginPage = () => {
   const { isLoading, setLoading } = useGroups();
   const classes = useStyles();
 
-  const {setPassword} = useUserData();
+  const { setPassword } = useUserData();
 
   const history = useHistory();
 
@@ -59,10 +59,10 @@ const LoginPage = () => {
   });
 
   const onSub = (data) => {
-    setLoading(true)
+    setLoading(true);
     api
-    .post("/sessions/", data)
-    .then((res) => {
+      .post("/sessions/", data)
+      .then((res) => {
         const { access } = res.data;
         const userId = jwt_decode(access).user_id;
         localStorage.setItem("@DevHealthy/user", JSON.stringify(access));
@@ -70,21 +70,21 @@ const LoginPage = () => {
         setUserId(userId);
         setToken(access);
         setPassword(data.password);
-        setLoading(false)
+        setLoading(false);
         setAuthenticated(true);
         history.push("/habits");
         toast.success("Sucesso!");
-    })
-    .catch(() => {
-        setLoading(false)
+      })
+      .catch(() => {
+        setLoading(false);
         toast.error("Usuário ou senha incorretos!", {
-        style: {
+          style: {
             backgroundColor: "red",
             color: "var(--white)",
             fontWeight: "bold",
-        },
-    	});
-    });
+          },
+        });
+      });
   };
 
   if (authenticated) {

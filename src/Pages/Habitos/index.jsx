@@ -9,6 +9,7 @@ import 'react-calendar/dist/Calendar.css';
 import Calendar from "react-calendar"
 import { useState } from "react"
 import Draggable from "react-draggable";
+import { motion } from 'framer-motion'
 
 const HabitsPage = () => {
 
@@ -27,6 +28,12 @@ const HabitsPage = () => {
 		<>
 			<AsideMenu />
 			<Window >
+		<motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.8 }}
+      >
 				<Flex>
                     <HabitsList />
 					<ActivitiesToDo />
@@ -42,6 +49,7 @@ const HabitsPage = () => {
 						</div>
 					</Draggable>
 				</Flex>
+		</motion.div>
 			</Window>
 		</>
 	);
