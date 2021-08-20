@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ContainerHome = styled.section`
-margin: 45%;
+margin: 44%;
 	color: var(--white);
 
 	& h1 {
