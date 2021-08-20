@@ -3,59 +3,59 @@ import styled from "styled-components";
 const tamanhoAvatar = "clamp(3rem, 10vw, 6rem)";
 
 export const Container = styled.div`
-	height: 100%;
-	width: 25%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	text-align: center;
-	padding: 1rem 0rem;
-	z-index: 10;
-	box-sizing: border-box;
-	background: linear-gradient(
-		to bottom,
-		#30336b 0%,
-		#6095b9 30%,
-		#6095b9 90%,
-		#30336b 100%
-	);
-	position: fixed;
-	left: 0;
-	.username {
-		text-transform: capitalize;
-	}
+  height: 100%;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem 0rem;
+  z-index: 10;
+  box-sizing: border-box;
+  background: linear-gradient(
+    to bottom,
+    #30336b 0%,
+    #6095b9 30%,
+    #6095b9 90%,
+    #30336b 100%
+  );
+  position: fixed;
+  left: 0;
+  .username {
+    text-transform: capitalize;
+  }
 
-	@media (max-width: 1000px) {
-		position: fixed;
-		top: 0;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		flex-wrap: nowrap;
-		width: 100%;
-		height: clamp(3rem, 15vw, 7rem);
-		padding: 0;
-		background: linear-gradient(
-			to right,
-			#30336b 0%,
-			#6095b9 30%,
-			/* #6095b9 90%, */ #30336b 100%
-		);
-		h1 {
-			margin: 0;
-			margin-left: 1rem;
-		}
-	}
-	@media (max-width: 580px) {
-		flex-wrap: wrap;
-		height: max-content;
-		justify-content: space-around;
+  @media (max-width: 1000px) {
+    position: fixed;
+    top: 0;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: clamp(3rem, 15vw, 7rem);
+    padding: 0;
+    background: linear-gradient(
+      to right,
+      #30336b 0%,
+      #6095b9 30%,
+      /* #6095b9 90%, */ #30336b 100%
+    );
+    h1 {
+      margin: 0;
+      margin-left: 1rem;
+    }
+  }
+  @media (max-width: 580px) {
+    flex-wrap: wrap;
+    height: max-content;
+    justify-content: space-around;
 
-		h1 {
-			flex-shrink: 0;
-			width: 100%;
-		}
-	} ;
+    h1 {
+      flex-shrink: 0;
+      width: 100%;
+    }
+  } ;
 `;
 
 export const SubContainer = styled.div`
@@ -134,7 +134,7 @@ export const MultiFrameContainer = styled.div`
   display: none;
   place-items: center;
 
-  @media (min-width: 768px) {
+  @media (min-width: 425px) {
     display: grid;
   }
 
@@ -217,7 +217,7 @@ export const Menu = styled.div`
     display: ${(props) => (props.show ? "unset" : "none")};
     position: absolute;
     width: max-content;
-    bottom: -27rem;
+    bottom: -29rem;
     left: 50%;
     background-color: #6095b9;
     box-sizing: border-box;
@@ -231,7 +231,7 @@ export const Menu = styled.div`
   }
 
   @media (max-width: 320px) {
-    bottom: -26rem;
+    bottom: -29rem;
     transform: translateX(-50%);
   } ;
 `;

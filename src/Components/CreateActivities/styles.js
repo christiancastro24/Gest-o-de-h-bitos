@@ -1,94 +1,64 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const ContainerPopUp = styled.div`
-        
-        input {
-        height: 2.2rem;
-        width: 95%;
-        border-radius: 10px;
-        margin-top: 0.5rem;
-        outline: none;
-        
-        }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.1rem;
+  border: 2px solid var(--white);
+  width: 17rem;
+  height: 15rem;
+  background-color: rgb(19, 15, 64);
+  position: absolute;
+  top: 25%;
+  left: 10%;
+  z-index: 1000;
+  gap: 1rem;
 
-        .btn-create-actv {
-            width: 70%;
-            display: block;
-            margin: 1.5rem auto; 
-            border-radius: 4%;
-            background-color: transparent;
-            border: 1px solid var(--pink);
-        }
+  input {
+    border-radius: 0.1rem;
+    background-color: var(--white);
+  }
 
-        h3 {
-            color: var(--white);
-        }
+  h4 {
+    font-size: 2rem;
+    color: var(--white);
+  }
 
-        input {
-            height: 3rem;
-            border: 2px solid var(--pink);
-            color: black;
-        }
+  button:nth-child(1) {
+    width: 0;
+    bottom: 0.6rem;
+    left: 6rem;
+  }
 
-        button {
-            cursor: pointer;
-            color: var(--white);
-        }
-        
-        button:nth-child(1) {
-            margin-left: auto;
-            height: 1.8rem; 
-            width: 2rem;
-            background-color: var(--pink);
-        }
-        
-        button:nth-child(6) {
-            display: block; 
-            margin: 1.5rem auto;
-            border-radius: 4%;
-            width: 85%;
-            height: 2.5rem;
-            background-color: transparent;
-            border: 1px solid var(--pink);
-            box-shadow: 0 0 2px 5px rgba(0, 0, 0, 0.4);
-        }
+  button:nth-last-child() {
+    cursor: pointer;
+    color: var(--white);
+    width: 37vw;
+  }
 
-        button:hover {
-            background-color: var(--pink);
-        }
+  @media (min-width: 375px) {
+    left: 3.3rem;
+  }
 
+  @media (min-width: 425px) {
+    left: 4.6rem;
+  }
 
-    @media (min-width: 300px) and (max-width: 767px) {
-        display: flex; 
-        flex-direction: column;
-        justify-content: center; 
-        align-items: center;
-        border-radius: 1rem;
-        width: 17rem; 
-        height: 19rem; 
-        background-color: rgb(19, 15, 64);
-        position: absolute; 
-        top: 25%;
-        left: 10%; 
-        z-index: 1000;
-    }
+  @media (min-width: 768px) {
+    left: 16rem;
+  }
 
+  @media (min-width: 1024px) {
+    left: 31.5rem;
+  }
 
+  @media (min-width: 1440px) {
+    left: 47.5rem;
+  }
 
-    @media (min-width: 768px) {
-
-        display: flex; 
-        flex-direction: column;
-        width: 22rem; 
-        height: 22rem; 
-        background-color: rgb(19, 15, 64);
-        position: absolute; 
-        top: 25%;
-        left: 38%; 
-        padding: 0.3rem;
-        justify-content: center; 
-        align-items: center;
-        border-radius: 1rem;
-        padding: 1rem;    
-    }
-        `
+  @media (min-width: 1866px) {
+    left: 64.5rem;
+  }
+`;

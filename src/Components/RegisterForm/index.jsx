@@ -14,6 +14,7 @@ import "../../index.css";
 import PinkButton from "../PinkButton";
 import Logo from "../../Components/Logo";
 import { useGroups } from "../../Providers/groups";
+import { motion } from 'framer-motion'
 
 const useStyles = makeStyles(() => ({
     inputs: {
@@ -36,7 +37,7 @@ const RegisterForm = () => {
     const history = useHistory();
 
     const formSchema = yup.object().shape({
-        username: yup.string().required("Usuário inválido").matches("^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$", "Usuário inválido"),
+        username: yup.string().required("Usuário inválido").matches("^[A-Za-z0-9-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$", "Usuário inválido"),
         email: yup.string().required("Email obrigatório!").email("E-mail inválido"),
         password: yup.string().min(6, "Mínimo 6 caracteres").required("Senha inválida")
     });
@@ -78,6 +79,12 @@ const RegisterForm = () => {
 
     const classes = useStyles();
     return (
+        <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 1 }}
+      >
         <>
             <ContainerRegisterForm>
                 <Logo />
@@ -119,6 +126,7 @@ const RegisterForm = () => {
                 </p>
             </ContainerRegisterForm>
         </>
+        </motion.div>
     )
 }
 
