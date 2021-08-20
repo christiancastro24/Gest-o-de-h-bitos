@@ -1,15 +1,21 @@
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from "@material-ui/core";
+import {
+	Dialog,
+	DialogTitle,
+	DialogContent,
+	DialogActions,
+	Button,
+} from "@material-ui/core";
 import { Tabs } from "antd";
 import { Avatar } from "../style";
 
-const AvatarSelector = ({open, handleClose, handleChangeAvatarId}) => {
-    const { TabPane } = Tabs;
-    const robotsId = 3;
-    const mutantsId = 2;
-    const catsId = 4;
-    const humansId = 5;
+const AvatarSelector = ({ open, handleClose, handleChangeAvatarId }) => {
+	const { TabPane } = Tabs;
+	const robotsId = 3;
+	const mutantsId = 2;
+	const catsId = 4;
+	const humansId = 5;
 
-    const getAvatars = (type = 3) => {
+	const getAvatars = (type = 3) => {
 		const avatarsQuantity = 30;
 		let output = [];
 		for (let i = 0; i < avatarsQuantity; i++) {
@@ -18,7 +24,7 @@ const AvatarSelector = ({open, handleClose, handleChangeAvatarId}) => {
 		return output;
 	};
 
-    return (
+	return (
 		<Dialog
 			open={open}
 			onClose={handleClose}
@@ -84,12 +90,16 @@ const AvatarSelector = ({open, handleClose, handleChangeAvatarId}) => {
 				</Tabs>
 			</DialogContent>
 			<DialogActions>
-				<Button onClick={handleClose} color="secondary" variant='contained'>
+				<Button
+					onClick={handleClose}
+					color="secondary"
+					variant="contained"
+				>
 					Close
 				</Button>
 			</DialogActions>
 		</Dialog>
 	);
-}
- 
+};
+
 export default AvatarSelector;

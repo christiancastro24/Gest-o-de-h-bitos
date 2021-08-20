@@ -4,7 +4,7 @@ import {
 	DialogContent,
 	DialogActions,
 	Button,
-    TextField,
+	TextField,
 } from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -12,47 +12,56 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useUserData } from "../../../Providers/UserData";
 import api from "../../../Services";
 import toast from "react-hot-toast";
-import { Form } from './styles'
+import { Form } from "./styles";
 import { useState } from "react";
 
 const AddHabit = ({ open, handleClose }) => {
-    const { userId, token, recarregarDados } = useUserData();
-    const [difficulty, setDifficulty] = useState('Escolha');
+	const { userId, token, recarregarDados } = useUserData();
+	const [difficulty, setDifficulty] = useState("Escolha");
 
-    const formSchema = yup.object().shape({
+	const formSchema = yup.object().shape({
 		title: yup.string().required("Campo Obrigatório"),
 		category: yup.string().required("Campo Obrigatório"),
 		difficulty: yup.string(),
 		frequency: yup.string(),
 	});
 
-    const handleSelect = (e) => {
-        if (e.target.value === "Escolha uma"){
-            return;
-        }
-        setDifficulty(e.target.value)
-    }
+	const handleSelect = (e) => {
+		if (e.target.value === "Escolha uma") {
+			return;
+		}
+		setDifficulty(e.target.value);
+	};
 	const {
 		register,
 		handleSubmit,
-		// formState: { errors },
+		// formState: { errors }, features futuras... contar com erros...
 	} = useForm({
 		resolver: yupResolver(formSchema),
 	});
 
-    const handleCreateHabit = (data) => {
-        data['user'] = userId;
-        data['achieved'] = false;
-        data["how_much_achieved"] = 0;
-        data["frequency"] = "Diário";
-        api.post("/habits/", data, {
+	const handleCreateHabit = (data) => {
+		data["user"] = userId;
+		data["achieved"] = false;
+		data["how_much_achieved"] = 0;
+		data["frequency"] = "Diário";
+		api.post("/habits/", data, {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
-		}).then(()=> {toast.success('Hábito criado'); recarregarDados(); handleClose()})
-        .catch(()=> toast.error('Falha! Verifique se todos campos foram preenchidos!'));
-    }
-    return (
+		})
+			.then(() => {
+				toast.success("Hábito criado");
+				recarregarDados();
+				handleClose();
+			})
+			.catch(() =>
+				toast.error(
+					"Falha! Verifique se todos campos foram preenchidos!"
+				)
+			);
+	};
+	return (
 		<Dialog
 			open={open}
 			onClose={handleClose}
@@ -121,6 +130,6 @@ const AddHabit = ({ open, handleClose }) => {
 			</DialogActions>
 		</Dialog>
 	);
-}
- 
+};
+
 export default AddHabit;

@@ -1,10 +1,17 @@
-import { Dialog, DialogTitle, Button, DialogContent, DialogContentText, DialogActions } from "@material-ui/core";
+import {
+	Dialog,
+	DialogTitle,
+	Button,
+	DialogContent,
+	DialogContentText,
+	DialogActions,
+} from "@material-ui/core";
 
 const DelConfirmation = ({
 	openDelConfirmation,
 	handleOpenDelConfirmation,
 	handleDelete,
-    itemId
+	itemId,
 }) => {
 	return (
 		<Dialog
@@ -17,19 +24,29 @@ const DelConfirmation = ({
 				{"Tem certeza disso?"}
 			</DialogTitle>
 			<DialogContent>
-				<DialogContentText style={{color: 'black'}}id="alert-dialog-description">
+				<DialogContentText
+					style={{ color: "black" }}
+					id="alert-dialog-description"
+				>
 					Tem certeza que deseja excluir esse hábito da sua lista?
 					Essa ação não poderá ser desfeita!
 				</DialogContentText>
 			</DialogContent>
 			<DialogActions>
-				<Button onClick={()=> {handleOpenDelConfirmation(); handleDelete(itemId);}} variant="contained" color="secondary">
+				<Button
+					onClick={() => {
+						handleOpenDelConfirmation();
+						handleDelete(itemId);
+					}}
+					variant="contained"
+					color="secondary"
+				>
 					Excluir
 				</Button>
 				<Button
 					onClick={handleOpenDelConfirmation}
 					color="primary"
-					autoFocus
+					variant="contained"
 				>
 					Voltar
 				</Button>
@@ -37,5 +54,5 @@ const DelConfirmation = ({
 		</Dialog>
 	);
 };
- 
+
 export default DelConfirmation;

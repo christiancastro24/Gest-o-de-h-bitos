@@ -1,11 +1,11 @@
-import {TextField} from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import { AccountCircle, MailOutline, LockOpen } from "@material-ui/icons";
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 import { Link, useHistory } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import {yupResolver} from "@hookform/resolvers/yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import ContainerRegisterForm from "./style";
 import api from "../../Services";
 import { useAuthenticated } from "../../Providers/authentication";
@@ -14,120 +14,150 @@ import "../../index.css";
 import PinkButton from "../PinkButton";
 import Logo from "../../Components/Logo";
 import { useGroups } from "../../Providers/groups";
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 
 const useStyles = makeStyles(() => ({
-    inputs: {
-        backgroundColor: 'white',
-        margin: "12px",
-        width: "100%",
-        maxWidth: "24rem",
-        outline: "none",
-        borderTopLeftRadius: "6px",
-        borderTopRightRadius: "6px",
-        boxShadow: "5px 6px 10px -2px black",
-    },
+	inputs: {
+		backgroundColor: "white",
+		margin: "12px",
+		width: "100%",
+		maxWidth: "24rem",
+		outline: "none",
+		borderTopLeftRadius: "6px",
+		borderTopRightRadius: "6px",
+		boxShadow: "5px 6px 10px -2px black",
+	},
 }));
 
 const RegisterForm = () => {
+	const { authenticated } = useAuthenticated();
+	const { isLoading, setLoading } = useGroups();
 
-    const { authenticated } = useAuthenticated();
-    const { isLoading, setLoading } = useGroups();
+	const history = useHistory();
 
-    const history = useHistory();
+	const formSchema = yup.object().shape({
+		username: yup
+			.string()
+			.required("Usuário inválido")
+			.matches(
+				"^[A-Za-z0-9-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$",
+				"Usuário inválido"
+			),
+		email: yup
+			.string()
+			.required("Email obrigatório!")
+			.email("E-mail inválido"),
+		password: yup
+			.string()
+			.min(6, "Mínimo 6 caracteres")
+			.required("Senha inválida"),
+	});
 
-    const formSchema = yup.object().shape({
-        username: yup.string().required("Usuário inválido").matches("^[A-Za-z0-9-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$", "Usuário inválido"),
-        email: yup.string().required("Email obrigatório!").email("E-mail inválido"),
-        password: yup.string().min(6, "Mínimo 6 caracteres").required("Senha inválida")
-    });
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({
+		resolver: yupResolver(formSchema),
+	});
 
-    const { register, handleSubmit, formState: {errors} } = useForm({
-        resolver: yupResolver(formSchema)
-    });
+	const onSub = (data) => {
+		setLoading(true);
+		api.post("/users/", data)
+			.then((res) => {
+				toast.success("Cadastro efetuado com sucesso!", {
+					style: {
+						backgroundColor: "var(--pink)",
+						color: "#fff",
+					},
+				});
+				setLoading(false);
+				history.push("/loginPage");
+			})
+			.catch(() => {
+				setLoading(false);
+				toast.error("Usuário ou e-mail já existente!", {
+					style: {
+						backgroundColor: "red",
+						color: "#fff",
+					},
+				});
+			});
+	};
 
-    const onSub = (data) => {
-        setLoading(true)
-        api.post("/users/", data)
-        .then((res) => {
+	if (authenticated) {
+		history.push("/habits");
+	}
 
-            toast.success("Cadastro efetuado com sucesso!",
-            {
-                style: {
-                    backgroundColor: "var(--pink)",
-                    color: "#fff"
-                }
-            })
-            setLoading(false)
-            history.push("/loginPage")
-        })
-        .catch(() => {
-            setLoading(false)
-            toast.error("Usuário ou e-mail já existente!",
-            {
-                style: {
-                    backgroundColor: "red",
-                    color: "#fff",
-            }
-            })
-        })
-    }
-
-    if(authenticated) {
-        history.push("/habits")
-    }
-
-    const classes = useStyles();
-    return (
-        <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 1 }}
-      >
-        <>
-            <ContainerRegisterForm>
-                <Logo />
-                <form onSubmit = {handleSubmit(onSub)} noValidate>
-                    <TextField required 
-                        className = {classes.inputs} 
-                        variant = "outlined" 
-                        placeholder = "Usuário" 
-                        type = "text"
-                        InputProps = {{startAdornment : (<AccountCircle/>),}} 
-                        {...register("username")}
-                    />
-                        {errors.username && <MessageBalloon className = "invalid_username_message" message = {errors.username.message} />}
-                    <TextField required 
-                        className={classes.inputs} 
-                        variant = "outlined" 
-                        placeholder = "E-mail" 
-                        InputProps = {{startAdornment : (<MailOutline/>),}}
-                        {...register("email")}
-                    />
-                    {errors.email && <MessageBalloon className = "invalid_email_message" message = {errors.email.message} />}
-                    <TextField required 
-                        className={classes.inputs} 
-                        variant = "outlined" 
-                        placeholder = "Senha" 
-                        type = "password"
-                        InputProps = {{startAdornment : (<LockOpen/>),}}
-                        {...register("password")}
-                    /> 
-                    {errors.password && <MessageBalloon className = "invalid_password_message" message = {errors.password.message} />}
-                    {isLoading && <span>Carregando...</span>}
-                    <PinkButton type = "submit" text = "Registrar-se" />
-                </form>
-                <p>
-                    Já possui uma conta? 
-                    <span className = "enter_link">
-                        <Link to = {"/loginPage"}> Entrar</Link>
-                    </span>
-                </p>
-            </ContainerRegisterForm>
-        </>
-        </motion.div>
-    )
-}
+	const classes = useStyles();
+	return (
+		<motion.div
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+			exit={{ opacity: 0 }}
+			transition={{ duration: 1 }}
+		>
+			<>
+				<ContainerRegisterForm>
+					<Logo />
+					<form onSubmit={handleSubmit(onSub)} noValidate>
+						<TextField
+							required
+							className={classes.inputs}
+							variant="outlined"
+							placeholder="Usuário"
+							type="text"
+							InputProps={{ startAdornment: <AccountCircle /> }}
+							{...register("username")}
+						/>
+						{errors.username && (
+							<MessageBalloon
+								className="invalid_username_message"
+								message={errors.username.message}
+							/>
+						)}
+						<TextField
+							required
+							className={classes.inputs}
+							variant="outlined"
+							placeholder="E-mail"
+							InputProps={{ startAdornment: <MailOutline /> }}
+							{...register("email")}
+						/>
+						{errors.email && (
+							<MessageBalloon
+								className="invalid_email_message"
+								message={errors.email.message}
+							/>
+						)}
+						<TextField
+							required
+							className={classes.inputs}
+							variant="outlined"
+							placeholder="Senha"
+							type="password"
+							InputProps={{ startAdornment: <LockOpen /> }}
+							{...register("password")}
+						/>
+						{errors.password && (
+							<MessageBalloon
+								className="invalid_password_message"
+								message={errors.password.message}
+							/>
+						)}
+						{isLoading && <span>Carregando...</span>}
+						<PinkButton type="submit" text="Registrar-se" />
+					</form>
+					<p>
+						Já possui uma conta?
+						<span className="enter_link">
+							<Link to={"/loginPage"}> Entrar</Link>
+						</span>
+					</p>
+				</ContainerRegisterForm>
+			</>
+		</motion.div>
+	);
+};
 
 export default RegisterForm;
