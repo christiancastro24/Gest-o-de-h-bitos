@@ -245,7 +245,7 @@ export const Loading = styled.span`
 
 export const ContainerTextDesktop = styled.div`
   height: 25vh;
-  width: 38vw;
+  /* width: 38vw; */
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
