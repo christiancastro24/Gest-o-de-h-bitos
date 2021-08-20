@@ -72,8 +72,8 @@ const ProfileCard = () => {
 		})
 			.then((res) => {
 				toast.success("Conta excluída!");
-				setAuthenticated(false);
 				localStorage.clear();
+				setAuthenticated(false);
 				setLoading(false);
 				history.push("/");
 			})
@@ -131,7 +131,11 @@ const ProfileCard = () => {
 							<div>
 								<button
 									className="yes_button"
-									onClick={deleteProfile}
+									onClick={() => {deleteProfile(); 
+										localStorage.clear();
+										setAuthenticated(false);
+										setLoading(false);
+										history.push("/");}}
 								>
 									Excluir
 								</button>
@@ -206,7 +210,7 @@ const ProfileCard = () => {
 							variant="contained"
 							size="medium"
 							className={classes.delete}
-							onClick={() => setDeletingProfile(true)}
+							onClick={() => {setDeletingProfile(!deletingProfile); }}
 						>
 							Excluir Conta
 						</Button>
