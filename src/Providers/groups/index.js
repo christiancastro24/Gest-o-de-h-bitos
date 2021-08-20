@@ -75,6 +75,7 @@ export const GroupsProvider = ({ children }) => {
 			})
 
 			.catch((err) => console.log(err));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[token])
   // Todos grupos que não precisam de ("Autorização")
   useEffect(() => {
