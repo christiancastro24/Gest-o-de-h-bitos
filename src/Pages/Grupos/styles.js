@@ -120,35 +120,60 @@ export const ContainerItemsSearch = styled.section`
 `;
 
 export const Container = styled.section`
-  width: 100%;
+  width: 100vw;
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
+  justify-content: flex-start;
   max-height: 85vh;
   background-color: #000;
   color: var(--white);
-  overflow-y: scroll;
-  overflow-x: hidden;
   margin-top: 0;
+  overflow-y: scroll;
 
-  @media (min-width: 300px) and (max-width: 508px) {
+  button {
+    width: 26vw;
+    height: 4vh;
+  }
+
+  @media (min-width: 425px) {
+    width: 87vw;
+  }
+
+  @media (min-width: 768px) {
+    button {
+      width: 11vw;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    width: 100%;
     display: flex;
+    flex-flow: row wrap;
     justify-content: center;
-    align-items: center;
-    margin: 0 -2rem;
+    max-height: 85vh;
+    background-color: #000;
+    color: var(--white);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-top: 0;
   }
 `;
+
 export const ContainerGroup = styled.div`
-  width: 100%;
+  width: 90vw;
+  height: 35vh;
   display: flex;
+  justify-content: space-between;
+  flex-direction: column;
   margin: 0.8rem;
   margin-top: 10px;
   border-radius: 8px;
-  justify-content: space-around;
   background-color: #30336b;
-  align-items: center;
   box-shadow: 5px 1px 5px 3px rgba(155, 155, 220);
   box-sizing: border-box;
+  align-items: center;
+  padding: 0.5rem;
+  gap: 0.5rem;
 
   h2,
   h3 {
@@ -156,79 +181,87 @@ export const ContainerGroup = styled.div`
     padding-left: 1rem;
   }
 
-  .Items {
-    display: flex;
-    flex-direction: column;
+  @media (min-width: 425px) {
+    width: 80vw;
   }
 
-  button:nth-child(2) {
-    width: 25%;
-    height: 3rem;
-    display: block;
-    margin-left: auto;
-    margin-right: 1rem;
-    border: none;
-    border-radius: 8px;
-    background-color: var(--pink);
-    font-weight: bold;
-    color: var(--white);
-    cursor: pointer;
+  @media (min-width: 768px) {
+    width: 40vw;
   }
 
-  button:nth-child(3) {
-    width: 10%;
-    height: 1.7rem;
-    border: none;
-    border-radius: 8px;
-    background-color: var(--lightBlue);
-    font-weight: bold;
-    color: var(--white);
-    cursor: pointer;
-  }
-
-  button:hover {
-    filter: brightness(90%);
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    width: 72vw;
+    height: 18vh;
+    justify-content: space-between;
   }
 `;
 
 export const ContainerGoalsAndAct = styled.div`
   position: absolute;
-  top: 5rem;
-  left: 30%;
   z-index: 1000;
-  overflow-y: auto;
+  overflow-y: scroll;
   background-color: rgb(19, 15, 64);
-  width: 30rem;
-  border-radius: 5%;
-  text-align: center;
-  max-height: 100vh;
-  padding: 1rem;
+  color: var(--white);
+  height: 50vh;
+  width: 100vw;
+  border-radius: 7px;
+  top: 19rem;
+  border: 2px solid var(--white);
 
-  .group-actv {
-    color: white;
-    border-bottom: 2px solid var(--pink);
-    margin: 0.2rem;
+  h2 {
+    margin: 1rem 0;
+    color: var(--white);
   }
 
   h4 {
     color: var(--white);
   }
 
-  .btn-delete {
-    background-color: var(--pink);
-    color: var(--white);
-    cursor: pointer;
+  .group-actv {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--pink);
   }
 
-  button:nth-child(1) {
-    display: block;
-    margin-left: auto;
-    background-color: var(--pink);
-    color: var(--white);
-    cursor: pointer;
+  @media (min-width: 425px) {
+    width: 70vw;
+  }
+
+  @media (min-width: 768px) {
+    top: 15rem;
+    width: 40vw;
+  }
+
+  @media (min-width: 1024px) {
+    top: 8rem;
+    height: 50vh;
+    width: 30vw;
   }
 `;
 
 export const Loading = styled.span`
   color: ${(props) => (props.visible ? "white" : "var(--background)")};
+`;
+
+export const ContainerTextDesktop = styled.div`
+  height: 25vh;
+  width: 38vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  @media (min-width: 1024px) {
+    width: 50vw;
+    text-align: left;
+    justify-content: center;
+  }
+`;
+
+export const ContainerButton = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+
+  @media (min-width: 1024px) {
+    flex-direction: column;
+  }
 `;

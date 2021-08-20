@@ -10,6 +10,7 @@ export const ContainerGoalsAndAct = styled.div`
   width: 100vw;
   border-radius: 7px;
   border: 2px solid var(--white);
+  top: 18.5rem;
 
   h2 {
     margin: 1rem 0;
@@ -34,9 +35,15 @@ export const ContainerGoalsAndAct = styled.div`
     background-color: var(--white);
   }
 
+  @media (min-width: 768px) {
+    width: 50vw;
+    top: 15rem;
+  }
+
   @media (min-width: 1024px) {
     height: 60vh;
     width: 30vw;
+    top: 8rem;
   }
 `;
 
