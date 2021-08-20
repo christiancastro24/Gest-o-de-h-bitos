@@ -47,7 +47,7 @@ const LoginPage = () => {
 
 	const formSchema = yup.object().shape({
 		username: yup.string().required("Usuário obrigatório!"),
-		password: yup.string().min(6, "Mínimo 6 caracteres!"),
+		password: yup.string().required('Senha obrigatória!').min(6, "Mínimo 6 caracteres!"),
 	});
 
 	const {
