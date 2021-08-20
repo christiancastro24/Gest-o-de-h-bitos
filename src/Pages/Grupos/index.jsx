@@ -68,7 +68,7 @@ const GroupsPage = () => {
 							defaultPage={1}
 							count={totalPages}
 							boundaryCount={countPageSize} //2
-							siblingCount={1}
+							siblingCount={0}
 						/>
 
 						<Loading visible={isLoading}>Carregando...</Loading>

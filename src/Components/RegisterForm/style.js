@@ -14,9 +14,9 @@ const ContainerRegisterForm = styled.div`
 		color: var(--white);
 	}
 
-	@media (max-width: 450px) {
+	/* @media (max-width: 450px) {
 		width: 160%;
-	}
+	} */
 
 	form {
 		display: flex;
