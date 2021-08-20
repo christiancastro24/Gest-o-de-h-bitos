@@ -43,6 +43,7 @@ const HabitsPage = () => {
 							style={{
 								display: "flex",
 								justifyContent: "center",
+                                maxWidth: '95%'
 							}}
 						>
 							<Calendar onChange={onChange} value={value} />

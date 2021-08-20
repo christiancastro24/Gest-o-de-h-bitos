@@ -144,7 +144,7 @@ export const GroupsProvider = ({ children }) => {
             color: "#fff",
           },
         });
-        window.location.reload();
+        setReload(!reload);
       })
 
       .catch((_) =>
@@ -207,7 +207,7 @@ export const GroupsProvider = ({ children }) => {
             color: "#fff",
           },
         });
-        window.location.reload();
+        setReload(!reload);
       })
       .catch((_) =>
         toast.error("Você já esta nesse grupo", {
@@ -287,6 +287,7 @@ export const GroupsProvider = ({ children }) => {
       })
       .then((_) => {
         setMyGroups(myGroups.filter((gro) => gro !== dataGroup));
+        setReload(!reload);
       })
       .catch((err) => console.log(err));
   };
