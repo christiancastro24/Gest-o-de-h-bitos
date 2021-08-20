@@ -19,6 +19,7 @@ import CreateActivities from "../../Components/CreateActivities";
 import { useState } from "react";
 import { Button, Input } from "@material-ui/core";
 import { useUserData } from "../../Providers/UserData";
+import { motion } from 'framer-motion'
 
 const MyGroups = () => {
   const {
@@ -59,6 +60,12 @@ const MyGroups = () => {
     <>
       <AsideMenu />
       <Window>
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.8 }}
+      >
         <CreateActivities itemId={groupId} />
         <CreateGoals itemId={groupId} />
         {popUpUpdateGroup && (
@@ -270,6 +277,7 @@ const MyGroups = () => {
             })}
           </Container>
         </ContainerAll>
+        </motion.div>
       </Window>
     </>
   );

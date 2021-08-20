@@ -5,6 +5,7 @@ import "./style.css"
 
 const ProfilePage = () => {
 	return (
+		
 		<>
 			<AsideMenu />
 			<Window>

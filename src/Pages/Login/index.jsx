@@ -20,6 +20,7 @@ import PinkButton from "../../Components/PinkButton";
 import MessageBalloon from "../../Components/MessageBalloon";
 import Logo from "../../Components/Logo";
 import { useGroups } from "../../Providers/groups";
+import { motion } from 'framer-motion'
 
 const useStyles = makeStyles(() => ({
   inputs: {
@@ -104,14 +105,14 @@ const LoginPage = () => {
                 placeholder="Usuário"
                 InputProps={{ startAdornment: <AccountCircle /> }}
                 {...register("username")}
-              />
+                />
               <br />
               {errors.username && (
                 <MessageBalloon
-                  message={errors.username.message}
-                  className="invalid_username_message"
+                message={errors.username.message}
+                className="invalid_username_message"
                 />
-              )}
+                )}
               <TextField
                 className={classes.inputs}
                 variant="outlined"
@@ -119,19 +120,20 @@ const LoginPage = () => {
                 InputProps={{ startAdornment: <LockOpen /> }}
                 type="password"
                 {...register("password")}
-              />
+                />
               {errors.password && (
                 <MessageBalloon
-                  message={errors.password.message}
-                  className="invalid_password_message"
+                message={errors.password.message}
+                className="invalid_password_message"
                 />
-              )}
+                )}
               {isLoading && <span>Carregando...</span>}
               <PinkButton type="submit" text="Entrar" />
             </form>
             <p>
               Não possui uma conta?
               <span className="enter_link">
+    
                 <Link to={"/registerPage"}> Cadastre-se</Link>
               </span>
             </p>
