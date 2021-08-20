@@ -204,10 +204,11 @@ export const ContainerGoalsAndAct = styled.div`
 	background-color: rgb(19, 15, 64);
 	color: var(--white);
 	height: 50vh;
-	width: 100vw;
+	width: 97vw;
 	border-radius: 7px;
 	top: 19rem;
 	border: 2px solid var(--white);
+	/* left: 0.35rem; */
 
 	h2 {
 		margin: 1rem 0;
