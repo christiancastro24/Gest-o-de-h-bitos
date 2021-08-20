@@ -1,4 +1,4 @@
-import ConfirmationPopupContainer from "./style";
+import ConfirmationPopupContainer from "./styles";
 
 const ConfirmationPopup = ({children}) => {
     return (

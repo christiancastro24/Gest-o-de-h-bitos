@@ -1,7 +1,7 @@
 import { Switch, Route } from "react-router-dom";
-import HomePage from "../Pages/Home"
-import LoginPage from "../Pages/Login"
-import PageNotFound from "../Pages/PageNotFound"
+import HomePage from "../Pages/Home";
+import LoginPage from "../Pages/Login";
+import PageNotFound from "../Pages/PageNotFound";
 import RegisterPage from "../Pages/Register";
 import GroupsPage from "../Pages/Grupos";
 import HabitsPage from "../Pages/Habitos";
@@ -9,31 +9,27 @@ import ProfilePage from "../Pages/Profile";
 import MyGroups from "../Pages/MeusGrupos";
 
 const Routes = () => {
-    return (
+	return (
 		<Switch>
 			<Route exact path="/">
 				<HomePage />
 			</Route>
-			<Route path="/registerPage">
+			<Route exact path="/registerPage">
 				<RegisterPage />
 			</Route>
-			<Route path="/loginPage">
+			<Route exact path="/loginPage">
 				<LoginPage />
 			</Route>
-			<Route path="/habits">
+			<Route exact path="/habits">
 				<HabitsPage />
 			</Route>
-			<Route path="/groups">
+			<Route exact path="/groups">
 				<GroupsPage />
 			</Route>
-			<Route path="/profile">
+			<Route exact path="/profile">
 				<ProfilePage />
 			</Route>
-			{/* <Route path="/teste">
-				 <CreateGroup />
-				<MessageBalloon />
-			</Route>  */}
-			<Route path="/myGroups">
+			<Route exact path="/myGroups">
 				<MyGroups />
 			</Route>
 			<Route path="*">
@@ -41,6 +37,6 @@ const Routes = () => {
 			</Route>
 		</Switch>
 	);
-}
+};
 
 export default Routes;
