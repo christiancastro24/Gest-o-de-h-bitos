@@ -13,7 +13,6 @@ export const Container = styled.div`
 	padding: 0.5rem;
 	width: 310px;
 	overflow-y: auto;
-	cursor: default;
 `;
 export const Column = styled.div`
 	display: flex;
