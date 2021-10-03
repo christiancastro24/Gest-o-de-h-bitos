@@ -72,7 +72,7 @@ button.MuiFab-root {
 }
 .MuiDialog-root .MuiDialog-paper .MuiInputBase-input {
 	background-color: white;
-	border-radius: 10px;
+	border-radius: 11px;
 	background: white;
 }
 b:nth-child(1) {
